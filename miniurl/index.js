@@ -20,7 +20,12 @@ $(document).ready(function(){
 		
 	};
 
-	var cambiarUIpostHash = function(error = "", color = "green", sePuedeGenerar = true, hashgen = ""){
+	//var cambiarUIpostHash = function(error = "", color = "green", sePuedeGenerar = true, hashgen = ""){
+	var cambiarUIpostHash = function(error, color, sePuedeGenerar, hashgen){
+		var error = error || "";
+		var color = color || "green";
+		var sePuedeGenerar = sePuedeGenerar || true;
+		var hashgen = hashgen || "";
 		$("#error").html(error);
 		$("#error").css('color',color);
 		$("#generar").prop('disabled',!sePuedeGenerar);
