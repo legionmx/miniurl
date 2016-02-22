@@ -21,12 +21,14 @@ require_once("../const.php");
 		</thead>
 		<tbody>
 			<?php
-				$sql = "select hash,url from enlaces where seLogea = true";
+				//$sql = "select hash,url from enlaces where seLogea = true";
+				$sql = "select hash,url,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace group by id_enlace";
 				$rs = $base->Execute($sql);
 				foreach ($rs as $registro) {
 					$hash = $registro['hash'];
 					$url = $registro['url'];
-					echo "<tr><td>$hash</td><td>$url</td><td>&nbsp;</td><td>&nbsp;</td></tr>";
+					$visitas = $registro['num_visitas'];
+					echo "<tr><td>$hash</td><td>$url</td><td>$visitas</td><td>&nbsp;</td></tr>";
 				}
 			?>
 		</tbody>
