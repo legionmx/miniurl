@@ -49,15 +49,19 @@ $(document).ready(function(){
 			$("#error").html("");
 			$("#error").css('color','black');
 			$("#salvar").prop('disabled',false);
+			//$("#salvar").removeClass("has-error has-success");
+			$("#alias-group").removeClass("has-error has-success");
 
 			$.getJSON("chkAlias.php", {'alias': alias}, function(response){
 				if(response.existe){
 					//alert("El alias existe");
 					$("#alias-group").addClass('has-error');
+					$("#salvar").prop('disabled',true);
 				}
 				else{
 					//alert("El alias NO existe");
 					$("#alias-group").addClass('has-success');
+					$("#salvar").prop('disabled',false);
 				}
 			});
 		}
