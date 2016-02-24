@@ -1,15 +1,30 @@
 $(document).ready(function(){
+	enlaceMin.getValoresFromUI = function(){
+		this.protocolo = $("#protocolo").val();
+		this.url = $("#url").val();
+		this.alias = $("#alias").val();
+		this.seLogea = $("#conLog").prop('checked')
+	};
+
+	enlaceMin.esValidaDireccion = function(){
+		return this.url.length >= 8;
+	};
+	enlaceMin.esValidoAlias = function(){
+		return this.alias.length >= 3;
+	};
+
 	var generarHash = function(){
-		var prot = $("#protocolo").val();
-		var uerele = $("#url").val();
+		//var prot = $("#protocolo").val();
+		//var uerele = $("#url").val();
+		enlaceMin.getValoresFromUI();
 		//if($("#conLog").prop('checked')) alert("Se logeara --"+ $("#conLog").prop('checked'));
 		//else alert("NO se logeara --"+ $("#conLog").prop('checked'));
-		if(uerele.length<8){
+		if(!enlaceMin.esValidaDireccion()){
 			cambiarUIpostHash("Debe ser una direcci&oacute; de al menos 8 caracteres",'orange',false);
 		}
 		else{
-			$.getJSON("getHash.php",{"protocolo": prot, "url": uerele},function(response){
-				if((response.existe==true)||uerele.length<8){
+			$.getJSON("getHash.php",{"protocolo": enlaceMin.protocolo, "url": enlaceMin.url},function(response){
+				if((response.existe==true)||enlaceMin.url.length<8){ //TODO: Revisar la 2a parte de la condicion
 					cambiarUIpostHash("La URL ya ha sido minimizada",'red',false,response.hash);
 				}
 				else{
@@ -30,13 +45,10 @@ $(document).ready(function(){
 	};
 
 	var salvarAlias = function(){
-		//Obtenemos valores a enviar
-		var prot = $("#protocolo").val();
-		var uerele = $("#url").val();
-		var alias = $("#alias").val();
+		enlaceMin.getValoresFromUI();
 
 		//Validamos la entrada
-		if(alias.length<3){
+		if(!enlaceMin.esValidoAlias()){
 			//El alias es muy muy corto
 			//alert("Alias muy muy corto");
 			$("#error").html("Por lo menos 3 caracteres");
@@ -49,10 +61,9 @@ $(document).ready(function(){
 			$("#error").html("");
 			$("#error").css('color','black');
 			$("#salvar").prop('disabled',false);
-			//$("#salvar").removeClass("has-error has-success");
 			$("#alias-group").removeClass("has-error has-success");
 
-			$.getJSON("chkAlias.php", {'alias': alias}, function(response){
+			$.getJSON("chkAlias.php", {'alias': enlaceMin.alias}, function(response){
 				if(response.existe){
 					//alert("El alias existe");
 					$("#alias-group").addClass('has-error');
@@ -67,12 +78,11 @@ $(document).ready(function(){
 		}
 	};
 
-	$("#generar").click(function(){
-		//Insertamos el link minimizado
-		var prot = $("#protocolo").val();
-		var uerele = $("#url").val();
-		var seLogea = $("#conLog").prop('checked')
-		$.getJSON("crtEnlace.php",{"hash": ultimoHash, "url": uerele, "protocolo" : prot, "seLogea": seLogea},function(response){
+	/*** Handlers de eventos ***/
+
+	$("#generar").click(function(){ //Insertamos el link minimizado
+		enlaceMin.getValoresFromUI();
+		$.getJSON("crtEnlace.php",{"hash": ultimoHash, "url": enlaceMin.url, "protocolo" : enlaceMin.protocolo, "seLogea": enlaceMin.seLogea},function(response){
 			//cambiarUIpostHash(response.status+" --- "+response.query,'blue',false,ultimoHash);
 			cambiarUIpostHash(response.status,'blue',false,ultimoHash);
 		});
@@ -90,3 +100,11 @@ $(document).ready(function(){
 });
 
 var ultimoHash = "";
+var enlaceMin = {
+	protocolo: 1,
+	url: "",
+	alias: "",
+	existe: false,
+	valido: false,
+	seLogea: false
+};
