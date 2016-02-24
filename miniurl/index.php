@@ -57,7 +57,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<p><em><?php echo CONS::BASEURL;?><span id="hashgen"></span></em><br><label for="conLog">¿Logear visitas?</label>&nbsp;<input type="checkbox" id="conLog"></p>
+				<p><!-- <em><?php echo CONS::BASEURL;?><span id="hashgen"></span></em><br> --><label for="conLog">¿Logear visitas?</label>&nbsp;<input type="checkbox" id="conLog"></p>
 			</div>
 		</div>
 		<div class="row">
