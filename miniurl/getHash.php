@@ -1,6 +1,6 @@
 <?php
 //include_once("adodb5/adodb.inc.php");
-include("const.php");
+require_once("const.php");
 
 //Sacamos el url completo, incluyendo el protocolo
 $urlCompleto = strtolower(CONS::PROTOCOLOS[$_REQUEST['protocolo']]).'://'.$_REQUEST['url'];
@@ -12,17 +12,13 @@ $dominioBase = "mi.ni/";
 $dominioBase = "localhost:8080/edsa/mini/";
 $dominioBase = CONS::BASEURL;
 $urlMini = $dominioBase.$hash;
-//$urlMini = $hash;
-//echo $hash; 
 
 //Revisamos si el hash existe
 $rs=$base->Execute("select count(*) as cuenta from enlaces where hash='$hash'");
 if($rs->fields['cuenta']=="0"){
-	//echo $hash;
 	echo json_encode(array("existe"=>false,"hash"=>$hash));
 }
 else{
-	//echo "El link existe";
 	echo json_encode(array("existe"=>true,"hash"=>$hash));
 }
 ?>
