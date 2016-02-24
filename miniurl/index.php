@@ -27,7 +27,14 @@
 					}
 					?>
 				</select>
+				<input type="text" id="prot_propio" class="form-control input-sm hidden" placeholder="Protocolo">
 			</div>
+			<!-- <div class="col-md-2">
+				<input type="text" id="prot_propio" class="form-control hidden" placeholder="Protocolo">
+			</div> -->
+			<!-- <div class="col-md-2 hidden" id="div_prot_propio">
+				<input type="text" id="prot_propio">
+			</div> -->
 			<div class="col-md-4">
 				<input type="url" name="url" id="url" class="form-control" placeholder="Direcci&oacute;n a minimizar">
 			</div>

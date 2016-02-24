@@ -5,10 +5,16 @@ $(document).ready(function(){
 	$("#generar").prop('disabled',true);
 
 	enlaceMin.getValoresFromUI = function(){
-		this.protocolo = $("#protocolo").val();
 		this.url = $("#url").val();
 		this.alias = $("#alias").val();
 		this.seLogea = $("#conLog").prop('checked')
+		this.protocolo = $("#protocolo").val();
+		if(this.protocolo == '3'){ //Hay que obtener el txt del input
+			this.protTxt = $("#prot_propio").val();
+		}
+		else{ //Se obtiene el txt del select
+			document.getElementById("protocolo").options[($("#protocolo").val())-1].text;
+		}
 	};
 
 	enlaceMin.esValidaDireccion = function(){
@@ -29,7 +35,7 @@ $(document).ready(function(){
 			cambiarUIpostHash("Debe ser una direcci&oacute;n de al menos 8 caracteres",'orange',false);
 		}
 		else{
-			$.getJSON("getHash.php",{"protocolo": enlaceMin.protocolo, "url": enlaceMin.url},function(response){
+			$.getJSON("getHash.php",{"protocolo": enlaceMin.protocolo, "protTxt": enlaceMin.protTxt, "url": enlaceMin.url},function(response){
 				$("#alias-group").removeClass("has-success has-error");
 				if((response.existe==true)||enlaceMin.url.length<8){ //TODO: Revisar la 2a parte de la condicion
 					cambiarUIpostHash("La URL ya ha sido minimizada",'red',false,response.hash);
@@ -122,6 +128,18 @@ $(document).ready(function(){
 
 	$("#protocolo").on("change",function(evento){
 		//generarHash();
+		var cve_prot = $(this).val();
+		var txt_prot = document.getElementById("protocolo").options[($(this).val())-1].text;
+		//console.log(cve_prot+" --> "+txt_prot);
+		if(cve_prot =='3'){
+			//console.log('El usuario ha elegido OTRO protocolo');
+			$("#prot_propio").removeClass('hidden');
+		}
+		else{
+			//console.log('Prot: '+$(this).val());
+			$("#prot_propio").addClass('hidden');
+			$("#prot_propio").val('');
+		}
 	});
 
 	$("#alias").on("input",function(evento){
@@ -146,6 +164,7 @@ $(document).ready(function(){
 var ultimoHash = "";
 var enlaceMin = {
 	protocolo: 1,
+	protTxt: "HTTP",
 	url: "",
 	alias: "",
 	existe: false,
