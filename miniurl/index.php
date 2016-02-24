@@ -11,8 +11,22 @@
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link href="css/sticky-footer.css" rel="stylesheet">
 </head>
 <body>
+	<nav class="navbar navbar-fixed-top navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand">M I N I U R L</a>
+			</div>
+			<div id="navbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="#">Inicio</a></li>
+					<li><a href="stats/">Estad&iacute;sticas</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12"><h2>M I N I U R L</h2></div>
@@ -77,6 +91,12 @@
 			</div>
 		</div>
 	</div>
+
+	<footer class="footer">
+      <div class="container">
+        <p class="text-muted">Nunc scio tenebris lux</p>
+      </div>
+    </footer>
 
 	<!-- JQuery y Bootstrap-->
 	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
