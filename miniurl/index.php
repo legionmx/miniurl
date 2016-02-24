@@ -1,5 +1,5 @@
 <?php
-	include("const.php");
+	require_once("const.php");
 ?>
 <!DOCTYPE html>
 <html>

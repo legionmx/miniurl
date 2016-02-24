@@ -13,7 +13,7 @@ require_once("../const.php");
 	<table>
 		<thead>
 			<tr>
-				<th>Hash</th>
+				<th>Alias</th>
 				<th>URL</th>
 				<th>Visitas</th>
 				<th>More</th>
