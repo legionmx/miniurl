@@ -5,8 +5,8 @@ class CONS{
 }
 
 //Conexion a BD, usando ADO
-//require_once("adodb5/adodb.inc.php");
-require_once("C:/Users/Legion/Documents/Biz/miniurl/adodb5/adodb.inc.php");
+require_once("adodb5/adodb.inc.php");
+//require_once("C:/Users/Legion/Documents/Biz/miniurl/adodb5/adodb.inc.php");
 
 $base = NewADOConnection('mysqli');
 if($base->Connect("localhost",'root',"","miniurl")){
