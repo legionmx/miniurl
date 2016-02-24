@@ -5,7 +5,7 @@
 	//TODO: validación de parámetros
 	$alias = $_REQUEST['a'];
 
-	$sql= "select ip,fecha,cve_protocolo,url,created from visitas,enlaces where visitas.id_enlace = enlaces.id and enlaces.hash = '$alias' order by fecha desc";
+	$sql= "select ip,fecha,browser,sisop,cve_protocolo,url,created from visitas,enlaces where visitas.id_enlace = enlaces.id and enlaces.hash = '$alias' order by fecha desc";
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +29,7 @@
 			<div class="col-md-8">
 				<table class="table table-hover table-condensed">
 					<thead>
-						<tr><th>IP</th><th>Fecha</th></tr>
+						<tr><th>IP</th><th>Browser</th><th>Sis. Op.</th><th>Fecha</th></tr>
 					</thead>
 					<tbody>
 						<?php
@@ -37,7 +37,9 @@
 							foreach ($rs as $registro) {
 								$ip = $registro['ip'];
 								$fecha = $registro['fecha'];
-								echo "<tr><td>$ip</td><td>$fecha</td></tr>";
+								$browser = $registro['browser'];
+								$sisop = $registro['sisop'];
+								echo "<tr><td>$ip</td><td>$browser</td><td>$sisop</td><td>$fecha</td></tr>";
 							}
 						?>
 					</tbody>
