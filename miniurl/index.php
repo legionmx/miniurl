@@ -32,7 +32,7 @@
 				<input type="url" name="url" id="url" class="form-control" placeholder="Direcci&oacute;n a minimizar">
 			</div>
 			<div class="col-md-1">
-				<button type="submit" id="generar" class="btn btn-default" disabled="">Generar Alias</button>
+				<button type="submit" id="generar" class="btn btn-default" disabled>Generar Alias</button>
 			</div>
 		</div>
 
@@ -57,7 +57,9 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<p><!-- <em><?php echo CONS::BASEURL;?><span id="hashgen"></span></em><br> --><label for="conLog">¿Logear visitas?</label>&nbsp;<input type="checkbox" id="conLog"></p>
+				<p>
+					<label for="conLog">¿Logear visitas?</label>&nbsp;<input type="checkbox" id="conLog">
+				</p>
 			</div>
 		</div>
 		<div class="row">

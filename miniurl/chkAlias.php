@@ -1,9 +1,7 @@
 <?php
 //echo json_encode(array('existe' => true));
-//TODO: Checar que exista el parametro
-
 require_once 'const.php';
-
+//TODO: Checar que exista el parametro
 $alias = $_REQUEST['alias'];
 $existe = true;
 
@@ -17,5 +15,5 @@ else{
 	//NOP
 }
 
-echo json_encode(array('existe'=>$existe));
+echo json_encode(array('existe'=>$existe, 'alias_revisado'=>$alias));
 ?>
