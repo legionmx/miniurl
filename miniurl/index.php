@@ -17,6 +17,7 @@
 		<div class="row">
 			<div class="col-md-12"><h2>M I N I U R L</h2></div>
 		</div>
+
 		<div class="row">
 			<div class="col-md-2">
 				<select id="protocolo" name="protocolo" class="form-control">
@@ -31,10 +32,24 @@
 				<input type="url" name="url" id="url" class="form-control" placeholder="Direcci&oacute;n a minimizar">
 			</div>
 			<div class="col-md-1">
-				<!-- <input type="button" id="generar" class="btn btn-default" value="Generar" disabled>-->
-				<button type="submit" id="generar" class="btn btn-default" disabled="">Generar</button>
+				<button type="submit" id="generar" class="btn btn-default" disabled>Generar Alias</button>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col-md-7" id="alias-group">
+			<p>
+				<div class="input-group">
+					<span class="input-group-addon"><?php echo CONS::BASEURL;?></span>
+					<input type="text" id="alias" class="form-control" placeholder="Alias">
+				</div>
+			</p>
+			</div>
+		</div>
+
+		
+
+
 		<div class="row">
 			<div class="col-md-12">
 				<p id="error"></p>
@@ -42,7 +57,16 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<p><em><?php echo CONS::BASEURL;?><span id="hashgen"></span></em><br><label for="conLog">¿Logear visitas?</label>&nbsp;<input type="checkbox" id="conLog"></p>
+				<p>
+					<label for="conLog">¿Logear visitas?</label>&nbsp;<input type="checkbox" id="conLog">
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<p>
+					<button type=submit id="salvar" class="btn btn-primary" disabled>Salvar url minimizado</button>
+				</p>
 			</div>
 		</div>
 	</div>
