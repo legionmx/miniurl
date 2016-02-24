@@ -130,6 +130,7 @@ $(document).ready(function(){
 
 	$("#salvar").click(function(){
 		if(enlaceMin.valido){
+			enlaceMin.getValoresFromUI();
 			$.getJSON("crtEnlace.php",enlaceMin,function(response){
 				cambiarUIpostHash(response.status,'blue',false,response.alias);
 				$("#salvar").prop('disabled',true);
