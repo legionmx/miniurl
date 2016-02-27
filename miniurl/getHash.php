@@ -3,7 +3,13 @@
 require_once("const.php");
 
 //Sacamos el url completo, incluyendo el protocolo
-$urlCompleto = strtolower(CONS::PROTOCOLOS[$_REQUEST['protocolo']]).'://'.$_REQUEST['url'];
+$url = $_REQUEST['url'];
+//Si el 'protocolo' es OTRO, usamos el valor de txt
+//if($_REQUEST['protocolo']=='3'){
+$protocolo = $_REQUEST['protTxt'];
+//}
+//$urlCompleto = strtolower(CONS::PROTOCOLOS[$_REQUEST['protocolo']]).'://'.$_REQUEST['url'];
+$urlCompleto = strtolower($protocolo)."://$url";
 
 //Usamos md5 para hashear, y sólo tomamos 8 caracteres
 $hash = substr(md5($urlCompleto),0,8);
