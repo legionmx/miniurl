@@ -19,7 +19,12 @@
 
 		//Logeamos
 		if($rs->fields['log'] == "1"){
-			$sqlLog = "insert into visitas (ip,id_enlace) values ('".$_SERVER['REMOTE_ADDR']."',".$rs->fields['id'].")";
+			$ip = $_SERVER['REMOTE_ADDR'];
+			$user_agent = $_SERVER['HTTP_USER_AGENT'];
+			$browser = get_browser(null,true);
+			$nombreBrowser = $browser['browser'];
+			$sisop = $browser['platform'];
+			$sqlLog = "insert into visitas (ip,user_agent,browser,sisop,id_enlace) values ('$ip','$user_agent','$nombreBrowser','$sisop',".$rs->fields['id'].")";
 			//die($sqlLog);
 			$rsLog = $base->Execute($sqlLog);
 		}
