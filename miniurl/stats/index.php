@@ -38,7 +38,7 @@ require_once("../const.php");
 							$rs = $base->Execute($sql);
 							foreach ($rs as $registro) {
 								$alias = $registro['hash'];
-								$direccion = strtolower(CONS::PROTOCOLOS[$registro['prot']])."://".$registro['url'];
+								$direccion = strtolower($_PROTOCOLOS[$registro['prot']])."://".$registro['url'];
 								$visitas = $registro['num_visitas'];
 								echo "<tr><td><a href='viewAlias.php?a=$alias'>$alias</a>&nbsp;<a href='graphAlias.php?a=$alias'><button type='button' class='btn btn-default btn-sm'><span class='glyphicon glyphicon-picture' aria-hidden='true'></span></button></a></td><td><a href='$direccion'>$direccion<a></td><td>$visitas</td><td>&nbsp;</td></tr>";
 							}

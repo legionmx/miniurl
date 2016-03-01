@@ -36,7 +36,8 @@
 			<div class="col-md-2">
 				<select id="protocolo" name="protocolo" class="form-control">
 					<?php
-					foreach (CONS::PROTOCOLOS as  $cveProt => $abvProt) {
+					//foreach (CONS::PROTOCOLOS as  $cveProt => $abvProt) {
+					foreach($_PROTOCOLOS as $cveProt => $abvProt) {
 						echo "<option value='$cveProt'>$abvProt</option>\n";
 					}
 					?>
