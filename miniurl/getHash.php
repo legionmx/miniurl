@@ -6,7 +6,8 @@ require_once("const.php");
 $url = $_REQUEST['url'];
 //Si el 'protocolo' es OTRO, usamos el valor de txt
 //if($_REQUEST['protocolo']=='3'){
-$protocolo = $_REQUEST['protTxt'];
+//$protocolo = $_REQUEST['protTxt'];
+$protocolo = $_PROTOCOLOS[$_REQUEST['protocolo']];
 //}
 //$urlCompleto = strtolower(CONS::PROTOCOLOS[$_REQUEST['protocolo']]).'://'.$_REQUEST['url'];
 $urlCompleto = strtolower($protocolo)."://$url";
