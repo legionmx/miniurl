@@ -6,6 +6,10 @@
 	$alias = $_REQUEST['a'];
 
 	$sql= "select ip,fecha,browser,sisop,cve_protocolo,url,created,user_agent from visitas,enlaces where visitas.id_enlace = enlaces.id and enlaces.hash = '$alias' order by fecha desc";
+
+	//checamos si se puede usar browscap
+	$mostrarDatosBrowser = true;
+	if(!ini_get('browscap')) $mostrarDatosBrowser = false;
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +33,7 @@
 			<div class="col-md-10">
 				<table class="table table-hover table-condensed">
 					<thead>
-						<tr><th>IP</th><th>Browser</th><th>Sis. Op.</th><th>Fecha</th><th>User Agent</th></tr>
+						<tr><th>IP</th><?php if($mostrarDatosBrowser) { ?><th>Browser</th><th>Sis. Op.</th><?php } ?><th>Fecha</th><th>User Agent</th></tr>
 					</thead>
 					<tbody>
 						<?php
@@ -43,8 +47,10 @@
 								?>
 								<tr>
 									<td><?php echo $ip;?></td>
+									<?php if($mostrarDatosBrowser) { ?>
 									<td><?php echo $browser;?></td>
 									<td><?php echo $sisop;?></td>
+									<?php } ?>
 									<td><?php echo $fecha;?></td>
 									<td><?php echo $userAgent;?></td>
 								</tr>
