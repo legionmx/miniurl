@@ -1,11 +1,15 @@
 <?php
-	/*** stats/viewAlias.php***/
+	/*** /stats/viewAlias.php - Muestra las estadísticas, en texto, para un alias dado***/
 	require_once("../const.php");
 
 	//TODO: validación de parámetros
 	$alias = $_REQUEST['a'];
 
-	$sql= "select ip,fecha,browser,sisop,cve_protocolo,url,created from visitas,enlaces where visitas.id_enlace = enlaces.id and enlaces.hash = '$alias' order by fecha desc";
+	$sql= "select ip,fecha,browser,sisop,cve_protocolo,url,created,user_agent from visitas,enlaces where visitas.id_enlace = enlaces.id and enlaces.hash = '$alias' order by fecha desc";
+
+	//checamos si se puede usar browscap
+	$mostrarDatosBrowser = true;
+	if(!ini_get('browscap')) $mostrarDatosBrowser = false;
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,10 +30,10 @@
 			<h2>Estad&iacute;sticas del alias <?php echo $alias; ?></h2>
 		</div>
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-10">
 				<table class="table table-hover table-condensed">
 					<thead>
-						<tr><th>IP</th><th>Browser</th><th>Sis. Op.</th><th>Fecha</th></tr>
+						<tr><th>IP</th><?php if($mostrarDatosBrowser) { ?><th>Browser</th><th>Sis. Op.</th><?php } ?><th>Fecha</th><th>User Agent</th></tr>
 					</thead>
 					<tbody>
 						<?php
@@ -39,7 +43,18 @@
 								$fecha = $registro['fecha'];
 								$browser = $registro['browser'];
 								$sisop = $registro['sisop'];
-								echo "<tr><td>$ip</td><td>$browser</td><td>$sisop</td><td>$fecha</td></tr>";
+								$userAgent = $registro['user_agent'];
+								?>
+								<tr>
+									<td><?php echo $ip;?></td>
+									<?php if($mostrarDatosBrowser) { ?>
+									<td><?php echo $browser;?></td>
+									<td><?php echo $sisop;?></td>
+									<?php } ?>
+									<td><?php echo $fecha;?></td>
+									<td><?php echo $userAgent;?></td>
+								</tr>
+								<?php
 							}
 						?>
 					</tbody>
