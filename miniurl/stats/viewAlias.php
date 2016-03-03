@@ -1,6 +1,11 @@
 <?php
-	/*** /stats/viewAlias.php - Muestra las estadísticas, en texto, para un alias dado***/
-	require_once("../const.php");
+	/*** /stats/viewAlias.php - Shows text statistics for a given alias ***/
+	require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
+	session_start();
+	if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
+		header('Location: /auth/');
+	}
+	$uid = $_SESSION['uid'];
 
 	//TODO: validación de parámetros
 	$alias = $_REQUEST['a'];
@@ -25,9 +30,33 @@
 </head>
 <body>
 
+	<nav class="navbar navbar-fixed-top navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand">M I N I U R L</a>
+			</div>
+			<div id="navbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/">Home</a></li>
+					<?php if(isset($_SESSION['authToken'])){ ?>
+					<li class="active"><a href="/stats/">Statistics</a></li>
+					<li><a href="/auth/logout.php">Logout</a></li>
+					<?php
+					}
+					else{
+					?>
+					<li><a href="/auth/">Login</a></li>
+					<?php } ?>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
 	<div class="container">
-		<div class="row">
-			<h2>Estad&iacute;sticas del alias <?php echo $alias; ?></h2>
+		<div class="row" class="page-header">
+			<div class="col-md-12">
+				<h2>Estad&iacute;sticas del alias <?php echo $alias; ?></h2>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-10">
