@@ -6,7 +6,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 
 //The next var contains the fields that are persisted in the DB
-$USER_FIELDS = array('username','firstName','lastName','dob','email');
+$USER_FIELDS = array('username','firstName','lastName','dob','email','password');
 
 class User
 {
@@ -86,7 +86,8 @@ class User
 		} catch (Exception $e){
 			//This is in fact a desired exception catch
 		}
-		if($registeredUser instanceof User) throw new Exception("The username is already registered", 1);
+		//if($registeredUser instanceof User) throw new Exception("The username is already registered", 1);
+		if($registeredUser->isRegistered()) throw new Exception("The username is already registered", 1);
 
 		//We prepare the insert
 		$insFields = "";
@@ -95,6 +96,12 @@ class User
 			if(in_array($field, $USER_FIELDS)){
 				if(!empty($insValues)) $insValues.=',';
 				if(!empty($insFields)) $insFields.=',';
+
+				//Special handling of password
+				if($field=='password'){
+					$value = hash('sha256', $value);
+				}
+
 				$insFields.="$field";
 				if(is_numeric($value)){
 					$insValues.="$value";

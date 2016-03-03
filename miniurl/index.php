@@ -1,5 +1,5 @@
 <?php
-	require_once("const.php");
+	require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 	session_start();
 ?>
 <!DOCTYPE html>
@@ -31,6 +31,7 @@
 					else{
 					?>
 					<li><a href="/auth/">Login</a></li>
+					<li><a href="/auth/vwSignUp.php">Sign up</a></li>
 					<?php } ?>
 				</ul>
 			</div>

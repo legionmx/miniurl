@@ -1,9 +1,10 @@
 <?php
-/*** /auth/index.php --- If not logged in, it shows a login page. If logged, redirect to main page.***
+/*** /auth/index.php --- If not logged in, it shows a login page. ***
+TODO:If logged, redirect to main page.
 **/
 require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 ?>
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
