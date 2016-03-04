@@ -8,6 +8,7 @@ $(document).ready(function(){
 		this.url = $("#url").val();
 		this.alias = $("#alias").val();
 		this.seLogea = $("#conLog").prop('checked')
+		if(typeof this.seLogea === "undefined") this.seLogea = false;
 		this.protocolo = $("#protocolo").val();
 		if(this.protocolo == '3'){ //The protocol is obtained from the text input
 			this.protTxt = $("#prot_propio").val();
