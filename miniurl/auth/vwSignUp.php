@@ -17,7 +17,7 @@ if(isset($_SESSION['authToken'])){ //If there is an authToken, no sign up is pos
 	<title>Sign up</title>
 	<!-- CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link href="/css/sticky-footer.css" rel="stylesheet">
+	<!-- <link href="/css/sticky-footer.css" rel="stylesheet"> -->
 </head>
 <body>
 	<nav class="navbar navbar-fixed-top navbar-inverse">
@@ -45,10 +45,10 @@ if(isset($_SESSION['authToken'])){ //If there is an authToken, no sign up is pos
 
 	<div class="container">
 		<div class="row page-header">
-			<div class="col-md-12"><h2>Sign up</h2></div>
+			<div class="col-md-12"><h3>Sign up</h3></div>
 		</div>
 		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
+			<div class="col-md-6 col-md-offset-3">
 				<div class="form-group">
 					<label for="email">Email address</label>
 					<input type="text" id="email" class="form-control" placeholder="newuser@coolurl.com">
@@ -56,6 +56,7 @@ if(isset($_SESSION['authToken'])){ //If there is an authToken, no sign up is pos
 				<div class="form-group">
 					<label for="password">Password</label>
 					<input type="password" id="password" class="form-control" placeholder="Super secret password here!">
+					<input type="password" id="passcheck" class="form-control" placeholder=" And please repeat it">
 				</div>
 				<div class="form-group">
 					<label for="firstName">Name(s)</label>
@@ -71,9 +72,14 @@ if(isset($_SESSION['authToken'])){ //If there is an authToken, no sign up is pos
 				</div> --><!-- Not all browser have implemented the type='date' input control -->
 			</div>
 		</div>
+		<div class="row hidden" id="messages">
+			<div class="col-md-6 col-md-offset-3">
+				<span id="messageContent" class="text-center"></span>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-2 col-md-offset-5">
-				<button type="submit" id="signup" class="btn btn-primary btn-lg">Sign up now!</button>
+				<button type="submit" id="signup" class="btn btn-primary btn-lg btn-block">Sign up now!</button>
 			</div>
 		</div>
 	</div>
