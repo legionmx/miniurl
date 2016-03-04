@@ -9,10 +9,10 @@ $(document).ready(function(){
 		this.alias = $("#alias").val();
 		this.seLogea = $("#conLog").prop('checked')
 		this.protocolo = $("#protocolo").val();
-		if(this.protocolo == '3'){ //Hay que obtener el txt del input
+		if(this.protocolo == '3'){ //The protocol is obtained from the text input
 			this.protTxt = $("#prot_propio").val();
 		}
-		else{ //Se obtiene el txt del select
+		else{ //The protocol is obtained from the select
 			document.getElementById("protocolo").options[($("#protocolo").val())-1].text;
 		}
 	};
@@ -26,20 +26,16 @@ $(document).ready(function(){
 
 	var generarHash = function(){
 		enlaceMin.getValoresFromUI();
-		//if($("#conLog").prop('checked')) alert("Se logeara --"+ $("#conLog").prop('checked'));
-		//else alert("NO se logeara --"+ $("#conLog").prop('checked'));
 		if(!enlaceMin.esValidaDireccion()){
-			//$("#alias").val("");
 			enlaceMin.valido = false;
 			$("#alias-group").removeClass("has-success has-error");
-			cambiarUIpostHash("Debe ser una direcci&oacute;n de al menos 8 caracteres",'orange',false);
+			cambiarUIpostHash("The URL should be at least 8 characters",'orange',false);
 		}
 		else{
 			$.getJSON("getHash.php",{"protocolo": enlaceMin.protocolo, "protTxt": enlaceMin.protTxt, "url": enlaceMin.url},function(response){
 				$("#alias-group").removeClass("has-success has-error");
-				if((response.existe==true)||enlaceMin.url.length<8){ //TODO: Revisar la 2a parte de la condicion
+				if((response.existe==true)||enlaceMin.url.length<8){ //TODO: Review the second part of the condition
 					cambiarUIpostHash("La URL ya ha sido minimizada",'red',false,response.hash);
-					//$("#alias").val="";
 					$("#alias").val(response.hash);
 					enlaceMin.valido = false;
 					$("#alias-group").addClass('has-error');
@@ -59,45 +55,39 @@ $(document).ready(function(){
 	};
 
 	//var cambiarUIpostHash = function(error = "", color = "green", sePuedeGenerar = true, hashgen = ""){
-	var cambiarUIpostHash = function(error, color, sePuedeGenerar, hashgen){
+	var cambiarUIpostHash = function(error, color, sePuedeGenerar){
 		var error = error || "";
 		var color = color || "green";
 		var sePuedeGenerar = sePuedeGenerar || true;
-		var hashgen = hashgen || "";
 		$("#error").html(error);
 		$("#error").css('color',color);
 		$("#generar").prop('disabled',!sePuedeGenerar);
-		//$("#hashgen").html(hashgen);
-		//$("#hashgen").css('color',color);
 	};
 
 	var revisarAlias = function(){
 		enlaceMin.getValoresFromUI();
 		$("#alias-group").removeClass("has-error has-success");
 
-		//Validamos la entrada
+		//Validations
 		if(!enlaceMin.esValidoAlias()){
-			//El alias es muy muy corto
-			//alert("Alias muy muy corto");
+			//The alias is too short
 			$("#error").html("Por lo menos 3 caracteres");
 			$("#error").css('color','orange');
 			$("#salvar").prop('disabled',true);
 		}
-		//Validamos la existencia en BD
 		else{
+			//Check if the it already exists in DB
 			$("#error").html("");
 			$("#error").css('color','black');
 			$("#salvar").prop('disabled',false);
 
 			$.getJSON("chkAlias.php", {'alias': enlaceMin.alias}, function(response){
 				if(response.existe){
-					//console.log("El alias existe");
 					$("#alias-group").addClass('has-error');
 					$("#salvar").prop('disabled',true);
 					enlaceMin.valido = false;
 				}
 				else{
-					//console.log("El alias NO existe");
 					$("#salvar").prop('disabled',false);
 					enlaceMin.alias = response.alias_revisado;
 					enlaceMin.valido = true;
@@ -107,50 +97,49 @@ $(document).ready(function(){
 		}
 	};
 
-	/*** Handlers de eventos ***/
+	/*** Event handlers ***/
 
-	$("#generar").click(function(){ //Insertamos el link minimizado
+	$("#generar").click(function(){ //We generate a hash
 		generarHash();
 	});
+
 	$("#url").on("input",function(evento){
 		enlaceMin.getValoresFromUI();
 		if(!enlaceMin.esValidaDireccion()){
-			//console.log("NO");
 			$("#alias").val("");
 			enlaceMin.valido = false;
-			cambiarUIpostHash("Debe ser una direcci&oacute;n de al menos 8 caracteres",'orange',false);
+			cambiarUIpostHash("The URL should be at least 8 characters",'orange',false);
 		}
 		else {
-			//console.log("SI!!!");
 			cambiarUIpostHash();
 		}
 
-		//Las siguientes lineas son para obligar a usar el button "Generar"
+		//The following lines are to force the user to use the "Generate" button
 		$("#alias").val("");
 		$("#alias-group").removeClass("has-success has-error");
 		$("#salvar").prop('disabled',true);
 	});
 
+	//It triggers the field for protocol input, if needed
 	$("#protocolo").on("change",function(evento){
 		//generarHash();
 		var cve_prot = $(this).val();
 		var txt_prot = document.getElementById("protocolo").options[($(this).val())-1].text;
-		//console.log(cve_prot+" --> "+txt_prot);
-		if(cve_prot =='3'){
-			//console.log('El usuario ha elegido OTRO protocolo');
+		if(cve_prot =='3'){ //Another protocol will be selected
 			$("#prot_propio").removeClass('hidden');
 		}
 		else{
-			//console.log('Prot: '+$(this).val());
 			$("#prot_propio").addClass('hidden');
 			$("#prot_propio").val('');
 		}
 	});
 
+	//Validation of the currently input alias
 	$("#alias").on("input",function(evento){
 		revisarAlias();
 	});
 
+	//Checks if the cool link is valid, and persists it if so
 	$("#salvar").click(function(){
 		if(enlaceMin.valido){
 			enlaceMin.getValoresFromUI();
@@ -161,12 +150,12 @@ $(document).ready(function(){
 			});
 		}
 		else{
-			//TODO: Teoricamente si esta enabled el button, la entrada es valida. Pero hay q revisarlo.
+			//TODO: In theory, if the button is enabled (clickable), the input is valid. But one should validate it.
 		}
 	});
 });
 
-var ultimoHash = "";
+var ultimoHash = ""; //This is a leftover string, left for compatibility. It should be eliminated
 var enlaceMin = {
 	protocolo: 1,
 	protTxt: "HTTP",
