@@ -33,20 +33,21 @@ $(document).ready(function(){
 			cambiarUIpostHash("The URL should be at least 8 characters",'orange',false);
 		}
 		else{
-			$.getJSON("getHash.php",{"protocolo": enlaceMin.protocolo, "protTxt": enlaceMin.protTxt, "url": enlaceMin.url},function(response){
+			//$.getJSON("getAlias.php",{"protocolo": enlaceMin.protocolo, "protTxt": enlaceMin.protTxt, "url": enlaceMin.url},function(response){
+			$.getJSON("getAlias.php",{"protocol": enlaceMin.protocolo, "url": enlaceMin.url},function(response){
 				$("#alias-group").removeClass("has-success has-error");
-				if((response.existe==true)||enlaceMin.url.length<8){ //TODO: Review the second part of the condition
-					cambiarUIpostHash("La URL ya ha sido minimizada",'red',false,response.hash);
-					$("#alias").val(response.hash);
+				if((response.exists==true)||enlaceMin.url.length<8){ //TODO: Review the second part of the condition
+					cambiarUIpostHash("La URL ya ha sido minimizada",'red',false,response.alias);
+					$("#alias").val(response.alias);
 					enlaceMin.valido = false;
 					$("#alias-group").addClass('has-error');
 				}
 				else{
-					cambiarUIpostHash("",'green',true,response.hash);
-					ultimoHash = response.hash;
+					cambiarUIpostHash("",'green',true,response.alias);
+					ultimoHash = response.alias;
 					$("#alias").val(ultimoHash);
 					$("#salvar").prop('disabled',false);
-					enlaceMin.alias = response.hash;
+					enlaceMin.alias = response.alias;
 					enlaceMin.valido = true;
 					$("#alias-group").addClass('has-success');
 				}
@@ -83,7 +84,7 @@ $(document).ready(function(){
 			$("#salvar").prop('disabled',false);
 
 			$.getJSON("chkAlias.php", {'alias': enlaceMin.alias}, function(response){
-				if(response.existe){
+				if(response.exists){
 					$("#alias-group").addClass('has-error');
 					$("#salvar").prop('disabled',true);
 					enlaceMin.valido = false;

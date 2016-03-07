@@ -24,4 +24,5 @@ $_PROTOCOLOS = array();
 foreach ($rsProts as $protocolo) {
 	$_PROTOCOLOS[$protocolo['clave']] = $protocolo['des'];
 }
+$_PROTOCOLS = $_PROTOCOLOS;
 ?>

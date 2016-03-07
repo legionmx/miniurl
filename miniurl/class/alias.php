@@ -3,6 +3,11 @@
 class Alias{
 
 	private $base = '';
+	protected $hash = '';
+
+	function __construct($relatedURL){
+		$this->hash = $this->generateHash($relatedURL);
+	}
 
 	function getHash($prot, $urlBase, $code = null, $sameUrl = null, $isLog = null) {
 
@@ -36,8 +41,8 @@ class Alias{
 
 				$urlCompleto = strtolower($protocolBase)."://$url/" . $codigo;
 
-				//Usamos md5 para hashear, y sólo tomamos 8 caracteres
-				$hash = substr(md5($urlCompleto),0,8);
+				//$hash = substr(md5($urlCompleto),0,8);
+				$this->generateHash($urlCompleto);
 				$dominioBase = CONS::BASEURL;
 				$urlMini = $dominioBase . $hash;
 
@@ -79,10 +84,10 @@ class Alias{
 			$idProt = $prot;
 			$urlCompleto = strtolower($idProt)."://$url";
 
-			//Usamos md5 para hashear, y sólo tomamos 8 caracteres
-			$hash = substr(md5($urlCompleto),0,8);
-			$dominioBase = CONS::BASEURL;
-			$urlMini = $dominioBase.$hash;
+			//$hash = substr(md5($urlCompleto),0,8);
+			$this->generateHash($urlCompleto);
+			//$dominioBase = CONS::BASEURL;
+			//$urlMini = $dominioBase.$hash;
 
 			//Revisamos si el hash existe
 			$rs=$base->Execute("select count(*) as cuenta from enlaces where hash='$hash'");
@@ -108,6 +113,22 @@ class Alias{
 		}
 
 	}
+
+	/*** String : String ***
+	Generates a eight characters hash, based on a complete MD5 one, from a full-length, long URL
+	*/
+	private function generateHash($URL){
+		return substr(md5($URL),0,8);
+	}
+
+	/*** void : String***
+	Getter of the hash field
+	*/
+	public function pubGetHash(){
+		return $this->hash;
+	}
+
+
 
 }
 
