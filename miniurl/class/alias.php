@@ -1,13 +1,12 @@
 <?php
 
-
 class Alias{
 
-	public $base = '';
+	private $base = '';
 
 	function getHash($prot, $urlBase, $code = null, $sameUrl = null, $isLog = null) {
 
-		include("../const.php");
+		include_once($_SERVER['DOCUMENT_ROOT']."/const.php");
 		$this->base = $base;
 
 		if (isset($code) && is_array($code)){
@@ -39,8 +38,6 @@ class Alias{
 
 				//Usamos md5 para hashear, y sólo tomamos 8 caracteres
 				$hash = substr(md5($urlCompleto),0,8);
-				$dominioBase = "mi.ni/";
-				$dominioBase = "localhost:8080/edsa/mini/";
 				$dominioBase = CONS::BASEURL;
 				$urlMini = $dominioBase . $hash;
 
@@ -84,8 +81,6 @@ class Alias{
 
 			//Usamos md5 para hashear, y sólo tomamos 8 caracteres
 			$hash = substr(md5($urlCompleto),0,8);
-			$dominioBase = "mi.ni/";
-			$dominioBase = "localhost:8080/edsa/mini/";
 			$dominioBase = CONS::BASEURL;
 			$urlMini = $dominioBase.$hash;
 
