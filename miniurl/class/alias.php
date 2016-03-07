@@ -79,6 +79,7 @@ class Alias{
 			return $arrayAlias;
 
 		}else{
+			return array();
 			//Sacamos el url completo, incluyendo el protocolo
 			$url = $url;
 			$idProt = $prot;
