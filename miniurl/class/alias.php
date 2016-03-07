@@ -42,7 +42,7 @@ class Alias{
 				$urlCompleto = strtolower($protocolBase)."://$url/" . $codigo;
 
 				//$hash = substr(md5($urlCompleto),0,8);
-				$this->generateHash($urlCompleto);
+				$hash = $this->generateHash($urlCompleto);
 				$dominioBase = CONS::BASEURL;
 				$urlMini = $dominioBase . $hash;
 
@@ -85,7 +85,7 @@ class Alias{
 			$urlCompleto = strtolower($idProt)."://$url";
 
 			//$hash = substr(md5($urlCompleto),0,8);
-			$this->generateHash($urlCompleto);
+			$hash = $this->generateHash($urlCompleto);
 			//$dominioBase = CONS::BASEURL;
 			//$urlMini = $dominioBase.$hash;
 
