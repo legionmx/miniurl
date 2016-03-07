@@ -6,7 +6,6 @@ if(!isset($_POST['ss'])){
 }
 if(!isset($_POST['username'])){
 	throw new Exception("Require parameter missing", 1);
-	//die("");
 	exit();
 }
 else{
@@ -14,7 +13,6 @@ else{
 }
 if(!isset($_POST['password'])){
 	throw new Exception("Required parameter missing", 1);
-	//die("");
 	exit();
 }
 else{
@@ -36,7 +34,6 @@ if($requestedUser->isRegistered()){
 		session_start();
 		$authToken = substr(md5($username.time()), 0, 10);
 		$_SESSION['authToken'] = $authToken;
-		//$_SESSION['uid'] = $requestedUser->id;
 		$_SESSION['uid'] = $requestedUser->getId();
 		session_write_close();
 		echo json_encode(array('status' => 1, 'message' => 'Authentication success', 'authToken' => $authToken));
