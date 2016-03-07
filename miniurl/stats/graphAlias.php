@@ -1,17 +1,11 @@
 <?php
-	/*** /stats/graphAlias.php --- Generates a graphic view of the visits of a given alias ***/
-	//require_once('../const.php');
-	require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
-	session_start();
-	if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
-		header('Location: /auth/');
-	}
-	$uid = $_SESSION['uid'];
+	/*** /stats/graphAlias.php --- Grafica las visitas de un alias en particular ***/
+	require_once('../const.php');
 
 	//TODO: Falta validar parámetros
 	$alias = $_REQUEST['a'];
 ?>
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -24,32 +18,7 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-fixed-top navbar-inverse">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand">M I N I U R L</a>
-			</div>
-			<div id="navbar">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/">Home</a></li>
-					<?php if(isset($_SESSION['authToken'])){ ?>
-					<li class="active"><a href="/stats/">Statistics</a></li>
-					<li><a href="/auth/logout.php">Logout</a></li>
-					<?php
-					}
-					else{
-					?>
-					<li><a href="/auth/">Login</a></li>
-					<?php } ?>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
 	<div class="container">
-		<div class="row page-header">
-			<div class="col-md-12">&nbsp;</div>
-		</div>
 		<div class="row">
 			<div id="graph-container" style="width:100%; height:400px;"></div>
 		</div>
