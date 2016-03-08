@@ -1,22 +1,25 @@
 <?php
-require_once("const.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/const.php");
 
 //TODO: Falta validacion de parametros
 $alias = $_REQUEST['alias'];
 $url = $_REQUEST['url'];
 $cve_protocolo = $_REQUEST['protocolo'];
 $protTxt = $_REQUEST['protTxt'];
-$seLogea = $_REQUEST['seLogea'];
+//$seLogea = $_REQUEST['seLogea']; // Now it is always managed in authenticated section
 
-if($seLogea == 'true'){
+//$seLogea now defaults to false and is dependant of the user authentication
+/*if($seLogea == 'true'){
 	$seLogea='true';
 }
 else {
 	$seLogea='false';
-}
+}*/
+$seLogea = false;
 
 if($cve_protocolo == '3'){
-	//Hay que checar si existe el 'OTRO'
+	//We have to check if the input protocol, presumed new, exists already in the DB.
+	//TODO: Because we already have the protocols on a variable in const.php, we can check it with that.
 	$sqlClave = "select clave as cve_protocolo  from cat_protocolo where descripcion like '$protTxt'";
 	$rsCat = $base->Execute($sqlClave);
 	$num_filas = 0;
@@ -38,9 +41,51 @@ if($cve_protocolo == '3'){
 	}
 }
 
-$query = "INSERT INTO enlaces(cve_protocolo,url,hash,seLogea) values ($cve_protocolo,'$url','$alias',$seLogea)";
-$base->Execute($query);
-//TODO: Aqui hace falta una validación de que el insert ocurrió
+//We check if there is auth info
+session_start();
+if(isset($_SESSION['authToken'])&&isset($_SESSION['uid'])){
+	$seLogea = ($_REQUEST['seLogea'] === 'true');
+	$uid = $_SESSION['uid'];
+	if(is_numeric($uid)){
+		session_write_close();
+	}
+	else{
+		unset($uid);
+		session_destroy();
+	}
+}
+else{
+	session_destroy();
+}
 
-echo json_encode(array('status' => "Se minimiz&oacute; el enlace -> ".CONS::BASEURL."$alias",'alias'=> $alias, 'query' => $query));
+$dataNewLink = array('cve_protocolo' => $cve_protocolo, 'url' => $url, 'hash' => $alias, 'seLogea' => $seLogea);
+if(isset($uid)) $dataNewLink['id_user'] = $uid;
+
+//$query = "INSERT INTO enlaces(cve_protocolo,url,hash,seLogea) values ($cve_protocolo,'$url','$alias',$seLogea)";
+$insFields = "";
+$insValues = "";
+foreach ($dataNewLink as $field => $value) {
+	if(!empty($insValues)) $insValues.=',';
+	if(!empty($insFields)) $insFields.=',';
+	$insFields.=$field;
+	if(is_numeric($value)){
+		$insValues.=$value;
+	}
+	elseif (is_bool($value)){
+		$insValues.= ($value) ? 'true' : 'false';
+	}
+	else{
+		$insValues.="'$value'";
+	}
+}
+$query = "insert into enlaces($insFields) values ($insValues)";
+
+$resInsert = $base->Execute($query);
+
+if($resInsert === false){ //If the result set is false, the query had errors
+	echo json_encode(array('error' => '1', 'status' => "Error inserting the link.\nSQL: $query"));
+}
+else{
+	echo json_encode(array('status' => "Se minimiz&oacute; el enlace -> ".CONS::BASEURL."$alias",'alias'=> $alias, 'query' => $query));
+}
 ?>
