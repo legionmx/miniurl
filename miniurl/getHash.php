@@ -4,11 +4,14 @@ require_once("const.php");
 
 //Sacamos el url completo, incluyendo el protocolo
 $url = $_REQUEST['url'];
-$protocolo = $_PROTOCOLOS[$_REQUEST['protocolo']];
+//Si el 'protocolo' es OTRO, usamos el valor de txt
+//if($_REQUEST['protocolo']=='3'){
+$protocolo = $_REQUEST['protTxt'];
 //}
+//$urlCompleto = strtolower(CONS::PROTOCOLOS[$_REQUEST['protocolo']]).'://'.$_REQUEST['url'];
 $urlCompleto = strtolower($protocolo)."://$url";
 
-//We hash the url using md5, and we only keep 8 characters
+//Usamos md5 para hashear, y sólo tomamos 8 caracteres
 $hash = substr(md5($urlCompleto),0,8);
 
 $dominioBase = "mi.ni/";

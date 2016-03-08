@@ -1,12 +1,6 @@
 <?php
 /*** stats/index.php -- Index de las estadísticas ***/
-require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
-session_start();
-if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
-	header('Location: /auth/');
-}
-$uid = $_SESSION['uid'];
-//session_destroy();
+require_once("../const.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,54 +15,32 @@ $uid = $_SESSION['uid'];
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
-	<nav class="navbar navbar-fixed-top navbar-inverse">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand">M I N I U R L</a>
-			</div>
-			<div id="navbar">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/">Home</a></li>
-					<?php if(isset($_SESSION['authToken'])){ ?>
-					<li class="active"><a href="#">Statistics</a></li>
-					<li><a href="/auth/logout.php">Logout</a></li>
-					<?php
-					}
-					else{
-					?>
-					<li><a href="/auth/">Login</a></li>
-					<?php } ?>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
 	<div class="container">
-		<div class="row" class="page-header">
-			<div class="col-md-12">
-				<h2>Cool links use statistics</h2>
-			</div>
+		<div class="row">
+			<h2>Estad&iacute;sticas de uso de enlaces</h2>
 		</div>
 		<div class="row">
 			<div class="col-md-10">
 				<table class="table table-hover table-condensed">
 					<thead>
 						<tr>
-							<th class="text-center" colspan="2">Alias</th>
+							<th>Alias</th>
 							<th>Direcci&oacute;n</th>
-							<th class="text-center">Visitas</th>
+							<th>Visitas</th>
 							<th>More</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-							$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace";
+							//$sql = "select hash,url from enlaces where seLogea = true";
+							//$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace group by id_enlace";
+							$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true group by id_enlace";
 							$rs = $base->Execute($sql);
 							foreach ($rs as $registro) {
 								$alias = $registro['hash'];
-								$direccion = strtolower($_PROTOCOLOS[$registro['prot']])."://".$registro['url'];
+								$direccion = strtolower(CONS::PROTOCOLOS[$registro['prot']])."://".$registro['url'];
 								$visitas = $registro['num_visitas'];
-								echo "<tr><td class='text-right'><a href='viewAlias.php?a=$alias'>$alias</a>&nbsp;</td><td><a href='graphAlias.php?a=$alias'><button type='button' class='btn btn-default btn-sm'><span class='glyphicon glyphicon-picture' aria-hidden='true'></span></button></a></td><td><a href='$direccion'>$direccion<a></td><td class='text-center'>$visitas</td><td>&nbsp;</td></tr>";
+								echo "<tr><td><a href='viewAlias.php?a=$alias'>$alias</a>&nbsp;<a href='graphAlias.php?a=$alias'><button type='button' class='btn btn-default btn-sm'><span class='glyphicon glyphicon-picture' aria-hidden='true'></span></button></a></td><td><a href='$direccion'>$direccion<a></td><td>$visitas</td><td>&nbsp;</td></tr>";
 							}
 						?>
 					</tbody>

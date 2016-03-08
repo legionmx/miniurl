@@ -1,20 +1,11 @@
 <?php
-	/*** /stats/viewAlias.php - Shows text statistics for a given alias ***/
-	require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
-	session_start();
-	if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
-		header('Location: /auth/');
-	}
-	$uid = $_SESSION['uid'];
+	/*** stats/viewAlias.php***/
+	require_once("../const.php");
 
 	//TODO: validación de parámetros
 	$alias = $_REQUEST['a'];
 
-	$sql= "select ip,fecha,browser,sisop,cve_protocolo,url,created,user_agent from visitas,enlaces where visitas.id_enlace = enlaces.id and enlaces.hash = '$alias' order by fecha desc";
-
-	//checamos si se puede usar browscap
-	$mostrarDatosBrowser = true;
-	if(!ini_get('browscap')) $mostrarDatosBrowser = false;
+	$sql= "select ip,fecha,browser,sisop,cve_protocolo,url,created from visitas,enlaces where visitas.id_enlace = enlaces.id and enlaces.hash = '$alias' order by fecha desc";
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,39 +21,15 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-fixed-top navbar-inverse">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand">M I N I U R L</a>
-			</div>
-			<div id="navbar">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/">Home</a></li>
-					<?php if(isset($_SESSION['authToken'])){ ?>
-					<li class="active"><a href="/stats/">Statistics</a></li>
-					<li><a href="/auth/logout.php">Logout</a></li>
-					<?php
-					}
-					else{
-					?>
-					<li><a href="/auth/">Login</a></li>
-					<?php } ?>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
 	<div class="container">
-		<div class="row" class="page-header">
-			<div class="col-md-12">
-				<h2>Estad&iacute;sticas del alias <?php echo $alias; ?></h2>
-			</div>
+		<div class="row">
+			<h2>Estad&iacute;sticas del alias <?php echo $alias; ?></h2>
 		</div>
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-8">
 				<table class="table table-hover table-condensed">
 					<thead>
-						<tr><th>IP</th><?php if($mostrarDatosBrowser) { ?><th>Browser</th><th>Sis. Op.</th><?php } ?><th>Fecha</th><th>User Agent</th></tr>
+						<tr><th>IP</th><th>Browser</th><th>Sis. Op.</th><th>Fecha</th></tr>
 					</thead>
 					<tbody>
 						<?php
@@ -72,18 +39,7 @@
 								$fecha = $registro['fecha'];
 								$browser = $registro['browser'];
 								$sisop = $registro['sisop'];
-								$userAgent = $registro['user_agent'];
-								?>
-								<tr>
-									<td><?php echo $ip;?></td>
-									<?php if($mostrarDatosBrowser) { ?>
-									<td><?php echo $browser;?></td>
-									<td><?php echo $sisop;?></td>
-									<?php } ?>
-									<td><?php echo $fecha;?></td>
-									<td><?php echo $userAgent;?></td>
-								</tr>
-								<?php
+								echo "<tr><td>$ip</td><td>$browser</td><td>$sisop</td><td>$fecha</td></tr>";
 							}
 						?>
 					</tbody>
