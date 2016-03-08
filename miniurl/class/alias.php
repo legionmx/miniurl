@@ -1,8 +1,9 @@
 <?php
 
+session_start();
 
 class Alias{
-
+	
 	public $base = '';
 
 	function getHash($prot, $urlBase, $code = null, $sameUrl = null, $isLog = null) {
@@ -27,7 +28,6 @@ class Alias{
 				$idProt = $prot[$i];
 				$codigo = $code[$i];
 				$protocolBase = $_PROTOCOLOS[$i+1];
-				session_start();
 				$uid = $_SESSION['uid'];
 
 				//ponemos si pidio usuario la misma url para todo los registros
