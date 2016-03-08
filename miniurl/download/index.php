@@ -26,7 +26,7 @@
 	<nav id="section_header" class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand">M I N I U R L</a>
+				<a class="navbar-brand"><img src="/images/logo_white.png" height="73" width="230" /></a>
 			</div>
 			<div id="navbar">
 				<ul class="nav navbar-nav navbar-right">
