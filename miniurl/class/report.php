@@ -38,6 +38,7 @@ class report {
 		
 	}
 	
+	
 		
 	
         
@@ -57,7 +58,7 @@ class report {
 	    $j=0;
             foreach ($result as $campos) {
 		if(!is_numeric($campos[$j])){
-			fputcsv($fp, array_values($campos),8);
+			fputcsv($fp, array_values($campos));
 		}
 		
 		$j++;
