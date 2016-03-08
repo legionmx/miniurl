@@ -21,28 +21,47 @@ class report {
         $query = 'select * from enlaces where activo = 1';
         $result = $base->getAll($query);
         
-        echo'<pre>';
-        print_r($result);  
+        $registers = count($result);
         
-        $fields = count($result);
-
-        $headers = array();
-        for ($i = 0; $i < $fields; $i++) {
-            $headers[] = mysql_field_name($result , $i);
-        }
+	
+	$index = array_keys($result[0]);
+	$fields = count($index);
+	
+	//print_r($index);
+	
+	
+	
+	for($i=0; $i< $fields; $i++){
+		if(!is_numeric($index[$i])){
+			$headers[] = $index[$i];
+		}
+		
+	}
+	
+		
+	
         
-        $fp = fopen($_SERVER['DOCUMENT_ROOT'] . '/miniurl/miniurl/csv/downloads/midescarga.csv', 'w');
+	echo '<pre>';
+	print_r($headers);
+        
+        $fp = fopen($_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/midescarga.csv', 'w');
         
         if ($fp && $result) {
             header('Content-Type: text/csv');
-            header('Content-Disposition: attachment; filename="export.csv"');
+            header('Content-Disposition: attachment; filename="midescarga.csv"');
             header('Pragma: no-cache');
             header('Expires: 0');
+	    
             fputcsv($fp, $headers);
             
-            while ($row = count($result)) {
-                fputcsv($fp, array_values($row));
-            }
+	    $j=0;
+            foreach ($result as $campos) {
+		if(!is_numeric($campos[$j])){
+			fputcsv($fp, array_values($campos),8);
+		}
+		
+		$j++;
+	    }
             
         }
         

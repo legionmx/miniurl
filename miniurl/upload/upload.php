@@ -11,7 +11,7 @@ switch ($_GET['method']) {
 
 class FileUp{
 
-	function readCsv(){
+	static function readCsv(){
 
 		$target_dir = "../csv/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);

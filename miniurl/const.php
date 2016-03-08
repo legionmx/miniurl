@@ -10,7 +10,7 @@ class CONS{
 require_once($_SERVER['DOCUMENT_ROOT']."/adodb5/adodb.inc.php");
 
 $base = NewADOConnection('mysqli');
-if($base->Connect("localhost",'root',"","miniurl")){
+if($base->Connect("localhost",'root',"root","miniurl")){
 	//NOP
 }
 else{

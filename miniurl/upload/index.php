@@ -30,11 +30,13 @@
 			</div>
 			<div id="navbar">
 				<ul class="nav navbar-nav navbar-right">
+					
 					<li><a href="/">Inicio</a></li>
 					<li><a href="/stats/">Estad&iacute;sticas</a></li>
 					<li class="active"><a href="#">Carga masiva</a></li>
 					<li><a href="/download/">Descarga de url´s</a></li>
 					<li><a href="/auth/logout.php">Logout</a></li>
+
 				</ul>
 			</div>
 		</div>

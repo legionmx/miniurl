@@ -30,11 +30,14 @@
 			</div>
 			<div id="navbar">
 				<ul class="nav navbar-nav navbar-right">
+
 					<li><a href="/">Inicio</a></li>
 					<li><a href="/stats/">Estad&iacute;sticas</a></li>
 					<li><a href="/upload/">Carga masiva</a></li>
 					<li class="active"><a href="#">Descarga de url´s</a></li>
 					<li><a href="/auth/logout.php">Logout</a></li>
+
+
 				</ul>
 			</div>
 		</div>
@@ -78,7 +81,7 @@
     <!--/ Slider end -->
     <div class="carousel-caption">
 		
-			<form method="post" action="/miniurl/class/report.php?method=csvDownload" enctype="multipart/form-data">
+			<form method="post" action="/class/report.php?method=csvDownload" enctype="multipart/form-data">
 
 				<div class="row">
 					<div class="col-md-12"><h2>URL´s CSV DOWNLOAD</h2></div>
