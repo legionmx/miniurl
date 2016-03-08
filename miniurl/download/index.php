@@ -92,7 +92,7 @@
 					
 					<div class="col-md-8">
 						<p>
-							<label for="rangeIds">¿Quiers descargar por rangos?</label>&nbsp;<input type="checkbox" id="rangeIds" name="rangeIds">
+							<label for="rangeIds">¿Quieres descargar por rangos?</label>&nbsp;<input type="checkbox" id="rangeIds" name="rangeIds">
 						</p>
 					</div>
 

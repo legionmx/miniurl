@@ -27,6 +27,8 @@ class Alias{
 				$idProt = $prot[$i];
 				$codigo = $code[$i];
 				$protocolBase = $_PROTOCOLOS[$i+1];
+				session_start();
+				$uid = $_SESSION['uid'];
 
 				//ponemos si pidio usuario la misma url para todo los registros
 
@@ -50,6 +52,7 @@ class Alias{
 				if($rs->fields['cuenta']=="0"){
 					$arrayAlias[$i] = array(
 						"existe"       => "false",
+						"id user"      => $uid,
 						"url"          => $url,
 						"hash"         => $hash,
 						"codigo"       => $codigo,
@@ -62,6 +65,7 @@ class Alias{
 				else{
 					$arrayAlias[$i] = array(
 						"existe"       => "true",
+						"id user"      => $uid,
 						"url"          => $url,
 						"hash"         => $hash,
 						"codigo"       => $codigo,
@@ -107,7 +111,7 @@ class Alias{
 
 		foreach ($createAlias as $value) {
 
-			$query = "insert into `enlaces` (`cve_protocolo`, `url`, `hash`, `seLogea`, `activo`, `code`) VALUES ('" . $value['protocol'] . "', '" . $value['url completa'] . "','" . $value['hash'] . "','" . $value['se logea'] . "','1','" . $value['codigo'] . "');";
+			$query = "insert into `enlaces` (`id_user`, `cve_protocolo`, `url`, `hash`, `seLogea`, `activo`, `code`) VALUES ('". $value['id user'] . "','" . $value['protocol'] . "', '" . $value['url completa'] . "','" . $value['hash'] . "','" . $value['se logea'] . "','1','" . $value['codigo'] . "');";
 			
 			$base->Execute($query);
 		}

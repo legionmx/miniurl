@@ -18,17 +18,12 @@ class report {
 	//$this->base = $base;
         
         $result = array();
-        $query = 'select * from enlaces where activo = 1';
+        $query = 'select id, cve_protocolo, url, hash, code from enlaces where activo = 1';
         $result = $base->getAll($query);
-        
         $registers = count($result);
-        
 	
 	$index = array_keys($result[0]);
 	$fields = count($index);
-	
-	//print_r($index);
-	
 	
 	
 	for($i=0; $i< $fields; $i++){
@@ -39,31 +34,43 @@ class report {
 	}
 	
 	
-		
-	
-        
-	echo '<pre>';
-	print_r($headers);
-        
         $fp = fopen($_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/midescarga.csv', 'w');
         
         if ($fp && $result) {
-            header('Content-Type: text/csv');
-            header('Content-Disposition: attachment; filename="midescarga.csv"');
-            header('Pragma: no-cache');
-            header('Expires: 0');
-	    
+            
             fputcsv($fp, $headers);
             
-	    $j=0;
-            foreach ($result as $campos) {
-		if(!is_numeric($campos[$j])){
-			fputcsv($fp, array_values($campos));
-		}
+	    $datos = array();
+            foreach ($result as $rows) {
 		
-		$j++;
+		$datos['id'] = $rows['id'];
+		$datos['cve_protocolo'] = $rows['cve_protocolo'];
+		$datos['url'] = $rows['url'];
+		$datos['hash'] = $rows['hash'];
+		$datos['code'] = $rows['code'];
+		
+		fputcsv($fp, array_values($datos));
+		
 	    }
-            
+	    
+	    $archivo = basename('midescarga.csv');
+
+	    $ruta = $_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/'.$archivo;
+
+	    
+	    /*header('Content-Type: application/csv');
+            header('Content-Disposition: attachment; filename="midescarga.csv"');
+            header('Pragma: no-cache');
+            header('Expires: 0');*/
+	    
+	    header('Content-Type: application/force-download');
+	    header('Content-Disposition: attachment; filename='.$archivo);
+	    header('Content-Transfer-Encoding: binary');
+	    header('Content-Length: '.filesize($ruta));
+	    
+	    
+	    
+	    
         }
         
     }
