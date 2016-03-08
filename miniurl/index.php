@@ -25,6 +25,8 @@
 					<li class="active"><a href="#">Home</a></li>
 					<?php if(isset($_SESSION['authToken'])){ ?>
 					<li><a href="/stats/">Statistics</a></li>
+					<li><a href="/upload/">CSV upload</a></li>
+					<li><a href="/download/">CSV download</a></li>
 					<li><a href="/auth/logout.php">Logout</a></li>
 					<?php
 					}
