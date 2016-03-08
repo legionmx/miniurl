@@ -1,5 +1,10 @@
 <?php
-	require_once("../const.php");
+	require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
+	session_start();
+	if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
+		header('Location: /auth/');
+	}
+	$uid = $_SESSION['uid'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,10 +30,11 @@
 			</div>
 			<div id="navbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="#">Inicio</a></li>
-					<li><a href="/miniurl/stats">Estad&iacute;sticas</a></li>
-					<li><a href="/miniurl/upload">Carga masiva</a></li>
-					<li><a href="/miniurl/download">Descarga de url´s</a></li>
+					<li><a href="/">Inicio</a></li>
+					<li><a href="/stats/">Estad&iacute;sticas</a></li>
+					<li><a href="/upload/">Carga masiva</a></li>
+					<li class="active"><a href="#">Descarga de url´s</a></li>
+					<li><a href="/auth/logout.php">Logout</a></li>
 				</ul>
 			</div>
 		</div>
