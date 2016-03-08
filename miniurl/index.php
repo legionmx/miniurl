@@ -140,18 +140,22 @@
 	</div>
 	</div>
 
-	<footer class="footer">
+	<!-- <footer class="footer">
       <div class="container">
         <p class="text-muted">Nunc scio tenebris lux</p>
       </div>
-    </footer>
+    </footer> -->
 
 	<!-- JQuery y Bootstrap-->
-	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<!-- <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
 	<!-- Scripts propios -->
-	<script type="text/javascript" src="/index.js"></script>
+	<!-- <script type="text/javascript" src="/index.js"></script>
 	<script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
 	<script src="/js/owl.carousel.min.js"></script>
 </body>
-</html>
+</html> -->
+<?php
+$ownFinalScripts = array('/index.js');
+include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
+?>

@@ -21,7 +21,7 @@
 	<title>Gr&aacute;fica de visitas</title>
 	<!-- CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link href="css/sticky-footer.css" rel="stylesheet">
+	<link href="/css/sticky-footer.css" rel="stylesheet">
 	<link href="/css/custom.css" rel="stylesheet">
 	<link rel="stylesheet" href="/css/owl.carousel.css"/>
     <link rel="stylesheet" href="/css/owl.theme.css"/>
@@ -96,21 +96,28 @@
 			<div class="col-md-12"><h2>Gr&aacute;fica diaria</h2></div>
 		</div>
 		<div class="row">
-			<div id="graph-container" style="width:100%; height:400px;"></div>
+			<div class="col-md-12">
+			<!--The next hidden input is to feed the alias to the JS script in the footer-->
+			<input type="hidden" id="alias" value="<?php echo $alias;?>" />
+				<div id="graph-container" style="width:100%; height:400px;"></div>
+			</div>
 		</div>
+
+	</div>
+
 	</div>
 
 	<!-- JQuery y Bootstrap-->
-	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<!-- <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
 	<!-- Look and feel scripts -->
-	<script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
-	<script src="/js/owl.carousel.min.js"></script>
+	<!-- <script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
+	<script src="/js/owl.carousel.min.js"></script> -->
 	<!-- Highcharts scripts-->
-	<script src="http://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
-	<script type="text/javascript">
-	$(function(){
+	<!-- <script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+	<!-- <script type="text/javascript">
+	/*$(function(){
 		$.getJSON('getGraphData.php',{"alias":"<?php echo $alias; ?>"},function(response){
 			$("#graph-container").highcharts({
 				xAxis: {
@@ -130,7 +137,11 @@
 				}]
 			});
 		});
-	});
+	});*/
 	</script>
 </body>
-</html>
+</html> -->
+<?php
+$ownFinalScripts = array('/stats/graphAlias.js',"http://code.highcharts.com/highcharts.js","https://code.highcharts.com/modules/exporting.js");
+include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
+?>
