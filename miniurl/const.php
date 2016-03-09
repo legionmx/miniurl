@@ -24,11 +24,15 @@ foreach ($rsProts as $protocolo) {
 	$_PROTOCOLOS[$protocolo['clave']] = $protocolo['des'];
 }
 
-$sqlCategories = "select id_category, category from cat_categories where active = 1 and id_user = " . $_SESSION['uid'];
-$rsCat = $base->Execute($sqlCategories);
-$_CATEGORIES = array();
-foreach ($rsCat as $category) {
-	$_CATEGORIES[$category['id_category']] = $category['category'];
+if(isset($_SESSION['uid'])){
+	$sqlCategories = "select id_category, category from cat_categories where active = 1 and id_user = " . $_SESSION['uid'];	
+	$rsCat = $base->Execute($sqlCategories);
+	$_CATEGORIES = array();
+	if($rsCat !== false){
+		foreach ($rsCat as $category) {
+			$_CATEGORIES[$category['id_category']] = $category['category'];
+		}
+	}
 }
 
 ?>
