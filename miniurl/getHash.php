@@ -9,7 +9,7 @@ $protocolo = $_PROTOCOLOS[$_REQUEST['protocolo']];
 $urlCompleto = strtolower($protocolo)."://$url";
 
 //We hash the url using md5, and we only keep 8 characters
-$hash = substr(md5($urlCompleto),0,8);
+$hash = substr(md5($urlCompleto+time()),0,8);
 
 $dominioBase = "mi.ni/";
 $dominioBase = "localhost:8080/edsa/mini/";
