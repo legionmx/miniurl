@@ -14,7 +14,8 @@ class FileUp{
 	static function readCsv(){
 		
 		$target_dir = "../csv/";
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+		$uniq = date("d-m-y") . substr(md5($_FILES["fileToUpload"]["name"]),0,8);
+		$target_file = $target_dir . $uniq .  basename($_FILES["fileToUpload"]["name"]);
 		$registros = array();
 
 		if (($fichero = fopen($target_file, "r")) !== FALSE) {
@@ -47,7 +48,6 @@ class FileUp{
 		        $regCode[$i] = $registros[$i]["codigo"];
 
 		    }
-
 		    if(isset($_POST['sameUrl']) && $_POST['sameUrl'] == 'on'){
 		    	$sameUrl = $_POST['sameUrl'];
 		    	$regProt = $_POST['protocolo'];
@@ -63,7 +63,6 @@ class FileUp{
 		    $createAlias = $hashAlias->getHash($regProt, $regUrl, $regCode, $sameUrl, $regLog);
 
 		    $insertAlias = $hashAlias->insertAlias($createAlias);
-
 		    
 
 		}
@@ -72,7 +71,8 @@ class FileUp{
 	static function transformCsv (){
 
 		$target_dir = "../csv/";
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+		$uniq = date("d-m-y") . '-' . substr(md5($_FILES["fileToUpload"]["name"]),0,8);
+		$target_file = $target_dir . $uniq .  basename($_FILES["fileToUpload"]["name"]);
 		$uploadOk = 1;
 		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
