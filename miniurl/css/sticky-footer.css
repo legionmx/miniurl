@@ -70,3 +70,6 @@ input[type=file], #url,#range1, #range2 {
   height: 45px;
   font-weight: 700;
 }
+.table-condensed {
+  background: #fff;
+}

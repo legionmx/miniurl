@@ -14,7 +14,7 @@ class FileUp{
 	static function readCsv(){
 		
 		$target_dir = "../csv/";
-		$uniq = date("d-m-y") . substr(md5($_FILES["fileToUpload"]["name"]),0,8);
+		$uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5($_FILES["fileToUpload"]["name"]),0,8);
 		$target_file = $target_dir . $uniq .  basename($_FILES["fileToUpload"]["name"]);
 		$registros = array();
 
@@ -69,9 +69,9 @@ class FileUp{
 	}
 
 	static function transformCsv (){
-
+		
 		$target_dir = "../csv/";
-		$uniq = date("d-m-y") . '-' . substr(md5($_FILES["fileToUpload"]["name"]),0,8);
+		$uniq = date("d-m-y") . '-' . time() . '-' . substr(md5($_FILES["fileToUpload"]["name"]),0,8);
 		$target_file = $target_dir . $uniq .  basename($_FILES["fileToUpload"]["name"]);
 		$uploadOk = 1;
 		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
