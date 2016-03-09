@@ -22,7 +22,13 @@ class report {
 	if (isset($_POST['rangeIds']) && $_POST['rangeIds'] == 'on'){
 		$range_1 = $_POST['range1'];
 		$range_2 = $_POST['range2'];
-		$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid . ' and id BETWEEN ' . $range_1 . ' AND '. $range_2 ;
+		$category  = $_POST['category'];
+		if($category == 0 ){
+			$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid . ' and id BETWEEN ' . $range_1 . ' AND '. $range_2 ;
+		}else{
+			$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid . ' and id BETWEEN ' . $range_1 . ' AND '. $range_2 . 'AND id_category =' . $category;	
+		}
+		
 	}else{
 		$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid ;
 	}
@@ -58,7 +64,8 @@ class report {
 		$datos['url'] = $rows['url'];
 		$datos['hash'] = $rows['hash'];
 		$datos['code'] = $rows['code'];
-		$datos['category'] = $_CATEGORIES[$rows['id_category']];
+		$datos['category'] = $rows['id_category'];
+		
 		
 		fputcsv($fp, array_values($datos));
 		
@@ -66,19 +73,15 @@ class report {
 	    
 	    $archivo = basename('midescarga.csv');
 
-	    $ruta = $_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/'.$archivo;
+	    $ruta = '/csv/downloads/'.$archivo;
 
 	    
-	    /*header('Content-Type: application/csv');
-            header('Content-Disposition: attachment; filename="midescarga.csv"');
-            header('Pragma: no-cache');
-            header('Expires: 0');*/
-	    
-	    header('Content-Type: application/force-download');
+	    /*header('Content-Type: application/force-download');
 	    header('Content-Disposition: attachment; filename='.$archivo);
 	    header('Content-Transfer-Encoding: binary');
-	    header('Content-Length: '.filesize($ruta));
+	    header('Content-Length: '.filesize($ruta));*/
 	    
+	    header ('Location: ' . $ruta);
 	    
 	    
 	    

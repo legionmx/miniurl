@@ -3,3 +3,8 @@ id,cve_protocolo,url,hash,code,id_category
 2,6,ftps://elmismourl.mx/111111,9e2b8a3f,111111,"Campaña newsletter"
 3,6,ftps://elmismourl.mx/222222,7ada7158,222222,"Campaña newsletter"
 4,6,ftps://elmismourl.mx/333333,245e4948,333333,"Campaña Navideña"
+6,1,http://loquesea.com/123123,ce26ad40,123123,"Campaña Navideña"
+7,2,https://google.com/111111,9c8dd063,111111,"Campaña Navideña"
+8,4,ftp://atabay.mx/222222,be48da83,222222,"Campaña Navideña"
+9,1,http://otrodominio.com/333333,b0473dd4,333333,"Campaña Navideña"
+10,7,laurl.com,b5de50a0,,"Campaña Navideña"

@@ -1,6 +1,5 @@
 <?php
 /*** const.php --- Incluye constantes, librerias y funciones necesarias para todo el sistema ***/
-
 class CONS{
 	const BASEURL = "localhost:8082/i/?";
 	//Sacaremos los protocolos de la BD
@@ -25,9 +24,7 @@ foreach ($rsProts as $protocolo) {
 	$_PROTOCOLOS[$protocolo['clave']] = $protocolo['des'];
 }
 
-//
-
-$sqlCategories = "select id_category, category from cat_categories where active = 1";
+$sqlCategories = "select id_category, category from cat_categories where active = 1 and id_user = " . $_SESSION['uid'];
 $rsCat = $base->Execute($sqlCategories);
 $_CATEGORIES = array();
 foreach ($rsCat as $category) {

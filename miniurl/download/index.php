@@ -1,10 +1,12 @@
 <?php
-	require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 	session_start();
+	require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
+	
 	if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 		header('Location: /auth/');
 	}
 	$uid = $_SESSION['uid'];
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -116,6 +118,7 @@
 					<div class="col-md-3">
 						
 						<select id="categories" name="category" class="form-control">
+							<option value='0' selected="selected">No Categories</option>
 							<?php 
 							foreach ($_CATEGORIES as  $cveCat => $abvCat) {
 								echo "<option value='$cveCat'>$abvCat</option>\n";

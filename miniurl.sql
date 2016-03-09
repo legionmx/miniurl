@@ -1,44 +1,56 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.4
+-- version 4.2.10
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 03, 2016 at 07:17 PM
--- Server version: 5.6.15-log
--- PHP Version: 5.4.24
+-- Servidor: localhost:8889
+-- Tiempo de generación: 09-03-2016 a las 16:59:00
+-- Versión del servidor: 5.5.38
+-- Versión de PHP: 5.5.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- Database: `miniurl`
+-- Base de datos: `miniurl`
 --
-CREATE DATABASE IF NOT EXISTS `miniurl` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `miniurl`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cat_permiso`
+-- Estructura de tabla para la tabla `cat_categories`
 --
 
-DROP TABLE IF EXISTS `cat_permiso`;
-CREATE TABLE IF NOT EXISTS `cat_permiso` (
-  `clave` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cat_categories` (
+`id_category` tinyint(25) NOT NULL,
+  `category` varchar(600) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `active` int(25) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `cat_categories`
+--
+
+INSERT INTO `cat_categories` (`id_category`, `category`, `id_user`, `active`) VALUES
+(1, 'Campaña Navideña', 1, 1),
+(2, 'Campaña newsletter', 1, 1),
+(3, 'Campaña de promociones', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cat_permiso`
+--
+
+CREATE TABLE `cat_permiso` (
+`clave` smallint(6) unsigned NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `abrev` varchar(10) NOT NULL,
-  `edo_reg` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`clave`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `edo_reg` tinyint(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `cat_permiso`
+-- Volcado de datos para la tabla `cat_permiso`
 --
 
 INSERT INTO `cat_permiso` (`clave`, `descripcion`, `abrev`, `edo_reg`) VALUES
@@ -52,20 +64,18 @@ INSERT INTO `cat_permiso` (`clave`, `descripcion`, `abrev`, `edo_reg`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cat_protocolo`
+-- Estructura de tabla para la tabla `cat_protocolo`
 --
 
-DROP TABLE IF EXISTS `cat_protocolo`;
-CREATE TABLE IF NOT EXISTS `cat_protocolo` (
-  `clave` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cat_protocolo` (
+`clave` tinyint(3) unsigned NOT NULL,
   `descripcion` varchar(20) NOT NULL,
   `html` varchar(20) DEFAULT NULL,
-  `edo_reg` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`clave`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `edo_reg` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `cat_protocolo`
+-- Volcado de datos para la tabla `cat_protocolo`
 --
 
 INSERT INTO `cat_protocolo` (`clave`, `descripcion`, `html`, `edo_reg`) VALUES
@@ -74,81 +84,59 @@ INSERT INTO `cat_protocolo` (`clave`, `descripcion`, `html`, `edo_reg`) VALUES
 (3, 'OTRO', NULL, 1),
 (4, 'FTP', NULL, 1),
 (5, 'GIT', NULL, 0),
-(6, 'FTPS', NULL, 1);
+(6, 'FTPS', NULL, 1),
+(7, 'Ã±Ã±Ã±', NULL, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `enlaces`
+-- Estructura de tabla para la tabla `enlaces`
 --
 
-DROP TABLE IF EXISTS `enlaces`;
-CREATE TABLE IF NOT EXISTS `enlaces` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `enlaces` (
+`id` bigint(20) unsigned NOT NULL,
   `id_user` smallint(5) unsigned DEFAULT NULL COMMENT 'id of user, if one was authenticated',
   `cve_protocolo` tinyint(3) unsigned NOT NULL,
   `url` varchar(200) NOT NULL,
   `hash` varchar(10) NOT NULL,
+  `code` varchar(600) CHARACTER SET utf8 NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `seLogea` tinyint(1) NOT NULL DEFAULT '0',
   `activo` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `hash_uniq` (`hash`),
-  KEY `cve_protocolo` (`cve_protocolo`),
-  KEY `id_user` (`id_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+  `id_category` varchar(600) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `enlaces`
+-- Volcado de datos para la tabla `enlaces`
 --
 
-INSERT INTO `enlaces` (`id`, `id_user`, `cve_protocolo`, `url`, `hash`, `created`, `seLogea`, `activo`) VALUES
-(1, NULL, 1, 'yahoo.com', '873c87c7', '2016-02-18 20:18:58', 0, 1),
-(3, NULL, 1, 'en.wikipedia.org/wiki', 'a1ff918b', '2016-02-19 01:20:35', 1, 1),
-(4, NULL, 2, 'en.wikipedia.org/wiki', '4167eb86', '2016-02-19 01:45:23', 0, 1),
-(6, NULL, 1, 'questionablecontent.net', '2ec8c9b4', '2016-02-19 05:42:16', 1, 1),
-(7, NULL, 2, 'questionablecontent.net', '32ec7a85', '2016-02-19 05:45:28', 1, 1),
-(8, NULL, 1, 'www.ingenieria.unam.mx', '2027a097', '2016-02-19 05:49:07', 1, 1),
-(9, NULL, 1, 'techdows.com/2015/12/google-chrome-48-49-and-50-release-dates.html', 'd9afb26b', '2016-02-19 21:13:44', 1, 1),
-(10, NULL, 1, 'advancesinap.collegeboard.org/stem/computer-science-principles', 'f77e3364', '2016-02-22 15:08:49', 1, 1),
-(11, NULL, 2, 'www.yahoo.com', '99e8a2cb', '2016-02-23 18:32:49', 1, 1),
-(12, NULL, 1, 'www.yahoo.com', 'c5f7ac7a', '2016-02-23 18:36:42', 1, 1),
-(13, NULL, 1, 'www.unam.mx', '52b9e615', '2016-02-23 18:42:50', 1, 1),
-(14, NULL, 1, 'yahoo.com.mx', '9e407a7c', '2016-02-24 00:45:02', 1, 1),
-(17, NULL, 1, 'facebook.com', 'hfbc', '2016-02-24 05:33:58', 1, 1),
-(18, NULL, 2, 'facebook.com', 'a023cfbf', '2016-02-24 05:46:47', 1, 1),
-(19, NULL, 2, 'superchamba.com', '44a2100d', '2016-02-24 15:22:59', 1, 1),
-(20, NULL, 1, 'superchamba.com', 'xixi', '2016-02-24 15:29:21', 1, 1),
-(21, NULL, 1, 'www.superchamba.com', 'xoxi', '2016-02-24 15:29:57', 1, 1),
-(22, NULL, 2, 'www.superchamba.com', 'xoxii', '2016-02-24 15:30:20', 1, 1),
-(23, NULL, 1, 'en.wikipedia.org/wiki/Ã†thelberht_of_Kent', 'noLog1', '2016-02-24 16:35:14', 0, 1),
-(24, NULL, 1, 'en.wikipedia.org/wiki/Kingdom_of_Kent', 'noLog2', '2016-02-24 16:36:13', 0, 1),
-(25, 1, 2, 'en.wikipedia.org/wiki/Tara_Air_Flight_193', 'conLog1', '2016-02-24 16:37:36', 1, 1),
-(26, NULL, 5, 'github.com/legionmx/miniurl.git', 'd9d0f361', '2016-02-24 18:42:39', 0, 1),
-(27, 1, 4, 'test.rebex.net', '3d2c9e34', '2016-02-24 18:48:49', 1, 1),
-(28, NULL, 6, 'test.rebex.net', '8e0f1f8e', '2016-02-24 18:50:00', 0, 1),
-(29, 1, 1, 'www.yahoo.com', '5d476288', '2016-02-24 19:12:37', 1, 1),
-(30, NULL, 1, 'sometext.txt', 'a2f4a9db', '2016-03-01 17:11:05', 0, 1);
+INSERT INTO `enlaces` (`id`, `id_user`, `cve_protocolo`, `url`, `hash`, `code`, `created`, `seLogea`, `activo`, `id_category`) VALUES
+(1, 1, 6, 'ftps://elmismourl.mx/123123', '5b94a2c6', '123123', '2016-03-09 04:28:52', 1, 1, '1'),
+(2, 1, 6, 'ftps://elmismourl.mx/111111', '9e2b8a3f', '111111', '2016-03-09 04:28:52', 1, 1, '2'),
+(3, 1, 6, 'ftps://elmismourl.mx/222222', '7ada7158', '222222', '2016-03-09 04:28:52', 1, 1, '2'),
+(4, 1, 6, 'ftps://elmismourl.mx/333333', '245e4948', '333333', '2016-03-09 04:28:52', 1, 1, '1'),
+(5, NULL, 2, 'urlmismo.com', '479a73ad', '', '2016-03-09 06:03:10', 0, 1, NULL),
+(6, 1, 1, 'http://loquesea.com/123123', 'ce26ad40', '123123', '2016-03-09 07:00:54', 1, 1, NULL),
+(7, 1, 2, 'https://google.com/111111', '9c8dd063', '111111', '2016-03-09 07:00:54', 1, 1, NULL),
+(8, 1, 4, 'ftp://atabay.mx/222222', 'be48da83', '222222', '2016-03-09 07:00:54', 1, 1, NULL),
+(9, 1, 1, 'http://otrodominio.com/333333', 'b0473dd4', '333333', '2016-03-09 07:00:54', 1, 1, NULL),
+(10, 1, 7, 'laurl.com', 'b5de50a0', '', '2016-03-09 14:35:46', 0, 1, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permisos_en_rol`
+-- Estructura de tabla para la tabla `permisos_en_rol`
 --
 
-DROP TABLE IF EXISTS `permisos_en_rol`;
-CREATE TABLE IF NOT EXISTS `permisos_en_rol` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `permisos_en_rol` (
+`id` smallint(5) unsigned NOT NULL,
   `id_rol` smallint(5) unsigned NOT NULL,
   `id_permiso` smallint(5) unsigned NOT NULL,
-  `vigente` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `id_rol` (`id_rol`) COMMENT 'El id del rol en roles',
-  KEY `id_permiso` (`id_permiso`) COMMENT 'id del permiso en permisos'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Relacion MM rol/permiso' AUTO_INCREMENT=6 ;
+  `vigente` tinyint(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='El id del rol en roles';
 
 --
--- Dumping data for table `permisos_en_rol`
+-- Volcado de datos para la tabla `permisos_en_rol`
 --
 
 INSERT INTO `permisos_en_rol` (`id`, `id_rol`, `id_permiso`, `vigente`) VALUES
@@ -161,20 +149,18 @@ INSERT INTO `permisos_en_rol` (`id`, `id_rol`, `id_permiso`, `vigente`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Estructura de tabla para la tabla `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `roles` (
+`id` smallint(5) unsigned NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `abrev` varchar(10) NOT NULL,
-  `activo` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `activo` tinyint(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `roles`
+-- Volcado de datos para la tabla `roles`
 --
 
 INSERT INTO `roles` (`id`, `nombre`, `abrev`, `activo`) VALUES
@@ -187,12 +173,11 @@ INSERT INTO `roles` (`id`, `nombre`, `abrev`, `activo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+`id` smallint(5) unsigned NOT NULL,
   `username` varchar(15) NOT NULL,
   `password` char(64) NOT NULL DEFAULT '1234567890123456789012345678901234567890123456789012345678901234',
   `firstName` varchar(50) NOT NULL,
@@ -200,14 +185,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   `dob` date NOT NULL,
   `email` varchar(100) NOT NULL,
   `id_role` smallint(5) unsigned NOT NULL DEFAULT '2',
-  `active` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  KEY `id_rol` (`id_role`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `active` tinyint(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `firstName`, `lastName`, `dob`, `email`, `id_role`, `active`) VALUES
@@ -217,23 +199,21 @@ INSERT INTO `users` (`id`, `username`, `password`, `firstName`, `lastName`, `dob
 -- --------------------------------------------------------
 
 --
--- Table structure for table `visitas`
+-- Estructura de tabla para la tabla `visitas`
 --
 
-DROP TABLE IF EXISTS `visitas`;
-CREATE TABLE IF NOT EXISTS `visitas` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `visitas` (
+`id` bigint(20) unsigned NOT NULL,
   `ip` varchar(15) NOT NULL,
   `user_agent` varchar(200) DEFAULT NULL,
   `browser` varchar(50) DEFAULT NULL,
   `sisop` varchar(50) DEFAULT NULL,
   `id_enlace` bigint(20) unsigned NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `visitas`
+-- Volcado de datos para la tabla `visitas`
 --
 
 INSERT INTO `visitas` (`id`, `ip`, `user_agent`, `browser`, `sisop`, `id_enlace`, `fecha`) VALUES
@@ -282,28 +262,113 @@ INSERT INTO `visitas` (`id`, `ip`, `user_agent`, `browser`, `sisop`, `id_enlace`
 (45, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0', '', '', 29, '2016-03-01 21:14:06');
 
 --
--- Constraints for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Constraints for table `enlaces`
+-- Indices de la tabla `cat_categories`
+--
+ALTER TABLE `cat_categories`
+ ADD PRIMARY KEY (`id_category`);
+
+--
+-- Indices de la tabla `cat_permiso`
+--
+ALTER TABLE `cat_permiso`
+ ADD PRIMARY KEY (`clave`);
+
+--
+-- Indices de la tabla `cat_protocolo`
+--
+ALTER TABLE `cat_protocolo`
+ ADD PRIMARY KEY (`clave`);
+
+--
+-- Indices de la tabla `enlaces`
 --
 ALTER TABLE `enlaces`
-  ADD CONSTRAINT `fk_cve_prot` FOREIGN KEY (`cve_protocolo`) REFERENCES `cat_protocolo` (`clave`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `hash_uniq` (`hash`), ADD KEY `cve_protocolo` (`cve_protocolo`), ADD KEY `id_user` (`id_user`);
 
 --
--- Constraints for table `permisos_en_rol`
+-- Indices de la tabla `permisos_en_rol`
 --
 ALTER TABLE `permisos_en_rol`
-  ADD CONSTRAINT `pk_cve_permisos` FOREIGN KEY (`id_permiso`) REFERENCES `cat_permiso` (`clave`),
-  ADD CONSTRAINT `pk_id_roles` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `id_rol` (`id_rol`);
 
 --
--- Constraints for table `users`
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `username` (`username`), ADD KEY `id_rol` (`id_role`);
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- Indices de la tabla `visitas`
+--
+ALTER TABLE `visitas`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cat_categories`
+--
+ALTER TABLE `cat_categories`
+MODIFY `id_category` tinyint(25) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `cat_permiso`
+--
+ALTER TABLE `cat_permiso`
+MODIFY `clave` smallint(6) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `cat_protocolo`
+--
+ALTER TABLE `cat_protocolo`
+MODIFY `clave` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT de la tabla `enlaces`
+--
+ALTER TABLE `enlaces`
+MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT de la tabla `permisos_en_rol`
+--
+ALTER TABLE `permisos_en_rol`
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `roles`
+--
+ALTER TABLE `roles`
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `visitas`
+--
+ALTER TABLE `visitas`
+MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `enlaces`
+--
+ALTER TABLE `enlaces`
+ADD CONSTRAINT `fk_cve_prot` FOREIGN KEY (`cve_protocolo`) REFERENCES `cat_protocolo` (`clave`);
+
+--
+-- Filtros para la tabla `users`
+--
+ALTER TABLE `users`
+ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id`);
