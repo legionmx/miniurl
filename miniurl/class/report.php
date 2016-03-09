@@ -20,19 +20,25 @@ class report {
 	$uid = $_SESSION['uid'];
 	
 	if (isset($_POST['rangeIds']) && $_POST['rangeIds'] == 'on'){
+		
 		$range_1 = $_POST['range1'];
 		$range_2 = $_POST['range2'];
 		$category  = $_POST['category'];
-		if($category == 0 ){
+		if($category == 0 && $range_1 != '' && $range_2 != '' ){
 			$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid . ' and id BETWEEN ' . $range_1 . ' AND '. $range_2 ;
+			
+		}elseif($category == 0 && $range_1 == '' && $range_2 == '' ){
+			
+			$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid . ' AND id_category ='  . $category ;
 		}else{
-			$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid . ' and id BETWEEN ' . $range_1 . ' AND '. $range_2 . 'AND id_category =' . $category;	
+			
+			$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid . ' and id BETWEEN ' . $range_1 . ' AND '. $range_2 . ' AND id_category =' . $category;	
 		}
 		
 	}else{
 		$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid ;
 	}
-	
+
 	
         $result = array();
         $result = $base->getAll($query);

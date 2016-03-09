@@ -1,10 +1,8 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 	session_start();
-
-	include_once("header.php");
 ?>
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -12,6 +10,7 @@
  	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>MINIURL - Home</title>
 
+	<!-- CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link href="css/sticky-footer.css" rel="stylesheet">
 	<link href="/css/custom.css" rel="stylesheet">
@@ -44,10 +43,10 @@
 		</div>
 	</nav>
 	
-	Slider start
+	<!-- Slider start -->
     <section id="slider_part">
          <div class="carousel slide" id="carousel-example-generic" data-ride="carousel">
-            Indicators
+            <!-- Indicators -->
          	 <ol class="carousel-indicators text-center">
                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -66,9 +65,9 @@
            	 		</div>
            	 	</div>
 
-           	 </div> 	 End Carousel Inner
+           	 </div> 	 <!-- End Carousel Inner -->
 
-            Controls
+            <!-- Controls -->
             <div class="slides-control ">
                 <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                 	<span><i class="fa fa-angle-left"></i></span>
@@ -79,7 +78,7 @@
             </div>
         </div>
   	</section>
-    Slider end -->
+    <!--/ Slider end -->
 
     <div class="carousel-caption">
 	<div class="container">
