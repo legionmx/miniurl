@@ -24,4 +24,14 @@ $_PROTOCOLOS = array();
 foreach ($rsProts as $protocolo) {
 	$_PROTOCOLOS[$protocolo['clave']] = $protocolo['des'];
 }
+
+//
+
+$sqlCategories = "select id_category, category from cat_categories where active = 1";
+$rsCat = $base->Execute($sqlCategories);
+$_CATEGORIES = array();
+foreach ($rsCat as $category) {
+	$_CATEGORIES[$category['id_category']] = $category['category'];
+}
+
 ?>

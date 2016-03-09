@@ -116,14 +116,11 @@
 					<div class="col-md-3">
 						
 						<select id="categories" name="category" class="form-control">
-							<option value="0">ninguna</option>
-							<option value="1">Campaña 1</option>
-							<option value="2">Campaña 2</option>
-							<?php /*
-							foreach ($_PROTOCOLOS as  $cveProt => $abvProt) {
-								echo "<option value='$cveProt'>$abvProt</option>\n";
+							<?php 
+							foreach ($_CATEGORIES as  $cveCat => $abvCat) {
+								echo "<option value='$cveCat'>$abvCat</option>\n";
 							}
-							*/ ?>
+							?>
 						</select>
 						
 					</div>
@@ -133,13 +130,13 @@
 					</div>
 
 					<div class="col-md-2">
-						<input type="text" name="url" id="url" placeholder="1">
+						<input type="text" name="range1" id="range1" placeholder="">
 					</div>
 					<div class="col-md-1">
 						<label>al</label>
 					</div>
 					<div class="col-md-2">
-						<input type="text" name="url" id="url" placeholder="">
+						<input type="text" name="range2" id="range2" placeholder="">
 					</div>
 				</div>
 				</div>

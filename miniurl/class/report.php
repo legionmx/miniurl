@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 switch ($_GET['method']) {
 	case 'csvDownload':
             report::csvDownload();
@@ -16,9 +16,19 @@ class report {
         include("../const.php");
         
 	//$this->base = $base;
-        
+	
+	$uid = $_SESSION['uid'];
+	
+	if (isset($_POST['rangeIds']) && $_POST['rangeIds'] == 'on'){
+		$range_1 = $_POST['range1'];
+		$range_2 = $_POST['range2'];
+		$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid . ' and id BETWEEN ' . $range_1 . ' AND '. $range_2 ;
+	}else{
+		$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid ;
+	}
+	
+	
         $result = array();
-        $query = 'select id, cve_protocolo, url, hash, code from enlaces where activo = 1';
         $result = $base->getAll($query);
         $registers = count($result);
 	
@@ -48,6 +58,7 @@ class report {
 		$datos['url'] = $rows['url'];
 		$datos['hash'] = $rows['hash'];
 		$datos['code'] = $rows['code'];
+		$datos['category'] = $_CATEGORIES[$rows['id_category']];
 		
 		fputcsv($fp, array_values($datos));
 		

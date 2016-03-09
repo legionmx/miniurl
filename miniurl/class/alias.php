@@ -12,29 +12,35 @@ class Alias{
 		$this->base = $base;
 
 		if (isset($code) && is_array($code)){
-
-			if($isLog == 'on'){
-				$isLog = 1;
-			}else{
-				$isLog = 0;
-			}
-
+			
+			$isLogid = 1;
+			
 			$arrayAlias= array();
 
 			for ($i = 0; $i < count($code); $i++){
 
 				//Sacamos el url completo, incluyendo el protocolo
 				$url = $urlBase[$i];
-				$idProt = $prot[$i];
+				if (is_array($prot)){
+					$idProt = $prot[$i];
+					$protocolBase = $_PROTOCOLOS[$prot[$i]];
+				}else{
+					$idProt = $prot;
+				}
+				
 				$codigo = $code[$i];
-				$protocolBase = $_PROTOCOLOS[$i+1];
 				$uid = $_SESSION['uid'];
 
 				//ponemos si pidio usuario la misma url para todo los registros
 
 				if(isset($sameUrl) && $sameUrl = 'on'){
 					$url = $urlBase;
-					$idProt = $prot;
+					$protocolBase = $_PROTOCOLOS[$prot];
+					if(isset($isLog) && $isLog = 'on'){
+						$isLogid = 1;
+					}else{
+						$isLogid = 0;
+					}
 				}
 
 				$urlCompleto = strtolower($protocolBase)."://$url/" . $codigo;
@@ -59,7 +65,7 @@ class Alias{
 						"url completa" => $urlCompleto,
 						"url mini"     => $urlMini,
 						"protocol"     => $idProt,
-						"se logea"     => $isLog
+						"se logea"     => $isLogid
 						);
 				}
 				else{
@@ -72,7 +78,7 @@ class Alias{
 						"url completa" => $urlCompleto,
 						"url mini"     => $urlMini,
 						"protocol"     => $idProt,
-						"se logea"     => $isLog
+						"se logea"     => $isLogid
 						);
 				}
 		
