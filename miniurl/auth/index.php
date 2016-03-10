@@ -21,18 +21,20 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 				<h2>Login</h2>
 			</div>
 		</div>
-		<div class="col-md-8 col-md-offset-2 form-inline">
-			<div class="input-group input-group-lg">
-				<span class="input-group-addon text-right">Username:</span>
-				<input type="text" id="username" class="form-control">
+		<div id="containerForm" class="container" >
+			<div class="col-md-8 col-md-offset-2 form-inline">
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon text-right">Username:</span>
+					<input type="text" id="username" class="form-control">
+				</div>
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon text-right">Password:</span>
+					<input type="password" id="password" class="form-control">
+				</div>
+				<!-- <div> -->
+					<button type="submit" id="login" class="btn btn-primary btn-lg text-right">L O G I N</button>
+				<!-- </div> -->
 			</div>
-			<div class="input-group input-group-lg">
-				<span class="input-group-addon text-right">Password:</span>
-				<input type="password" id="password" class="form-control">
-			</div>
-			<!-- <div> -->
-				<button type="submit" id="login" class="btn btn-primary btn-lg text-right">L O G I N</button>
-			<!-- </div> -->
 		</div>
 	</div>
 
