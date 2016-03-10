@@ -219,4 +219,4 @@ pip-log.txt
 miniurl/jquery-2.2.0.js
 miniurl/templateView.php
 *.csv
-csv/
+miniurl/csv/
