@@ -19,16 +19,16 @@
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
-    <div class="carousel-caption">
+    <div class="carousel-caption alias-stats-title">
 
 	<div class="container">
 		<div class="row" class="page-header">
 			<div class="col-md-12">
-				<h2>Estad&iacute;sticas del alias <?php echo $alias; ?></h2>
+				<h2>Stats for alias <?php echo $alias; ?></h2>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-12">
 				<table class="table table-hover table-condensed">
 					<thead>
 						<tr><th>IP</th><?php if($mostrarDatosBrowser) { ?><th>Browser</th><th>Sis. Op.</th><?php } ?><th>Fecha</th><th>User Agent</th></tr>

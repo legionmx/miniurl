@@ -16,11 +16,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 	<div class="container">
 		<div class="row" class="page-header">
 			<div class="col-md-12">
-				<h2>Cool links use statistics</h2>
+				<h2>Usage statistics</h2>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-12">
 				<table class="table table-hover table-condensed">
 					<thead>
 						<tr>
@@ -48,16 +48,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 	</div>
 
 	</div>
-
-	<!-- JQuery y Bootstrap-->
-	<!-- <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
-	<!-- Other scripts -->
-	<!-- <script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
-	<script src="/js/owl.carousel.min.js"></script>
-</body>
-</html>
--->
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
 ?>
