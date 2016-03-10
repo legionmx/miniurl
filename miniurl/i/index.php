@@ -21,10 +21,17 @@
 		if($rs->fields['log'] == "1"){
 			$ip = $_SERVER['REMOTE_ADDR'];
 			$user_agent = $_SERVER['HTTP_USER_AGENT'];
-			$browser = get_browser(null,true);
-			$nombreBrowser = $browser['browser'];
-			$sisop = $browser['platform'];
-			$sqlLog = "insert into visitas (ip,user_agent,browser,sisop,id_enlace) values ('$ip','$user_agent','$nombreBrowser','$sisop',".$rs->fields['id'].")";
+			$showBrowserData = true;
+			if(!ini_get('browscap')) $showBrowserData = false;
+			if($showBrowserData){
+				$browser = get_browser(null,true);
+				$nombreBrowser = $browser['browser'];
+				$sisop = $browser['platform'];
+				$sqlLog = "insert into visitas (ip,user_agent,browser,sisop,id_enlace) values ('$ip','$user_agent','$nombreBrowser','$sisop',".$rs->fields['id'].")";
+			}
+			else{
+				$sqlLog = "insert into visitas (ip,user_agent,id_enlace) values ('$ip','$user_agent',".$rs->fields['id'].")";
+			}
 			//die($sqlLog);
 			$rsLog = $base->Execute($sqlLog);
 		}
