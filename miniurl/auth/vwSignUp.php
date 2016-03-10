@@ -17,39 +17,41 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 		<div class="row page-header">
 			<div class="col-md-12"><h2>Sign up</h2></div>
 		</div>
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<div class="form-group">
-					<label for="email">Email address</label>
-					<input type="text" id="email" class="form-control" placeholder="newuser@coolurl.com">
+		<div id="containerForm" class="container" >
+			<div class="row">
+				<div class="col-md-9 col-md-offset-2">
+					<div class="form-group">
+						<label for="email">Email address</label>
+						<input type="text" id="email" class="form-control" placeholder="newuser@coolurl.com">
+					</div>
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input type="password" id="password" class="form-control" placeholder="Super secret password here!">
+						<input type="password" id="passcheck" class="form-control" placeholder=" And please repeat it">
+					</div>
+					<div class="form-group">
+						<label for="firstName">Name(s)</label>
+						<input type="text" id="firstName" class="form-control" placeholder="Your given name(s)">
+					</div>
+					<div class="form-group">
+						<label for="lastName">Family Name</label>
+						<input type="text" id="lastName" class="form-control" placeholder="Your last name">
+					</div>
+					<!-- <div class="form-group">
+						<label for="dob">Date of Birth</label>
+						<input type="date" id="dob" class="form-control">
+					</div> --><!-- Not all browser have implemented the type='date' input control -->
 				</div>
-				<div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" id="password" class="form-control" placeholder="Super secret password here!">
-					<input type="password" id="passcheck" class="form-control" placeholder=" And please repeat it">
-				</div>
-				<div class="form-group">
-					<label for="firstName">Name(s)</label>
-					<input type="text" id="firstName" class="form-control" placeholder="Your given name(s)">
-				</div>
-				<div class="form-group">
-					<label for="lastName">Family Name</label>
-					<input type="text" id="lastName" class="form-control" placeholder="Your last name">
-				</div>
-				<!-- <div class="form-group">
-					<label for="dob">Date of Birth</label>
-					<input type="date" id="dob" class="form-control">
-				</div> --><!-- Not all browser have implemented the type='date' input control -->
 			</div>
-		</div>
-		<div class="row hidden" id="messages">
-			<div class="col-md-6 col-md-offset-3">
-				<span id="messageContent" class="text-center"></span>
+			<div class="row hidden" id="messages">
+				<div class="col-md-6 col-md-offset-3">
+					<span id="messageContent" class="text-center"></span>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2 col-md-offset-5">
-				<button type="submit" id="signup" class="btn btn-primary btn-lg btn-block">Sign up now!</button>
+			<div class="row">
+				<div class="col-md-3 col-md-offset-5">
+					<button type="submit" id="signup" class="btn btn-primary btn-lg btn-block">Sign up now!</button>
+				</div>
 			</div>
 		</div>
 	</div>
