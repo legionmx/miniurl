@@ -72,3 +72,10 @@ input[type=file], #url,#range1, #range2 {
 	margin:0px;
 	border-bottom: none;
 }
+
+.input-group {
+	display: table !important;
+	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
