@@ -4,10 +4,23 @@ $(document).ready(function(){
 	$("#salvar").prop('disabled',true);
 	$("#generar").prop('disabled',true);
 
+	var MainForm = function(){
+		this.keyProtocol = $("#protocolo").val();
+		this.url = $("#url").val();
+		this.alias = $("#alias").val();
+		this.seLogea = $("#conLog").prop('checked');
+		if(this.protocolo == '3'){ // The 'other' option is selected
+			this.protTxt = $("#prot_propio").val(); //The input is taken from the text box
+		}
+		else{
+			document.getElementById()
+		}
+	}
+
 	enlaceMin.getValoresFromUI = function(){
 		this.url = $("#url").val();
 		this.alias = $("#alias").val();
-		this.seLogea = $("#conLog").prop('checked')
+		this.seLogea = $("#conLog").prop('checked');
 		this.protocolo = $("#protocolo").val();
 		if(this.protocolo == '3'){ //Hay que obtener el txt del input
 			this.protTxt = $("#prot_propio").val();
@@ -59,16 +72,20 @@ $(document).ready(function(){
 	};
 
 	//var cambiarUIpostHash = function(error = "", color = "green", sePuedeGenerar = true, hashgen = ""){
-	var cambiarUIpostHash = function(error, color, sePuedeGenerar, hashgen){
+	var cambiarUIpostHash = function(error, color, itCanBeGenerated, hashgen){
 		var error = error || "";
 		var color = color || "green";
-		var sePuedeGenerar = sePuedeGenerar || true;
+		var itCanBeGenerated = itCanBeGenerated || true;
 		var hashgen = hashgen || "";
 		$("#error").html(error);
 		$("#error").css('color',color);
-		$("#generar").prop('disabled',!sePuedeGenerar);
-		//$("#hashgen").html(hashgen);
-		//$("#hashgen").css('color',color);
+		if(error.length>0){
+			$("#error").removeClass('hidden');
+		}
+		else{
+			$("#error").addClass('hidden');
+		}
+		$("#generar").prop('disabled',!itCanBeGenerated);
 	};
 
 	var revisarAlias = function(){
@@ -77,27 +94,28 @@ $(document).ready(function(){
 
 		//Validamos la entrada
 		if(!enlaceMin.esValidoAlias()){
-			//El alias es muy muy corto
-			//alert("Alias muy muy corto");
-			$("#error").html("Por lo menos 3 caracteres");
-			$("#error").css('color','orange');
+			//The alias is short
+			/*$("#error").html("Por lo menos 3 caracteres");
+			$("#error").css('color','orange');*/
+			cambiarUIpostHash("At least 3 characters",'orange');
 			$("#salvar").prop('disabled',true);
 		}
 		//Validamos la existencia en BD
 		else{
-			$("#error").html("");
-			$("#error").css('color','black');
+			/*$("#error").html("");
+			$("#error").css('color','black');*/
+			cambiarUIpostHash("");
 			$("#salvar").prop('disabled',false);
 
 			$.getJSON("chkAlias.php", {'alias': enlaceMin.alias}, function(response){
 				if(response.existe){
-					//console.log("El alias existe");
+					//The alias exists.
 					$("#alias-group").addClass('has-error');
 					$("#salvar").prop('disabled',true);
 					enlaceMin.valido = false;
 				}
 				else{
-					//console.log("El alias NO existe");
+					//The alias does not exist
 					$("#salvar").prop('disabled',false);
 					enlaceMin.alias = response.alias_revisado;
 					enlaceMin.valido = true;
@@ -107,41 +125,39 @@ $(document).ready(function(){
 		}
 	};
 
-	/*** Handlers de eventos ***/
+	/*** Event handlers ***/
 
-	$("#generar").click(function(){ //Insertamos el link minimizado
+	$("#generar").click(function(){
 		generarHash();
 	});
 	$("#url").on("input",function(evento){
 		enlaceMin.getValoresFromUI();
 		if(!enlaceMin.esValidaDireccion()){
-			//console.log("NO");
 			$("#alias").val("");
 			enlaceMin.valido = false;
-			cambiarUIpostHash("Debe ser una direcci&oacute;n de al menos 8 caracteres",'orange',false);
+			cambiarUIpostHash("The address must have at least 8 characters",'orange',false);
 		}
 		else {
-			//console.log("SI!!!");
 			cambiarUIpostHash();
 		}
 
-		//Las siguientes lineas son para obligar a usar el button "Generar"
+		//The next lines are used to enforce the use of the "Generate" button
+		//TODO: the workflow needs to be checked for the necessity of this.
 		$("#alias").val("");
 		$("#alias-group").removeClass("has-success has-error");
 		$("#salvar").prop('disabled',true);
 	});
 
 	$("#protocolo").on("change",function(evento){
-		//generarHash();
 		var cve_prot = $(this).val();
-		var txt_prot = document.getElementById("protocolo").options[($(this).val())-1].text;
-		//console.log(cve_prot+" --> "+txt_prot);
+		var selectedOption = $("#protocolo option:selected")[0];
+		//console.log(selectedOption.innerHTML+' --- '+selectedOption.value);
+		var txt_prot = selectedOption.innerHTML;
+		//console.log(' --- '+txt_prot)
 		if(cve_prot =='3'){
-			//console.log('El usuario ha elegido OTRO protocolo');
 			$("#prot_propio").removeClass('hidden');
 		}
 		else{
-			//console.log('Prot: '+$(this).val());
 			$("#prot_propio").addClass('hidden');
 			$("#prot_propio").val('');
 		}
@@ -161,7 +177,7 @@ $(document).ready(function(){
 			});
 		}
 		else{
-			//TODO: Teoricamente si esta enabled el button, la entrada es valida. Pero hay q revisarlo.
+			//TODO: In theory, if the button is enabled, the input is valid. But an exception could be handled here.
 		}
 	});
 
