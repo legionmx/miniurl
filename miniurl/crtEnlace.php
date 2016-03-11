@@ -2,10 +2,16 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/const.php");
 
 //TODO: Falta validacion de parametros
-$alias = $_REQUEST['alias'];
+/*$alias = $_REQUEST['alias'];
 $url = $_REQUEST['url'];
 $cve_protocolo = $_REQUEST['protocolo'];
 $protTxt = $_REQUEST['protTxt'];
+//$seLogea = $_REQUEST['seLogea']; // Now it is always managed in authenticated section*/
+
+$alias = $_REQUEST['alias'];
+$url = $_REQUEST['url'];
+$cve_protocolo = $_REQUEST['keyProtocol'];
+$protTxt = $_REQUEST['protocol'];
 //$seLogea = $_REQUEST['seLogea']; // Now it is always managed in authenticated section
 
 //$seLogea now defaults to false and is dependant of the user authentication
@@ -44,7 +50,8 @@ if($cve_protocolo == '3'){
 //We check if there is auth info
 session_start();
 if(isset($_SESSION['authToken'])&&isset($_SESSION['uid'])){
-	$seLogea = ($_REQUEST['seLogea'] === 'true');
+	//$seLogea = ($_REQUEST['seLogea'] === 'true');
+	$seLogea = ($_REQUEST['isTracked'] === 'true');
 	$uid = $_SESSION['uid'];
 	if(is_numeric($uid)){
 		session_write_close();
@@ -57,7 +64,7 @@ if(isset($_SESSION['authToken'])&&isset($_SESSION['uid'])){
 else{
 	session_destroy();
 }
-
+//die("$alias --- $url --- $cve_protocolo --- $protTxt");
 $dataNewLink = array('cve_protocolo' => $cve_protocolo, 'url' => $url, 'hash' => $alias, 'seLogea' => $seLogea);
 if(isset($uid)) $dataNewLink['id_user'] = $uid;
 
