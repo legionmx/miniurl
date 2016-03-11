@@ -4,6 +4,13 @@
 .navbar-header-short{
 	width: 200px;
 }
+.navbar-brand {
+    float: left;
+    font-size: 18px;
+    height: 48px;
+    line-height: 20px;
+    padding: 14px;
+}
 
 #wrapAllForm {
 	float: right;
@@ -14,9 +21,9 @@
 	margin: 0 auto;
 }
 
-input[type=file], #url,#range1, #range2 {
+input[type=file], #url,#range1, #range2, #categories {
   background: rgba(255, 255, 255, .2);
-  color:#000;
+  color:#aeaeae;
   border-radius: 0;
   height: 45px;
   padding: 10px;
@@ -24,7 +31,7 @@ input[type=file], #url,#range1, #range2 {
   font-size: 16px;
 }
 
-input[type=file], input[type=text], input[type=password], select.form-control, .input-group span {
+input[type=file], input[type=text], input[type=password], select.form-control, #rangeBox select, .input-group span {
   border-bottom: 2px solid #aeaeae;
   border-right: none;
   border-left: none;
@@ -156,4 +163,8 @@ input[type=file], input[type=text], input[type=password], select.form-control, .
 #error {
 	border: 2px solid #aeaeae;
 	
+}
+
+#rangeBox label {
+	vertical-align: bottom;
 }

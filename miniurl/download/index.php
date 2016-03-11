@@ -12,14 +12,13 @@
 ?>
 
 	<div class="carousel-caption">
-	
-		<div id="wrapperUniq">
 		
+		<div class="container">
+			<div id="wrapAllForm">
+			<div class="row page-header">
+				<div class="col-md-12"><img id="logoTitle" src="/images/logo_lnk.cool_green.png" width="200"><h2>- Mini URL</h2></div>
+			</div>
 			<form id="uploadForm" method="post" action="/class/report.php?method=csvDownload" enctype="multipart/form-data">
-
-				<div class="row">
-					<div class="col-md-12"><h2>URL´s CSV DOWNLOAD</h2></div>
-				</div>
 
 				<div id="containerForm" class="container">
 				<div class="row">
@@ -78,6 +77,7 @@
 				
 
 			</form>
+		</div>
 		</div>
 
 	</div>
