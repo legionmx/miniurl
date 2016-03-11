@@ -7,8 +7,8 @@ class Alias{
 	public $base = '';
 
 	function getHash($prot, $urlBase, $code = null, $sameUrl = null, $isLog = null) {
-
-		include("../const.php");
+		
+		require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 		$this->base = $base;
 
 		if (isset($code) && is_array($code)){
@@ -44,12 +44,14 @@ class Alias{
 				}
 
 				$urlCompleto = strtolower($protocolBase)."://$url/" . $codigo;
+				
+				$urlToDb = $url. "/" . $codigo;
 
 				//Usamos md5 para hashear, y sólo tomamos 8 caracteres
 				$hash = substr(md5($urlCompleto),0,8);
 				$dominioBase = "mi.ni/";
 				$dominioBase = "localhost:8080/edsa/mini/";
-				$dominioBase = CONS::BASEURL;
+				$dominioBase = $_BASEURL;
 				$urlMini = $dominioBase . $hash;
 
 				//Revisamos si el hash existe
@@ -62,7 +64,7 @@ class Alias{
 						"url"          => $url,
 						"hash"         => $hash,
 						"codigo"       => $codigo,
-						"url completa" => $urlCompleto,
+						"url completa" => $urlToDb,
 						"url mini"     => $urlMini,
 						"protocol"     => $idProt,
 						"se logea"     => $isLogid
@@ -75,7 +77,7 @@ class Alias{
 						"url"          => $url,
 						"hash"         => $hash,
 						"codigo"       => $codigo,
-						"url completa" => $urlCompleto,
+						"url completa" => $urlToDb,
 						"url mini"     => $urlMini,
 						"protocol"     => $idProt,
 						"se logea"     => $isLogid
@@ -117,7 +119,7 @@ class Alias{
 
 		foreach ($createAlias as $value) {
 
-			$query = "insert into `enlaces` (`id_user`, `cve_protocolo`, `url`, `hash`, `seLogea`, `activo`, `code`) VALUES ('". $value['id user'] . "','" . $value['protocol'] . "', '" . $value['url completa'] . "','" . $value['hash'] . "','" . $value['se logea'] . "','1','" . $value['codigo'] . "');";
+			$query = "insert into `enlaces` (`id_user`, `cve_protocolo`, `url`, `hash`, `seLogea`, `activo`, `code`, `mini_url`) VALUES ('". $value['id user'] . "','" . $value['protocol'] . "', '" . $value['url completa'] . "','" . $value['hash'] . "','" . $value['se logea'] . "','1','" . $value['codigo'] . "','" . $value['url mini'] . "');";
 			
 			$base->Execute($query);
 		}

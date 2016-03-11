@@ -25,18 +25,18 @@ class report {
 		$range_2 = $_POST['range2'];
 		$category  = $_POST['category'];
 		if($category == 0 && $range_1 != '' && $range_2 != '' ){
-			$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid . ' and id BETWEEN ' . $range_1 . ' AND '. $range_2 ;
+			$query = 'select id, cve_protocolo, url, hash, code, id_category, mini_url from enlaces where activo = 1 and id_user = ' . $uid . ' and id BETWEEN ' . $range_1 . ' AND '. $range_2 ;
 			
 		}elseif($category == 0 && $range_1 == '' && $range_2 == '' ){
 			
-			$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid . ' AND id_category ='  . $category ;
+			$query = 'select id, cve_protocolo, url, hash, code, id_category, mini_url from enlaces where activo = 1 and id_user = ' . $uid . ' AND id_category ='  . $category ;
 		}else{
 			
-			$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid . ' and id BETWEEN ' . $range_1 . ' AND '. $range_2 . ' AND id_category =' . $category;	
+			$query = 'select id, cve_protocolo, url, hash, code, id_category, mini_url from enlaces where activo = 1 and id_user = ' . $uid . ' and id BETWEEN ' . $range_1 . ' AND '. $range_2 . ' AND id_category =' . $category;	
 		}
 		
 	}else{
-		$query = 'select id, cve_protocolo, url, hash, code, id_category from enlaces where activo = 1 and id_user = ' . $uid ;
+		$query = 'select id, cve_protocolo, url, hash, code, id_category, mini_url from enlaces where activo = 1 and id_user = ' . $uid ;
 	}
 
 	
@@ -71,15 +71,18 @@ class report {
 		$datos['hash'] = $rows['hash'];
 		$datos['code'] = $rows['code'];
 		$datos['category'] = $rows['id_category'];
-		
+		$datos['mini_url'] = $rows['mini_url'];
 		
 		fputcsv($fp, array_values($datos));
 		
 	    }
+	    $uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
+	    $fileName = $_SERVER['DOCUMENT_ROOT']  . '/csv/downloads/midescarga.csv';
+	    $fileNameNew = $_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/' . $uniq . '.csv';
 	    
-	    $archivo = basename('midescarga.csv');
-
-	    $ruta = '/csv/downloads/'.$archivo;
+	    $rutaNew = '/csv/downloads/' . $uniq . '.csv';
+	    
+	    $newRoot = rename ($fileName,$fileNameNew);
 
 	    
 	    /*header('Content-Type: application/force-download');
@@ -87,7 +90,7 @@ class report {
 	    header('Content-Transfer-Encoding: binary');
 	    header('Content-Length: '.filesize($ruta));*/
 	    
-	    header ('Location: ' . $ruta);
+	    header ('Location: ' . $rutaNew);
 	    
 	    
 	    

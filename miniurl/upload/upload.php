@@ -13,7 +13,7 @@ class FileUp{
 
 	static function readCsv(){
 		
-		$target_dir = "../csv/";
+		$target_dir = $_SERVER['DOCUMENT_ROOT'] .  "/csv/";
 		$uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5($_FILES["fileToUpload"]["name"]),0,8);
 		$target_file = $target_dir . $uniq .  basename($_FILES["fileToUpload"]["name"]);
 		$registros = array();
@@ -41,9 +41,20 @@ class FileUp{
 		 	
 		 	$regProt = array();
 		 	$regUrl = array();
+		
 		    
 		    for ($i = 0; $i < count($registros); $i++) {
-		        $regProt[$i] = $registros[$i]["protocolo"];
+			
+			switch ($registros[$i]["protocolo"]){
+				case 'http':
+					$regProt[$i] = 1;
+					break;
+				case 'https':
+					$regProt[$i] = 2;
+					break;
+				
+			}
+
 		        $regUrl[$i] = $registros[$i]["url"];
 		        $regCode[$i] = $registros[$i]["codigo"];
 
@@ -57,6 +68,9 @@ class FileUp{
 			}
 		    	
 		    	
+		    }else{
+			$sameUrl = null;
+			$regLog = 1;
 		    }
 
 		    $hashAlias = new Alias;
@@ -64,13 +78,14 @@ class FileUp{
 
 		    $insertAlias = $hashAlias->insertAlias($createAlias);
 		    
+		    include_once($_SERVER['DOCUMENT_ROOT'].'/upload/success.php');
 
 		}
 	}
 
 	static function transformCsv (){
 		
-		$target_dir = "../csv/";
+		$target_dir = $_SERVER['DOCUMENT_ROOT'] . "/csv/";
 		$uniq = date("d-m-y") . '-' . time() . '-' . substr(md5($_FILES["fileToUpload"]["name"]),0,8);
 		$target_file = $target_dir . $uniq .  basename($_FILES["fileToUpload"]["name"]);
 		$uploadOk = 1;
@@ -78,28 +93,28 @@ class FileUp{
 
 		// revisa si ya existe el archivo
 		if (file_exists($target_file)) {
-		    echo "Error, ya existe un archivo con el mismo nombre.";
+		    echo "<p id='errorUpload'>Error, ya existe un archivo con el mismo nombre.</p>";
 		    $uploadOk = 0;
 		}
 
 		// Checa si el formato es el correcto
 		if($imageFileType != "csv") {
-		    echo "Revisa que la extenci&oacute; sea la correcta, solo se admiten archivos csv.";
+		    echo "<p id='errorUpload'>Revisa que la extenci&oacute; sea la correcta, solo se admiten archivos csv.</p>";
 		    $uploadOk = 0;
 		}
 
 		// si $uploadOk esta seteado a 0 regresar error
 		if ($uploadOk == 0) {
-		    echo "Error, tu archivo no pudo cargarse.";
+		    echo "<p id='errorUpload'>Error, tu archivo no pudo cargarse.<p>";
 
 		// if everything is ok, try to upload file
 		} else {
 
 		    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+		        echo "<p id='successUpload'>El archivo ". basename( $_FILES["fileToUpload"]["name"]). " se subio correctamente.<p>";
 		        FileUp::readCsv();
 		    } else {
-		        echo "Error, hubo un problema al subir tu archivo.";
+		        echo "<p id='errorUpload'>Error, hubo un problema al subir tu archivo.</p>";
 		    }
 
 		}

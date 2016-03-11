@@ -5,6 +5,8 @@ class CONS{
 	//Sacaremos los protocolos de la BD
 }
 
+$_BASEURL = $_SERVER['HTTP_HOST'] . "/i/?";
+
 //Conexion a BD, usando ADO
 require_once($_SERVER['DOCUMENT_ROOT']."/adodb5/adodb.inc.php");
 

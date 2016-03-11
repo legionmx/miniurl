@@ -68,7 +68,7 @@ else{
            	<div class="carousel-inner">
            	 	<div class="item active">
            	 		<div class="overlay-slide">
-           	 			<img src="../images/p1.jpg" alt="" class="img-responsive">
+           	 			<img src="../images/bg2.jpg" alt="" class="img-responsive">
            	 		</div>
            	 	</div>
                 <div class="item">
