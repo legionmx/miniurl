@@ -12,6 +12,8 @@
 ?>
 
     <div class="carousel-caption">
+	
+		<div id="wrapperUniq">
 		
 			<form method="post" action="upload.php?method=transformCsv" enctype="multipart/form-data">
 
@@ -69,6 +71,7 @@
 				
 
 			</form>
+		</div>
 
 	</div>
 <?php

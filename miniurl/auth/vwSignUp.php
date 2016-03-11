@@ -12,6 +12,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
     <div class="carousel-caption">
+	
+	<div id="wrapperUniq">
 
 	<div class="container">
 		<div class="row page-header">
@@ -19,7 +21,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 		</div>
 		<div id="containerForm" class="container" >
 			<div class="row">
-				<div class="col-md-9 col-md-offset-2">
+				<div class="col-md-10 col-md-offset-1">
 					<div class="form-group">
 						<label for="email">Email address</label>
 						<input type="text" id="email" class="form-control" placeholder="newuser@coolurl.com">
@@ -49,11 +51,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-3 col-md-offset-5">
+				<div class="col-md-4 col-md-offset-4">
 					<button type="submit" id="signup" class="btn btn-primary btn-lg btn-block">Sign up now!</button>
 				</div>
 			</div>
 		</div>
+	</div>
+	
 	</div>
 
 	</div>

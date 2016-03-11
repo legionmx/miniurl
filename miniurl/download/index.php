@@ -11,7 +11,9 @@
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
-    <div class="carousel-caption">
+	<div class="carousel-caption">
+	
+		<div id="wrapperUniq">
 		
 			<form id="uploadForm" method="post" action="/class/report.php?method=csvDownload" enctype="multipart/form-data">
 
@@ -76,6 +78,7 @@
 				
 
 			</form>
+		</div>
 
 	</div>
 <?php

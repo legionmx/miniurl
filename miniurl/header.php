@@ -73,7 +73,7 @@ else{
            	 	</div>
                 <div class="item">
                     <div class="overlay-slide">
-                        <img src="../images/p2.jpg" alt="" class="img-responsive">
+                        <img src="../images/bg2.jpg" alt="" class="img-responsive">
            	 		</div>
            	 	</div>
 

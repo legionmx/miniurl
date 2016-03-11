@@ -13,31 +13,32 @@ $activePage = 'Login';
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
-    <div class="carousel-caption">
+	<div class="carousel-caption">
+		<div id="wrapperUniq">
 
-	<div class="content">
-		<div class="row page-header">
-			<div class="col-md-8 col-md-offset-2">
-				<h2>Login</h2>
+			<div class="content">
+				<div class="row page-header">
+					<div class="col-md-8 col-md-offset-2">
+						<img id="logoTitle" src="/images/logo_lnk.cool_green.png" width="200">
+					</div>
+				</div>
+				<div id="containerForm" class="container" >
+					<div class="col-md-8 col-md-offset-2 form-inline">
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon text-right">Username:</span>
+							<input type="text" id="username" class="form-control">
+						</div>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon text-right">Password:</span>
+							<input type="password" id="password" class="form-control">
+						</div>
+						<!-- <div> -->
+							<button type="submit" id="login" class="btn btn-primary btn-lg text-right">L O G I N</button>
+						<!-- </div> -->
+					</div>
+				</div>
 			</div>
 		</div>
-		<div id="containerForm" class="container" >
-			<div class="col-md-8 col-md-offset-2 form-inline">
-				<div class="input-group input-group-lg">
-					<span class="input-group-addon text-right">Username:</span>
-					<input type="text" id="username" class="form-control">
-				</div>
-				<div class="input-group input-group-lg">
-					<span class="input-group-addon text-right">Password:</span>
-					<input type="password" id="password" class="form-control">
-				</div>
-				<!-- <div> -->
-					<button type="submit" id="login" class="btn btn-primary btn-lg text-right">L O G I N</button>
-				<!-- </div> -->
-			</div>
-		</div>
-	</div>
-
 	</div>
 
 	<!-- JQuery y Bootstrap-->

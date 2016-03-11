@@ -385,7 +385,7 @@ ul.navbar-nav > .active > a{
     -moz-transition-delay:.3s;
     -o-transition-delay:.3s;
     margin: 10px 0px;
-    text-transform: uppercase;
+    
 }
 
 .carousel-caption p label{
@@ -398,9 +398,9 @@ ul.navbar-nav > .active > a{
 }
 
 .carousel-caption #containerForm{
-    background: rgba(0, 0, 0, 0.3);
+    background: #ffffff;
     padding: 15px;
-    
+
 }
 
 .carousel-caption img{
@@ -461,7 +461,7 @@ ul.navbar-nav > .active > a{
     width: 10%;
     left: 45%;
     margin:0 auto;
-    bottom:30%;
+    bottom:15%;
 }
 
 .carousel-indicators li{
@@ -2618,22 +2618,19 @@ iframe{
 }
 
 .carousel-caption h2{
-    color:#fff;
-    border-top: 1px solid#fff;
-    border-bottom: 1px solid#fff;
-    width: 50%;
+    color:#01a38a;
+    width: 60%;
     margin: 0 auto;
-    line-height: 85px;
+   padding-top: 27px;
     position: relative;
     font-size:40px;
-    margin-bottom: 20px;
 }
 .carousel-caption h2:after{
     content: "";
     position: absolute;
     width: 2px;
     height: 110px;
-    background: #EE3B24;
+    
     left: 10px;
     top: -10px;
 
@@ -2643,7 +2640,6 @@ iframe{
     position: absolute;
     width: 2px;
     height: 110px;
-    background: #EE3B24;
     right: 10px;
     top: -10px;
 }
