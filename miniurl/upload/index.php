@@ -12,17 +12,22 @@
 ?>
 
     <div class="carousel-caption">
+	<div class="container">
+		<div id="wrapAllForm">
+			
+			<div class="row page-header">
+				<div class="col-md-12">
+					<img id="logoTitle" width="200" src="/images/logo_lnk.cool_green.png">
+					<h2>- Mini URL</h2>
+				</div>
+			</div>
 		
 			<form method="post" action="upload.php?method=transformCsv" enctype="multipart/form-data">
-
-				<div class="row">
-					<div class="col-md-12"><h2>URL´s CSV UPLOAD</h2></div>
-				</div>
 
 				<div id="containerForm" class="container">
 				<div class="row">
 					
-					<div class="col-md-8">
+					<div class="col-md-7">
 						<input type="file" name="fileToUpload" id="fileToUpload" class="form-control fileToUpload" placeholder="Selecciona un archivo">
 					</div>
 
@@ -69,6 +74,8 @@
 				
 
 			</form>
+		</div>
+	</div>
 
 	</div>
 <?php

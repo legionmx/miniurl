@@ -1,17 +1,47 @@
 /* Styles associated specifically with the Cool Link webpage
 ----------------------------------------------*/
+
 .navbar-header-short{
 	width: 200px;
 }
+.navbar-brand {
+    float: left;
+    font-size: 18px;
+    height: 48px;
+    line-height: 20px;
+    padding: 14px;
+}
 
-input[type=file], #url,#range1, #range2 {
+#wrapAllForm {
+	float: right;
+	width: 550px;
+}
+#wrapperUniq{
+	width:550px;
+	margin: 0 auto;
+}
+
+input[type=file], #url,#range1, #range2, #categories {
   background: rgba(255, 255, 255, .2);
-  color:#000;
-  border-radius: 1px;
+  color:#aeaeae;
+  border-radius: 0;
   height: 45px;
   padding: 10px;
   font-weight: 700;
   font-size: 16px;
+}
+
+input[type=file], input[type=text], input[type=password], select.form-control, #rangeBox select, .input-group span {
+  border-bottom: 2px solid #aeaeae;
+  border-right: none;
+  border-left: none;
+  border-top:none;
+  border-radius: 0px !important;
+}
+
+.input-group span {
+	background: none;
+	border-radius: 0px !important;
 }
 
 .fileToUpload::before {
@@ -20,15 +50,26 @@ input[type=file], #url,#range1, #range2 {
   border-radius: 3px;
 }
 
+#generar {
+	background: #01a38a;
+	border-radius: 0;
+	color:#ffffff;
+	border:0;
+}
+
 .btn-primary {
-  height: 45px;
-  padding: 10px;
+  background: #01a38a;
+  border:0;
+  padding: 5px 10px;
   font-size: 16px;
   border-radius: 1px;
 }
 
 #url, #range1, #range2 {
-  border: 1px solid #ccc;
+  border-bottom: 2px solid #aeaeae;
+  border-right: none;
+  border-left: none;
+  border-top:none;
   color: #000;
   width: 100%;
 }
@@ -56,7 +97,7 @@ input[type=file], #url,#range1, #range2 {
 
 /**/
 .carousel-caption {
-	margin-top: -100px;
+	
 }
 
 .row {
@@ -70,7 +111,8 @@ input[type=file], #url,#range1, #range2 {
 
 .page-header {
 	margin:0px;
-	border-bottom: none;
+	border-bottom: 2px solid #aeaeae;
+	background: #ffffff;
 }
 
 .input-group {
@@ -86,7 +128,7 @@ input[type=file], #url,#range1, #range2 {
 }
 
 .form-group #password, .form-group #passcheck{
-	width:150px;
+	width:127px;
 }
 
 .form-group #password {
@@ -94,14 +136,35 @@ input[type=file], #url,#range1, #range2 {
 }
 
 .form-group .form-control{
-	width:320px;
+	
 	float:right;
 }
 
 .form-group label {
 	width: 200px;
+	line-height: 35px;
 }
 
 .singUpForm{
 	margin: 0 auto;
+}
+
+#logoTitle {
+	float:left;
+}
+
+#wrapperUniq #logoTitle {
+	float: none;
+}
+.carousel-caption {
+	color:#aeaeae;
+}
+
+#error {
+	border: 2px solid #aeaeae;
+	
+}
+
+#rangeBox label {
+	vertical-align: bottom;
 }
