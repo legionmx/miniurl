@@ -27,7 +27,7 @@
 				<div class="row">
 					
 					<div class="col-md-7">
-						<div class="inputFile"><label class="butonInputFile">Upload</label></div>
+						<div class="inputFile"><label class="butonInputFile">Browse</label><span id="fileName">Select File</span></div>
 						<input type="file" name="fileToUpload" id="fileToUpload" class="form-control fileToUpload" placeholder="Select CSV">
 					</div>
 

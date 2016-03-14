@@ -268,6 +268,11 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	border: 2px solid #aeaeae;
 }
 
+#fileName {
+	font-size: 18px;
+	line-height: 48px;
+}
+
 .fa {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
