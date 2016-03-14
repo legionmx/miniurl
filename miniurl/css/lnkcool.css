@@ -1,6 +1,18 @@
 /* Styles associated specifically with the Cool Link webpage
 ----------------------------------------------*/
 
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=4.5.0');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.5.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.5.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.5.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.5.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+img {
+	border: none;
+}
+
 .navbar-header-short{
 	width: 200px;
 }
@@ -44,10 +56,30 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	border-radius: 0px !important;
 }
 
-.fileToUpload::before {
+.inputFile {
+	width:90%;
+	position: absolute;
+	border-bottom: 2px solid #aeaeae;
+	height: 45px;
+	padding-left: 40%;
+}
+
+.inputFile label.butonInputFile {
+	background: #aeaeae none repeat scroll 0 0;
+	position: absolute;
+	left: 0px;
+	height: 45px;
+	width: 40%;
+	color:#ffffff;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 45px;
+}
+
+.fileToUpload {
   background: transparent !important;
-  border-color: #ffffff;
-  border-radius: 3px;
+  opacity: 0;
+  cursor: pointer;
 }
 
 #generar {
@@ -57,12 +89,26 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	border:0;
 }
 
+.btn-default {
+	border: none;
+}
+
 .btn-primary {
   background: #01a38a;
   border:0;
   padding: 5px 10px;
   font-size: 16px;
   border-radius: 1px;
+}
+
+.btn-primary:hover {
+	background: #01d1b1;
+}
+
+.contentButon{
+	height: 45px;
+    line-height: 50px;
+    vertical-align: middle;
 }
 
 #url, #range1, #range2 {
@@ -80,8 +126,16 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
   font-weight: 700;
 }
 .table-condensed {
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  
+  color: #aeaeae;
+}
+
+.table tr {
+	border-bottom: 1px solid #aeaeae;
+}
+
+.table > thead > tr > th {
+	border-bottom-color: #aeaeae;
 }
 
 .table-condensed a {
@@ -96,7 +150,19 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 }
 
 /**/
-.carousel-caption {
+.backgroundCaption {
+	margin-top: -50px;
+    right: 0;
+    text-align: center;
+    text-shadow: none !important;
+    top: 50%;
+    transition: all 0.3s ease 0s;
+     left: 0;
+    padding-bottom: 30px;
+    bottom: 0;
+    padding-top: 20px;
+    position: absolute;
+    background: #ffffff;
 	
 }
 
@@ -111,15 +177,29 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 
 .page-header {
 	margin:0px;
-	border-bottom: 2px solid #aeaeae;
+	border-bottom: none;
 	background: #ffffff;
+	padding: 0 15px;
 }
 
-.input-group {
+.page-header .headerLine {
+	padding-bottom: 15px;
+	border-bottom: 2px solid #aeaeae;
+}
+
+#logoTitle {
+	margin-left: -30px;
+	margin-top: 10px;
+	padding-bottom: 0;
+	border: none;
+}
+
+.login .input-group {
 	display: table !important;
 	margin: 0 auto;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	width: 415px;
 }
 
 .form-group {
@@ -167,4 +247,47 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 
 #rangeBox label {
 	vertical-align: bottom;
+}
+.input-group-addon.text-right{
+	width: 100px !important;
+	padding: 10px 8px;
+}
+
+#login {
+	margin-top:20px;
+	margin-bottom: 10px;
+}
+
+.input-group #username, .input-group #password {
+	font-size: 17px;
+	padding: 10px 6px;
+}
+
+#success-row {
+	border: 2px solid #aeaeae;
+}
+
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color:#01a38a;
+  font-size: 18px;
+}
+
+.fa-bar-chart-o:before,
+.fa-bar-chart:before {
+  content: "\f080";
+}
+.fa-area-chart:before {
+  content: "\f1fe";
+}
+.fa-pie-chart:before {
+  content: "\f200";
+}
+.fa-line-chart:before {
+  content: "\f201";
 }

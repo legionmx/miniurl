@@ -11,7 +11,7 @@
 	<div class="container">
 		<div id="wrapAllForm">
 			<div class="row page-header">
-				<div class="col-md-12"><img id="logoTitle" src="/images/logo_lnk.cool_green.png" width="200"><h2>- Mini URL</h2></div>
+				<div class="col-md-12 headerLine"><img id="logoTitle" src="/images/logo_lnk.cool_green.png" width="200"></div>
 			</div>
 			<div id="containerForm" class="container" >
 				<div class="row">
@@ -28,7 +28,7 @@
 					<div class="col-md-5">
 						<input type="url" name="url" id="url" class="form-control" placeholder="URL to minimize">
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-4 contentButon">
 						<button type="submit" id="generar" class="btn btn-default" disabled>Generate Alias</button>
 					</div>
 				</div>
@@ -58,6 +58,15 @@
 						<p id="error" class="hidden"></p>
 					</div>
 				</div>
+				<div class="row">
+ 					<div class="col-md-12 hidden" id="success-row">
+ 						The Cool Link was saved:&nbsp;
+ 						<a href="#" target="_blank" id="alias-success" class="btn btn-link">Etwas</a>
+ 						<button type="button" class="btn btn-default" id="copy-link-btn">
+ 							<span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+ 						</button>
+ 					</div>
+ 				</div>
 				
 				<div class="row">
 					<div id="contentSubmit" class="col-md-12">

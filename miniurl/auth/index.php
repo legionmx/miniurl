@@ -14,16 +14,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
 	<div class="carousel-caption">
-		<div id="wrapperUniq">
+		<div id="wrapperUniq" class="login">
 
 			<div class="content">
 				<div class="row page-header">
-					<div class="col-md-8 col-md-offset-2">
+					<div class="col-md-12 headerLine">
 						<img id="logoTitle" src="/images/logo_lnk.cool_green.png" width="200">
 					</div>
 				</div>
 				<div id="containerForm" class="container" >
-					<div class="col-md-8 col-md-offset-2 form-inline">
+					<div class="col-md-12 form-inline">
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon text-right">Username:</span>
 							<input type="text" id="username" class="form-control">

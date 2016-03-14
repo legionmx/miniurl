@@ -2621,11 +2621,12 @@ iframe{
 
 .carousel-caption h2{
     color:#01a38a;
+    font-weight: lighter;
     width: 60%;
     margin: 0 auto;
-   padding-top: 27px;
+   padding-top: 12px;
     position: relative;
-    font-size:40px;
+    font-size:55px;
 }
 .carousel-caption h2:after{
     content: "";

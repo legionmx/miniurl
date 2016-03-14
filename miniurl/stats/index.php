@@ -11,7 +11,7 @@ $activePage = 'Statistics';
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
-    <div class="carousel-caption">
+    <div class="carousel-caption backgroundCaption">
 
 	<div class="container">
 		<div class="row" class="page-header">
@@ -24,10 +24,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 				<table class="table table-hover table-condensed">
 					<thead>
 						<tr>
-							<th class="text-center" colspan="2">Alias</th>
+							<th class="text-center">Chart</th>
+							<th class="text-center">Alias</th>
 							<th>Direcci&oacute;n</th>
 							<th class="text-center">Visitas</th>
-							<th>More</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -39,7 +39,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 									$alias = $registro['hash'];
 									$direccion = strtolower($_PROTOCOLOS[$registro['prot']])."://".$registro['url'];
 									$visitas = $registro['num_visitas'];
-									echo "<tr><td class='text-right'><a href='viewAlias.php?a=$alias'>$alias</a>&nbsp;</td><td><a href='graphAlias.php?a=$alias'><button type='button' class='btn btn-default btn-sm'><span class='glyphicon glyphicon-picture' aria-hidden='true'></span></button></a></td><td><a href='$direccion'>$direccion<a></td><td class='text-center'>$visitas</td><td>&nbsp;</td></tr>";
+									echo "<tr><td><a href='graphAlias.php?a=$alias'><button type='button' class='btn btn-default btn-sm'><i class='fa fa-line-chart'></i></span></button></a></td><td class='text-center'><a href='viewAlias.php?a=$alias'>$alias</a>&nbsp;</td><td class='text-left'><a href='$direccion'>$direccion<a></td><td class='text-center'>$visitas</td></tr>";
 								}
 							}
 							else{

@@ -17,7 +17,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 
 	<div class="container">
 		<div class="row page-header">
-			<div class="col-md-12"><h2>Sign up</h2></div>
+			<div class="col-md-12 headerLine"><h2>Sign up</h2></div>
 		</div>
 		<div id="containerForm" class="container" >
 			<div class="row">
