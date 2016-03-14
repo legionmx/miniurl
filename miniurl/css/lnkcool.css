@@ -168,3 +168,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 #rangeBox label {
 	vertical-align: bottom;
 }
+
+#success-row {
+	border: 2px solid #aeaeae;
+}
