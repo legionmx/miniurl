@@ -171,6 +171,11 @@ $(document).ready(function(){
 	$("#url").on("input",function(evento){
 		newLink.getValuesFromUI();
 		//console.log(newLink);
+		var protocolsRegExp = /^https?:\/\//;
+		if(protocolsRegExp.test(newLink.url)){
+			newLink.url = newLink.url.replace(protocolsRegExp,"");
+			$("#url").val(newLink.url);
+		}
 		if(!newLink.hasValidAddress()){
 			$("#alias").val("");
 			newLink.isValid = false;
