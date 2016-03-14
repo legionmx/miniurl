@@ -38,7 +38,7 @@ class FileUp{
 
 		    fclose($fichero);
 		 
-		    echo "Leidos " . count($registros) . " registros <br>";
+		    echo "<p id='readSms'>Leidos " . count($registros) . " registros </p>";
 		 	
 		 	$regProt = array();
 		 	$regUrl = array();

@@ -14,12 +14,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
 	<div class="carousel-caption">
-		<div id="wrapperUniq" class="login">
+		<div id="wrapAllForm" class="login">
 
-			<div class="content">
+			
 				<div class="row page-header">
 					<div class="col-md-12 headerLine">
-						<img id="logoTitle" src="/images/logo_lnk.cool_green.png" width="200">
+						<h2>Login</h2>
 					</div>
 				</div>
 				<div id="containerForm" class="container" >
@@ -37,7 +37,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 						<!-- </div> -->
 					</div>
 				</div>
-			</div>
+			
 		</div>
 	</div>
 

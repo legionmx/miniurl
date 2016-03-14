@@ -22,8 +22,8 @@
     <div class="carousel-caption alias-stats-title">
 
 	<div class="container">
-		<div class="row" class="page-header">
-			<div class="col-md-12">
+		<div class="row page-header">
+			<div class="col-md-12 headerLine">
 				<h2>Stats for alias <?php echo $alias; ?></h2>
 			</div>
 		</div>

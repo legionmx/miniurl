@@ -39,7 +39,7 @@ input[type=file], #url,#range1, #range2, #categories {
   border-radius: 0;
   height: 45px;
   padding: 10px;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 16px;
 }
 
@@ -51,9 +51,21 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
   border-radius: 0px !important;
 }
 
-.input-group span {
+.input-group span.input-group-addon {
 	background: none;
 	border-radius: 0px !important;
+	border: 0;
+	padding: 0px!important;
+	font-size: 14px;
+	width: 120px !important;
+	font-weight: 500;
+	text-align: left;
+	color: #aeaeae;
+}
+
+#alias-group .input-group span.input-group-addon {
+	width: 100% !important;
+	border-bottom: 2px solid #aeaeae;
 }
 
 .inputFile {
@@ -71,7 +83,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	height: 45px;
 	width: 40%;
 	color:#ffffff;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 400;
 	line-height: 45px;
 }
@@ -116,14 +128,15 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
   border-right: none;
   border-left: none;
   border-top:none;
-  color: #000;
+  color: #aeaeae;
   width: 100%;
 }
 #protocolo, #alias {
   background: rgba(255, 255, 255, .3);
-  color: #000;
+  color: #aeaeae;
   height: 45px;
   font-weight: 700;
+  
 }
 .table-condensed {
   
@@ -223,6 +236,8 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 .form-group label {
 	width: 200px;
 	line-height: 35px;
+	font-weight: 400;
+	
 }
 
 .singUpForm{
@@ -248,7 +263,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 #rangeBox label {
 	vertical-align: bottom;
 }
-<<<<<<< HEAD
+
 .input-group-addon.text-right{
 	width: 100px !important;
 	padding: 10px 8px;
