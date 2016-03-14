@@ -58,6 +58,16 @@
 						<p id="error" class="hidden"></p>
 					</div>
 				</div>
+
+				<div class="row">
+					<div class="col-md-12 hidden" id="success-row">
+						The Cool Link was saved:&nbsp;
+						<a href="#" target="_blank" id="alias-success" class="btn btn-link">Etwas</a>
+						<button type="button" class="btn btn-default" id="copy-link-btn">
+							<span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+						</button>
+					</div>
+				</div>
 				
 				<div class="row">
 					<div id="contentSubmit" class="col-md-12">

@@ -123,6 +123,7 @@ $(document).ready(function(){
 		}
 		else{
 			$("#error").addClass('hidden');
+			$("#success-row").addClass('hidden');
 		}
 		$("#generar").prop('disabled',!itCanBeGenerated);
 	};
@@ -210,7 +211,13 @@ $(document).ready(function(){
 			//$.getJSON("crtEnlace.php",enlaceMin,function(response){
 			$.getJSON("crtEnlace.php",newLink,function(response){
 				//cambiarUIpostHash(response.status,'blue',false,response.alias);
-				cambiarUIpostHash(response.status,'blue',false);
+				//cambiarUIpostHash(response.status,'blue',false);
+				//cambiarUIpostHash("The Cool Link was saved: ",'blue',false);
+				cambiarUIpostHash("",'blue',false);
+				//$("#alias-success").val(response.status);
+				$("#alias-success").text(response.status);
+				$("#alias-success").prop('href','http://'+response.status);
+				$("#success-row").removeClass('hidden');
 				$("#salvar").prop('disabled',true);
 				$("#generar").prop('disabled',true);
 			});
@@ -220,6 +227,9 @@ $(document).ready(function(){
 		}
 	});
 
+	$("#copy-link-btn").click(function(){
+		copyToClipboard($("#alias-success").text());
+	});
 	
 	$("#sameUrl").change(function(){
 		if($("#sameUrl").prop('checked') ){
@@ -254,3 +264,19 @@ var enlaceMin = {
 	valido: false, //isValid
 	seLogea: false //isTracked
 };
+
+var copyToClipboard = function(link){
+	var textArea = document.createElement("textarea");
+	textArea.value = link;
+	document.body.appendChild(textArea);
+	textArea.select();
+	try{
+		var copied = document.execCommand('copy');
+		var status = copied ? 'copied' : 'not copied';
+		console.log("The link was "+status);
+	}catch (err){
+		console.log("The browser was unable to copy the link");
+	}
+
+	document.body.removeChild(textArea);
+}

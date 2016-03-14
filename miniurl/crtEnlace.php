@@ -93,6 +93,7 @@ if($resInsert === false){ //If the result set is false, the query had errors
 	echo json_encode(array('error' => '1', 'status' => "Error inserting the link.\nSQL: $query"));
 }
 else{
-	echo json_encode(array('status' => "Se minimiz&oacute; el enlace -> ".CONS::BASEURL."$alias",'alias'=> $alias, 'query' => $query));
+	//echo json_encode(array('status' => "Se minimiz&oacute; el enlace -> ".CONS::BASEURL."$alias",'alias'=> $alias, 'query' => $query));
+	echo json_encode(array('status' => "$_BASEURL$alias",'alias'=> $alias, 'query' => $query));
 }
 ?>
