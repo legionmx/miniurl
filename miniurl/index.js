@@ -255,6 +255,8 @@ $(document).ready(function(){
 
 	$('#fileToUpload').change(function(e){
 		$('#upload1').removeAttr('disabled');
+		$('#fileName').empty();
+		$('#fileName').append($('#fileToUpload').val());
 	});
 
 });

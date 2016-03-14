@@ -16,9 +16,8 @@
 		<div id="wrapAllForm">
 			
 			<div class="row page-header">
-				<div class="col-md-12">
-					<img id="logoTitle" width="200" src="/images/logo_lnk.cool_green.png">
-					<h2>- Mini URL</h2>
+				<div class="col-md-12 headerLine">
+					<h2>Upload</h2>
 				</div>
 			</div>
 		
@@ -28,11 +27,12 @@
 				<div class="row">
 					
 					<div class="col-md-7">
-						<input type="file" name="fileToUpload" id="fileToUpload" class="form-control fileToUpload" placeholder="Selecciona un archivo">
+						<div class="inputFile"><label class="butonInputFile">Browse</label><span id="fileName">Select File</span></div>
+						<input type="file" name="fileToUpload" id="fileToUpload" class="form-control fileToUpload" placeholder="Select CSV">
 					</div>
 
-					<div class="col-md-4">
-						<button type="submit" id="upload1" class="btn btn-primary" name="submit" disabled>Subir y generar alias</button>
+					<div class="col-md-4 contentButon">
+						<button type="submit" id="upload1" class="btn btn-primary" name="submit" disabled>Upload - generate</button>
 					</div>
 
 				</div>
@@ -45,7 +45,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<p>
-							<label for="sameUrl">¿Usar misma url?</label>&nbsp;<input type="checkbox" id="sameUrl" name="sameUrl">
+							<label for="sameUrl">¿Use the same url?</label>&nbsp;<input type="checkbox" id="sameUrl" name="sameUrl">
 						</p>
 					</div>
 				</div>
@@ -59,14 +59,14 @@
 							}
 							?>
 						</select>
-						<input type="text" id="prot_propio" class="form-control input-sm hidden" placeholder="Protocolo">
+						<input type="text" id="prot_propio" class="form-control input-sm hidden" placeholder="Protocol">
 					</div>
 					<div class="col-md-5">
-						<input type="text" name="url" id="url" placeholder="Direcci&oacute;n a minimizar">
+						<input type="text" name="url" id="url" placeholder="URL to minimize">
 					</div>
 					<div class="col-md-4">
 						<p>
-							<label id="labelLog" for="conLog">¿Logear visitas?</label>&nbsp;<input type="checkbox" id="conLog" name="conLog">
+							<label id="labelLog" for="conLog">¿Log visits?</label>&nbsp;<input type="checkbox" id="conLog" name="conLog">
 						</p>
 					</div>
 				</div>
