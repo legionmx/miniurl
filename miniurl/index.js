@@ -4,8 +4,8 @@ $(document).ready(function(){
 	$("#salvar").prop('disabled',true);
 	$("#generar").prop('disabled',true);
 
-	var MainForm = function(){
-		this.keyProtocol = $("#protocolo").val();
+	var LnkCool = function(){
+		/*this.keyProtocol = $("#protocolo").val();
 		this.url = $("#url").val();
 		this.alias = $("#alias").val();
 		this.seLogea = $("#conLog").prop('checked');
@@ -13,11 +13,37 @@ $(document).ready(function(){
 			this.protTxt = $("#prot_propio").val(); //The input is taken from the text box
 		}
 		else{
-			document.getElementById()
+			//document.getElementById();
+			var selectedOption = $("#protocolo option:selected")[0];
+			this.protTxt = selectedOption.innerHTML;
+		}*/
+		this.getValuesFromUI = function(){
+			this.keyProtocol = $("#protocolo").val();
+			this.url = $("#url").val();
+			this.alias = $("#alias").val();
+			this.isTracked = $("#conLog").prop('checked');
+			this.exists = false;
+			this.isValid = false;
+			if(this.keyProtocol == '3'){ // The 'other' option is selected
+				this.protocol = $("#prot_propio").val(); //The input is taken from the text box
+			}
+			else{
+				//document.getElementById();
+				var selectedOption = $("#protocolo option:selected")[0];
+				this.protocol = selectedOption.innerHTML;
+			}
+		};
+		this.hasValidAddress = function(){
+			console.log(this.url.length);
+			return this.url.length >= 8;
+		};
+		this.hasValidAlias = function(){
+			return this.alias.length >= 3;
 		}
-	}
+		this.getValuesFromUI();
+	};
 
-	enlaceMin.getValoresFromUI = function(){
+	/*enlaceMin.getValoresFromUI = function(){
 		this.url = $("#url").val();
 		this.alias = $("#alias").val();
 		this.seLogea = $("#conLog").prop('checked');
@@ -35,35 +61,40 @@ $(document).ready(function(){
 	};
 	enlaceMin.esValidoAlias = function(){
 		return this.alias.length >= 3;
-	};
+	};*/
+
+	var newLink = new LnkCool();
 
 	var generarHash = function(){
-		enlaceMin.getValoresFromUI();
-		//if($("#conLog").prop('checked')) alert("Se logeara --"+ $("#conLog").prop('checked'));
-		//else alert("NO se logeara --"+ $("#conLog").prop('checked'));
-		if(!enlaceMin.esValidaDireccion()){
-			//$("#alias").val("");
-			enlaceMin.valido = false;
+		//enlaceMin.getValoresFromUI();
+		newLink.getValuesFromUI(); //TODO an on access refreseh would be better
+		//if(!enlaceMin.esValidaDireccion()){
+		console.log(newLink);
+		if(!newLink.hasValidAddress()){
+			//This path shouldn't ocurr. The input validates it on change.
+			//enlaceMin.valido = false;
+			newLink.isValid = false;
 			$("#alias-group").removeClass("has-success has-error");
-			cambiarUIpostHash("Debe ser una direcci&oacute;n de al menos 8 caracteres",'orange',false);
+			cambiarUIpostHash("#####The address must have at least 8 characters",'orange',false);
 		}
 		else{
-			$.getJSON("getHash.php",{"protocolo": enlaceMin.protocolo, "protTxt": enlaceMin.protTxt, "url": enlaceMin.url},function(response){
+			$.getJSON("getHash.php",{"protocolo": newLink.keyProtocol, "protTxt": newLink.protocol, "url": newLink.url},function(response){
 				$("#alias-group").removeClass("has-success has-error");
-				if((response.existe==true)||enlaceMin.url.length<8){ //TODO: Revisar la 2a parte de la condicion
-					cambiarUIpostHash("La URL ya ha sido minimizada",'red',false,response.hash);
-					//$("#alias").val="";
+				if((response.existe==true)||newLink.url.length<8){ //TODO: Check if the second clause of the condition is needed
+					//cambiarUIpostHash("The URL has already been minimized",'red',false,response.hash);
+					cambiarUIpostHash("The URL has already been minimized",'red',false);
 					$("#alias").val(response.hash);
-					enlaceMin.valido = false;
+					//enlaceMin.valido = false;
+					newLink.isValid = false;
 					$("#alias-group").addClass('has-error');
 				}
 				else{
 					cambiarUIpostHash("",'green',true,response.hash);
 					ultimoHash = response.hash;
-					$("#alias").val(ultimoHash);
+					$("#alias").val(ultimoHash); //TODO: the 'ultimoHash' schema should be deprecated
 					$("#salvar").prop('disabled',false);
-					enlaceMin.alias = response.hash;
-					enlaceMin.valido = true;
+					newLink.alias = response.hash;
+					newLink.isValid = true;
 					$("#alias-group").addClass('has-success');
 				}
 			});
@@ -72,11 +103,19 @@ $(document).ready(function(){
 	};
 
 	//var cambiarUIpostHash = function(error = "", color = "green", sePuedeGenerar = true, hashgen = ""){
-	var cambiarUIpostHash = function(error, color, itCanBeGenerated, hashgen){
+	//var cambiarUIpostHash = function(error, color, itCanBeGenerated, hashgen){
+	var cambiarUIpostHash = function(error, color, itCanBeGenerated){
 		var error = error || "";
 		var color = color || "green";
-		var itCanBeGenerated = itCanBeGenerated || true;
-		var hashgen = hashgen || "";
+		//var itCanBeGenerated = itCanBeGenerated || true;
+		if(typeof itCanBeGenerated === "undefined"){
+			var itCanBeGenerated = true;
+		}
+		else{
+			var itCanBeGenerated = itCanBeGenerated;
+		}
+		//var itCanBeGenerated = itCanBeGenerated || true;
+		//var hashgen = hashgen || "";
 		$("#error").html(error);
 		$("#error").css('color',color);
 		if(error.length>0){
@@ -84,41 +123,40 @@ $(document).ready(function(){
 		}
 		else{
 			$("#error").addClass('hidden');
+			$("#success-row").addClass('hidden');
 		}
 		$("#generar").prop('disabled',!itCanBeGenerated);
 	};
 
-	var revisarAlias = function(){
-		enlaceMin.getValoresFromUI();
+	var checkAlias = function(){
+		newLink.getValuesFromUI();
 		$("#alias-group").removeClass("has-error has-success");
 
-		//Validamos la entrada
-		if(!enlaceMin.esValidoAlias()){
+		//Input validation
+		if(!newLink.hasValidAlias()){
 			//The alias is short
 			/*$("#error").html("Por lo menos 3 caracteres");
 			$("#error").css('color','orange');*/
 			cambiarUIpostHash("At least 3 characters",'orange');
 			$("#salvar").prop('disabled',true);
 		}
-		//Validamos la existencia en BD
+		//Persisted alias validation
 		else{
-			/*$("#error").html("");
-			$("#error").css('color','black');*/
 			cambiarUIpostHash("");
 			$("#salvar").prop('disabled',false);
 
-			$.getJSON("chkAlias.php", {'alias': enlaceMin.alias}, function(response){
+			$.getJSON("chkAlias.php", {'alias': newLink.alias}, function(response){
 				if(response.existe){
 					//The alias exists.
 					$("#alias-group").addClass('has-error');
 					$("#salvar").prop('disabled',true);
-					enlaceMin.valido = false;
+					newLink.isValid = false;
 				}
 				else{
-					//The alias does not exist
+					//The alias doesn't exist
 					$("#salvar").prop('disabled',false);
-					enlaceMin.alias = response.alias_revisado;
-					enlaceMin.valido = true;
+					newLink.alias = response.alias_revisado;
+					newLink.isValid = true;
 					$("#alias-group").addClass('has-success');
 				}
 			});
@@ -131,11 +169,12 @@ $(document).ready(function(){
 		generarHash();
 	});
 	$("#url").on("input",function(evento){
-		enlaceMin.getValoresFromUI();
-		if(!enlaceMin.esValidaDireccion()){
+		newLink.getValuesFromUI();
+		//console.log(newLink);
+		if(!newLink.hasValidAddress()){
 			$("#alias").val("");
-			enlaceMin.valido = false;
-			cambiarUIpostHash("The address must have at least 8 characters",'orange',false);
+			newLink.isValid = false;
+			cambiarUIpostHash("--The address must have at least 8 characters",'orange',false);
 		}
 		else {
 			cambiarUIpostHash();
@@ -153,7 +192,6 @@ $(document).ready(function(){
 		var selectedOption = $("#protocolo option:selected")[0];
 		//console.log(selectedOption.innerHTML+' --- '+selectedOption.value);
 		var txt_prot = selectedOption.innerHTML;
-		//console.log(' --- '+txt_prot)
 		if(cve_prot =='3'){
 			$("#prot_propio").removeClass('hidden');
 		}
@@ -164,14 +202,22 @@ $(document).ready(function(){
 	});
 
 	$("#alias").on("input",function(evento){
-		revisarAlias();
+		checkAlias();
 	});
 
 	$("#salvar").click(function(){
-		if(enlaceMin.valido){
-			enlaceMin.getValoresFromUI();
-			$.getJSON("crtEnlace.php",enlaceMin,function(response){
-				cambiarUIpostHash(response.status,'blue',false,response.alias);
+		if(newLink.isValid){
+			newLink.getValuesFromUI();
+			//$.getJSON("crtEnlace.php",enlaceMin,function(response){
+			$.getJSON("crtEnlace.php",newLink,function(response){
+				//cambiarUIpostHash(response.status,'blue',false,response.alias);
+				//cambiarUIpostHash(response.status,'blue',false);
+				//cambiarUIpostHash("The Cool Link was saved: ",'blue',false);
+				cambiarUIpostHash("",'blue',false);
+				//$("#alias-success").val(response.status);
+				$("#alias-success").text(response.status);
+				$("#alias-success").prop('href','http://'+response.status);
+				$("#success-row").removeClass('hidden');
 				$("#salvar").prop('disabled',true);
 				$("#generar").prop('disabled',true);
 			});
@@ -181,6 +227,9 @@ $(document).ready(function(){
 		}
 	});
 
+	$("#copy-link-btn").click(function(){
+		copyToClipboard($("#alias-success").text());
+	});
 	
 	$("#sameUrl").change(function(){
 		if($("#sameUrl").prop('checked') ){
@@ -207,11 +256,27 @@ $(document).ready(function(){
 
 var ultimoHash = "";
 var enlaceMin = {
-	protocolo: 1,
-	protTxt: "HTTP",
+	protocolo: 1, //keyProtocol
+	protTxt: "HTTP", //protocol
 	url: "",
 	alias: "",
-	existe: false,
-	valido: false,
-	seLogea: false
+	existe: false, //exists
+	valido: false, //isValid
+	seLogea: false //isTracked
 };
+
+var copyToClipboard = function(link){
+	var textArea = document.createElement("textarea");
+	textArea.value = link;
+	document.body.appendChild(textArea);
+	textArea.select();
+	try{
+		var copied = document.execCommand('copy');
+		var status = copied ? 'copied' : 'not copied';
+		console.log("The link was "+status);
+	}catch (err){
+		console.log("The browser was unable to copy the link");
+	}
+
+	document.body.removeChild(textArea);
+}
