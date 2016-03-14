@@ -5,18 +5,6 @@ $(document).ready(function(){
 	$("#generar").prop('disabled',true);
 
 	var LnkCool = function(){
-		/*this.keyProtocol = $("#protocolo").val();
-		this.url = $("#url").val();
-		this.alias = $("#alias").val();
-		this.seLogea = $("#conLog").prop('checked');
-		if(this.protocolo == '3'){ // The 'other' option is selected
-			this.protTxt = $("#prot_propio").val(); //The input is taken from the text box
-		}
-		else{
-			//document.getElementById();
-			var selectedOption = $("#protocolo option:selected")[0];
-			this.protTxt = selectedOption.innerHTML;
-		}*/
 		this.getValuesFromUI = function(){
 			this.keyProtocol = $("#protocolo").val();
 			this.url = $("#url").val();
@@ -43,36 +31,13 @@ $(document).ready(function(){
 		this.getValuesFromUI();
 	};
 
-	/*enlaceMin.getValoresFromUI = function(){
-		this.url = $("#url").val();
-		this.alias = $("#alias").val();
-		this.seLogea = $("#conLog").prop('checked');
-		this.protocolo = $("#protocolo").val();
-		if(this.protocolo == '3'){ //Hay que obtener el txt del input
-			this.protTxt = $("#prot_propio").val();
-		}
-		else{ //Se obtiene el txt del select
-			document.getElementById("protocolo").options[($("#protocolo").val())-1].text;
-		}
-	};
-
-	enlaceMin.esValidaDireccion = function(){
-		return this.url.length >= 8;
-	};
-	enlaceMin.esValidoAlias = function(){
-		return this.alias.length >= 3;
-	};*/
-
 	var newLink = new LnkCool();
 
 	var generarHash = function(){
-		//enlaceMin.getValoresFromUI();
 		newLink.getValuesFromUI(); //TODO an on access refreseh would be better
-		//if(!enlaceMin.esValidaDireccion()){
-		console.log(newLink);
+		//console.log(newLink);
 		if(!newLink.hasValidAddress()){
 			//This path shouldn't ocurr. The input validates it on change.
-			//enlaceMin.valido = false;
 			newLink.isValid = false;
 			$("#alias-group").removeClass("has-success has-error");
 			cambiarUIpostHash("#####The address must have at least 8 characters",'orange',false);
@@ -81,10 +46,8 @@ $(document).ready(function(){
 			$.getJSON("getHash.php",{"protocolo": newLink.keyProtocol, "protTxt": newLink.protocol, "url": newLink.url},function(response){
 				$("#alias-group").removeClass("has-success has-error");
 				if((response.existe==true)||newLink.url.length<8){ //TODO: Check if the second clause of the condition is needed
-					//cambiarUIpostHash("The URL has already been minimized",'red',false,response.hash);
 					cambiarUIpostHash("The URL has already been minimized",'red',false);
 					$("#alias").val(response.hash);
-					//enlaceMin.valido = false;
 					newLink.isValid = false;
 					$("#alias-group").addClass('has-error');
 				}
@@ -102,20 +65,15 @@ $(document).ready(function(){
 		
 	};
 
-	//var cambiarUIpostHash = function(error = "", color = "green", sePuedeGenerar = true, hashgen = ""){
-	//var cambiarUIpostHash = function(error, color, itCanBeGenerated, hashgen){
 	var cambiarUIpostHash = function(error, color, itCanBeGenerated){
 		var error = error || "";
 		var color = color || "green";
-		//var itCanBeGenerated = itCanBeGenerated || true;
 		if(typeof itCanBeGenerated === "undefined"){
 			var itCanBeGenerated = true;
 		}
 		else{
 			var itCanBeGenerated = itCanBeGenerated;
 		}
-		//var itCanBeGenerated = itCanBeGenerated || true;
-		//var hashgen = hashgen || "";
 		$("#error").html(error);
 		$("#error").css('color',color);
 		if(error.length>0){
@@ -135,8 +93,6 @@ $(document).ready(function(){
 		//Input validation
 		if(!newLink.hasValidAlias()){
 			//The alias is short
-			/*$("#error").html("Por lo menos 3 caracteres");
-			$("#error").css('color','orange');*/
 			cambiarUIpostHash("At least 3 characters",'orange');
 			$("#salvar").prop('disabled',true);
 		}
@@ -171,7 +127,6 @@ $(document).ready(function(){
 	$("#url").on("input",function(evento){
 		newLink.getValuesFromUI();
 		//console.log(newLink);
-		//var protocolsRegExp = /^https?:\/\//;
 		var protocolsRegExp = /^(\S+):\/\//;
 		if(protocolsRegExp.test(newLink.url)){
 			newLink.url = newLink.url.replace(protocolsRegExp,"");
@@ -214,13 +169,8 @@ $(document).ready(function(){
 	$("#salvar").click(function(){
 		if(newLink.isValid){
 			newLink.getValuesFromUI();
-			//$.getJSON("crtEnlace.php",enlaceMin,function(response){
 			$.getJSON("crtEnlace.php",newLink,function(response){
-				//cambiarUIpostHash(response.status,'blue',false,response.alias);
-				//cambiarUIpostHash(response.status,'blue',false);
-				//cambiarUIpostHash("The Cool Link was saved: ",'blue',false);
 				cambiarUIpostHash("",'blue',false);
-				//$("#alias-success").val(response.status);
 				$("#alias-success").text(response.status);
 				$("#alias-success").prop('href','http://'+response.status);
 				$("#success-row").removeClass('hidden');
@@ -263,15 +213,6 @@ $(document).ready(function(){
 });
 
 var ultimoHash = "";
-var enlaceMin = {
-	protocolo: 1, //keyProtocol
-	protTxt: "HTTP", //protocol
-	url: "",
-	alias: "",
-	existe: false, //exists
-	valido: false, //isValid
-	seLogea: false //isTracked
-};
 
 var copyToClipboard = function(link){
 	var textArea = document.createElement("textarea");
