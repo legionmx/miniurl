@@ -13,7 +13,7 @@ class Alias{
 
 		if (isset($code) && is_array($code)){
 			
-			$isLogid = 1;
+			
 			
 			$arrayAlias= array();
 
@@ -41,6 +41,10 @@ class Alias{
 					}else{
 						$isLogid = 0;
 					}
+				}else{
+						
+					$isLogid = $isLog[$i];
+				
 				}
 
 				$urlCompleto = strtolower($protocolBase)."://$url/" . $codigo;

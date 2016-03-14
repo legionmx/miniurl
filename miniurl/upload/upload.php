@@ -23,7 +23,7 @@ class FileUp{
 		    // Lee los nombres de los campos
 		    $nombres_campos = fgetcsv($fichero, 0, ",", "\"", "\"");
 		    $num_campos = count($nombres_campos);
-
+			
 		    // Lee los registros
 		    while (($datos = fgetcsv($fichero, 0, ",", "\"", "\"")) !== FALSE) {
 
@@ -35,13 +35,14 @@ class FileUp{
 		        // Añade el registro leido al array de registros
 		        $registros[] = $registro;
 		    }
+
 		    fclose($fichero);
 		 
 		    echo "Leidos " . count($registros) . " registros <br>";
 		 	
 		 	$regProt = array();
 		 	$regUrl = array();
-		
+			$regLog = array();
 		    
 		    for ($i = 0; $i < count($registros); $i++) {
 			
@@ -54,7 +55,8 @@ class FileUp{
 					break;
 				
 			}
-
+			
+			$regLog[$i] = $registros[$i]["log"];
 		        $regUrl[$i] = $registros[$i]["url"];
 		        $regCode[$i] = $registros[$i]["codigo"];
 
@@ -70,7 +72,6 @@ class FileUp{
 		    	
 		    }else{
 			$sameUrl = null;
-			$regLog = 1;
 		    }
 
 		    $hashAlias = new Alias;
@@ -111,7 +112,7 @@ class FileUp{
 		} else {
 
 		    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		        echo "<p id='successUpload'>El archivo ". basename( $_FILES["fileToUpload"]["name"]). " se subio correctamente.<p>";
+		        echo "<p id='successUpload'>El archivo ". basename( $_FILES["fileToUpload"]["name"]). " se subio correctamente.</p>";
 		        FileUp::readCsv();
 		    } else {
 		        echo "<p id='errorUpload'>Error, hubo un problema al subir tu archivo.</p>";
