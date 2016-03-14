@@ -16,14 +16,13 @@ $(document).ready(function(){
 				this.protocol = $("#prot_propio").val(); //The input is taken from the text box
 			}
 			else{
-				//document.getElementById();
 				var selectedOption = $("#protocolo option:selected")[0];
 				this.protocol = selectedOption.innerHTML;
 			}
 		};
 		this.hasValidAddress = function(){
-			console.log(this.url.length);
-			return this.url.length >= 8;
+			//console.log(this.url.length);
+			return this.url.length >= 4;
 		};
 		this.hasValidAlias = function(){
 			return this.alias.length >= 3;
@@ -35,12 +34,11 @@ $(document).ready(function(){
 
 	var generarHash = function(){
 		newLink.getValuesFromUI(); //TODO an on access refreseh would be better
-		//console.log(newLink);
 		if(!newLink.hasValidAddress()){
 			//This path shouldn't ocurr. The input validates it on change.
 			newLink.isValid = false;
 			$("#alias-group").removeClass("has-success has-error");
-			cambiarUIpostHash("#####The address must have at least 8 characters",'orange',false);
+			cambiarUIpostHash("The address must have at least 4 characters",'orange',false);
 		}
 		else{
 			$.getJSON("getHash.php",{"protocolo": newLink.keyProtocol, "protTxt": newLink.protocol, "url": newLink.url},function(response){
@@ -126,7 +124,6 @@ $(document).ready(function(){
 	});
 	$("#url").on("input",function(evento){
 		newLink.getValuesFromUI();
-		//console.log(newLink);
 		var protocolsRegExp = /^(\S+):\/\//;
 		if(protocolsRegExp.test(newLink.url)){
 			newLink.url = newLink.url.replace(protocolsRegExp,"");
@@ -135,7 +132,7 @@ $(document).ready(function(){
 		if(!newLink.hasValidAddress()){
 			$("#alias").val("");
 			newLink.isValid = false;
-			cambiarUIpostHash("--The address must have at least 8 characters",'orange',false);
+			cambiarUIpostHash("The address must have at least 4 characters",'red',false);
 		}
 		else {
 			cambiarUIpostHash();
@@ -221,10 +218,10 @@ var copyToClipboard = function(link){
 	textArea.select();
 	try{
 		var copied = document.execCommand('copy');
-		var status = copied ? 'copied' : 'not copied';
-		console.log("The link was "+status);
+		//var status = copied ? 'copied' : 'not copied';
+		//console.log("The link was "+status);
 	}catch (err){
-		console.log("The browser was unable to copy the link");
+		//console.log("The browser was unable to copy the link");
 	}
 
 	document.body.removeChild(textArea);
