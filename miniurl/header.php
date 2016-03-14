@@ -43,7 +43,7 @@ else{
           foreach ($headLinks as $title => $link) {
             ?>
             <li<?php if($title == $activePage ){ echo ' class="active"';} ?>>
-              <a href="<?php if($title == $activePage ){ echo '#';} else{ echo $link;}?>"><?php echo $title; ?></a>
+              <a href="<?php if($title == $activePage && false ){ echo '#'; } else{ echo $link;}?>"><?php echo $title; ?></a>
             </li>
             <?php
           }

@@ -2,25 +2,12 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/const.php");
 
 //TODO: Falta validacion de parametros
-/*$alias = $_REQUEST['alias'];
-$url = $_REQUEST['url'];
-$cve_protocolo = $_REQUEST['protocolo'];
-$protTxt = $_REQUEST['protTxt'];
-//$seLogea = $_REQUEST['seLogea']; // Now it is always managed in authenticated section*/
-
 $alias = $_REQUEST['alias'];
 $url = $_REQUEST['url'];
 $cve_protocolo = $_REQUEST['keyProtocol'];
 $protTxt = $_REQUEST['protocol'];
-//$seLogea = $_REQUEST['seLogea']; // Now it is always managed in authenticated section
 
 //$seLogea now defaults to false and is dependant of the user authentication
-/*if($seLogea == 'true'){
-	$seLogea='true';
-}
-else {
-	$seLogea='false';
-}*/
 $seLogea = false;
 
 if($cve_protocolo == '3'){
@@ -34,7 +21,7 @@ if($cve_protocolo == '3'){
 		$cve_protocolo = $fila['cve_protocolo'];
 	}
 	if($num_filas === 0){
-		//El protocolo no existe en catalogo. Se inserta
+		//The protocol does not exist. It must be persisted first
 		$sqlIns = "insert into cat_protocolo (descripcion) values ('$protTxt')";
 		$rsn = $base->Execute($sqlIns);
 		$rsCat = $base->Execute($sqlClave);
@@ -43,14 +30,13 @@ if($cve_protocolo == '3'){
 		}
 	}
 	else{
-		//NOP: Si hubo registros, obtuvimos ya la clave antes del if
+		//NOP: If there were registries, we already have the protocol key
 	}
 }
 
 //We check if there is auth info
 session_start();
 if(isset($_SESSION['authToken'])&&isset($_SESSION['uid'])){
-	//$seLogea = ($_REQUEST['seLogea'] === 'true');
 	$seLogea = ($_REQUEST['isTracked'] === 'true');
 	$uid = $_SESSION['uid'];
 	if(is_numeric($uid)){
@@ -64,11 +50,10 @@ if(isset($_SESSION['authToken'])&&isset($_SESSION['uid'])){
 else{
 	session_destroy();
 }
-//die("$alias --- $url --- $cve_protocolo --- $protTxt");
+
 $dataNewLink = array('cve_protocolo' => $cve_protocolo, 'url' => $url, 'hash' => $alias, 'seLogea' => $seLogea);
 if(isset($uid)) $dataNewLink['id_user'] = $uid;
 
-//$query = "INSERT INTO enlaces(cve_protocolo,url,hash,seLogea) values ($cve_protocolo,'$url','$alias',$seLogea)";
 $insFields = "";
 $insValues = "";
 foreach ($dataNewLink as $field => $value) {
