@@ -171,7 +171,8 @@ $(document).ready(function(){
 	$("#url").on("input",function(evento){
 		newLink.getValuesFromUI();
 		//console.log(newLink);
-		var protocolsRegExp = /^https?:\/\//;
+		//var protocolsRegExp = /^https?:\/\//;
+		var protocolsRegExp = /^(\S+):\/\//;
 		if(protocolsRegExp.test(newLink.url)){
 			newLink.url = newLink.url.replace(protocolsRegExp,"");
 			$("#url").val(newLink.url);
