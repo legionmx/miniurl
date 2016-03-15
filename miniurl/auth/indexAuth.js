@@ -2,18 +2,46 @@
 */
 $(document).ready(function(){
 
+	var displayMessage = function(message){
+		$("#success-row").removeClass('hidden');
+		$("#success-row").text(message);
+	}
+
+	var isFieldValid = function(fieldName){
+		var field = $("#"+fieldName);
+		//return value > 0;
+		if(field.val().length > 0){
+			return true;
+		}
+		else{
+			field.parent().addClass('has-error');
+			field.focus();
+			/*$("#success-row").removeClass('hidden');
+			$("#success-row").text('The '+fieldName+' is empty');*/
+			displayMessage('The '+fieldName+' is empty');
+			return false;
+		}
+	}
+
 	var attemptLogin = function(){
+		if(!isFieldValid('username')){
+			return false;
+		}
+		if(!isFieldValid('password')){
+			return false;
+		}
 		var username = $("#username").val();
 		var password = $("#password").val();
-		$.post('authUser.php',{'username': username, 'password': password, 'ss': 'blah'},function(data,status){
+		$.post('authUser.php',{'username': username, 'password': password, 'ss': 'blah'},function(data,success){
 			if(data.status == '1'){
 				window.location.replace("/");
 			}
 			else{
-				//TODO: An error message should be displayed
+				//displayMessage(data.message);
+				displayMessage("The username/password is not valid");
 			}
-			console.log(status);
-			console.log(data.message);
+			//console.log(success);
+			//console.log(data.message);
 		},'json');
 	}
 
@@ -26,6 +54,14 @@ $(document).ready(function(){
 		if(event.key == 'Enter'){
 			attemptLogin();
 		}
+	});
+
+	$("#username,#password").on('input',function(){
+		if($(this).val().length>0) {
+			$(this).parent().removeClass('has-error');
+			$("#success-row").addClass('hidden');
+		}
+		//else console.log("--> "+$(this).val().length);
 	});
 
 });
