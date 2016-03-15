@@ -1,9 +1,10 @@
 <?php
 /**
-* class/Usuario.php - clase User
+* class/User.php - class User
 */
 //namespace miniurl;
 require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
+//global $base; //This is not supposed to be needed
 
 //The next var contains the fields that are persisted in the DB
 $USER_FIELDS = array('username','firstName','lastName','dob','email','password');
@@ -17,41 +18,67 @@ class User
 	protected $lastName;
 	protected $dob; //Date of Birth, fecha de nacimiento
 	protected $email;
-	protected $role; //El id por el momento, pero deber’a ser otro objeto
+	protected $role; //The role id for the time being, it should be another object
 	protected $active;
 	protected $registered;
+	private $bd;
 
-	function __construct($username=null)
+	function __construct($user=null)
 	{
+		//global $base;
+		//die("---->".print_r($base,1));
+
 		$this->registered = false; //We assume the user is not registered yet
 		$this->active = false; //Until registered, we cannnot truly say it is active
 		$this->password = null;
+		$this->username = 'anonymous'; //They shouldn't be persisted, this is just a placeholder
+		$this->firstName = 'Anonymous';
 		//We search the user in the DB to load it
 		global $base;
-		$sqlUser = "select * from users where username='$username'";
-		$rsUser = $base->Execute($sqlUser);
-		if($rsUser->RecordCount() == 0){ //The user is not persisted in DB
-			//throw new Exception("The user doesn't exist in the DB", 1);
-		}
-		else{
-			$data = $rsUser->fetchNextObject(false);
-			$this->active = true;
-			$this->registered = true;
-			$this->id = $data->id;
-			$this->username = $data->username;
-			$this->password = $data->password;
-			$this->data = $data->password;
-			$this->firstName = $data->firstName;
-			$this->lastName = $data->lastName;
-			$this->dob = $data->dob;
-			$this->email = $data->email;
-			$this->role = $data->id_role;
-			if($data->active != '0') $this->active = true;
+		$sqlUser = null;
+		if(!is_null($user)){
+			if(is_numeric($user)){
+				//We request the user via UID
+				$sqlUser = "select * from users where id=$user";
+			}
+			else{
+				//We request the user via username
+				$sqlUser = "select * from users where username='$user'";
+			}
+			//global $base;
+			//die(print_r($base,1));
+			if(is_null($base)){
+				//throw new Exception("The connection to the DB doesn't exist", 1);
+				$this->firstName=' ';
+			}
+			else{
+				$rsUser = $base->Execute($sqlUser);
+				if($rsUser->RecordCount() == 0){ //The user is not persisted in DB
+					//throw new Exception("The user doesn't exist in the DB", 1);
+				}
+				else{
+					$data = $rsUser->fetchNextObject(false);
+					$this->active = true;
+					$this->registered = true;
+					$this->id = $data->id;
+					$this->username = $data->username;
+					$this->password = $data->password;
+					$this->data = $data->password;
+					$this->firstName = $data->firstName;
+					$this->lastName = $data->lastName;
+					$this->dob = $data->dob;
+					$this->email = $data->email;
+					$this->role = $data->id_role;
+					if($data->active != '0') $this->active = true;
+				}
+			}
 		}
 	}
 
 	function __toString(){
-		return $this->username.' --- '.$this->firstName.' '.$this->lastName;
+		//return $this->username.' --- '.$this->firstName.' '.$this->lastName;
+		//The above was a test functionality. It is now better to just throw the first name
+		return $this->firstName;
 	}
 	/*** Getters/Setters ***/
 	public function getId(){
@@ -127,10 +154,6 @@ class User
 //Test
 /*$adminUser = new User('admin');
 echo $adminUser."<br>";
-<<<<<<< HEAD
-=======
-
->>>>>>> 59312cc072c4f08aef08dc392ac1fb842db502d4
 $datosUsuarioCreado=array('username' => 'usuario1','firstName'=> 'Usua','lastName' => 'Rio Uno','dob' => '2013-11-09','email' => 'usuario1@usuari.os');
 //die(User::create($datosUsuarioCreado));
 echo User::create($datosUsuarioCreado);*/

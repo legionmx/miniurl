@@ -51,14 +51,14 @@ else{
           ?>
 	  
 	  <?php
-	  if(isset($_SESSION['authToken'])){
-	      $user = new User;
-	      $userName = $user->getNamebyId($_SESSION['uid']);
-	      $userNameOk = preg_filter('/firstName/', '', $userName);
+	  if(isset($_SESSION['authToken'])&&isset($_SESSION['uid'])){
+	      $user = new User($_SESSION['uid']);
+	      //$userName = $user->getNamebyId($_SESSION['uid']);
+	      //$userNameOk = preg_filter('/firstName/', '', $userName);
 	  
 	  
 	  ?>
-	      <li><a>Welcome: <?php echo $userNameOk; ?></a></li>
+	      <li><a>Welcome: <?php echo $user; ?></a></li>
 	  
 	  <?php }?>
 	  
