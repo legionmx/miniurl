@@ -14,9 +14,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
 	<div class="carousel-caption">
-		<div id="wrapAllForm" class="login">
-
-			
+		
+		<div class="container">
+			<div id="wrapAllForm" class="login">
+	
+				
 				<div class="row page-header">
 					<div class="col-md-12 headerLine">
 						<h2>Login</h2>
@@ -37,7 +39,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 						<!-- </div> -->
 					</div>
 				</div>
-			
+				
+			</div>
 		</div>
 	</div>
 

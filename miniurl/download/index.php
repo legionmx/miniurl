@@ -25,12 +25,12 @@
 					
 					<div class="col-md-8">
 						<p>
-							<label for="rangeIds">¿Quieres descargar por rangos?</label>&nbsp;<input type="checkbox" id="rangeIds" name="rangeIds">
+							<input type="checkbox" id="rangeIds" name="rangeIds">&nbsp;<label for="rangeIds">You want to download ranges?</label>
 						</p>
 					</div>
 
 					<div class="col-md-4 contentButon">
-						<button type="submit" id="upload1" class="btn btn-primary" name="submit">Descargar Url´s</button>
+						<button type="submit" id="upload1" class="btn btn-primary" name="submit">Url´s Download</button>
 					</div>
 
 				</div>
@@ -42,35 +42,41 @@
 				</div>
 				
 
-				<div class="row" id="rangeBox" style="display: none;">
-					<div class="col-md-2">
-						<label>Categor&iacute;a:</label>
+				<div id="rangeBox" style="display: none;">
+					<div class="row">
+						<div class="col-md-3">
+							<label>Category:</label>
+						</div>
+						<div class="col-md-5">
+							
+							<select id="categories" name="category" class="form-control">
+								<option value='0' selected="selected">No Categories</option>
+								<?php 
+								foreach ($_CATEGORIES as  $cveCat => $abvCat) {
+									echo "<option value='$cveCat'>$abvCat</option>\n";
+								}
+								?>
+							</select>
+							
+						</div>
 					</div>
-					<div class="col-md-3">
-						
-						<select id="categories" name="category" class="form-control">
-							<option value='0' selected="selected">No Categories</option>
-							<?php 
-							foreach ($_CATEGORIES as  $cveCat => $abvCat) {
-								echo "<option value='$cveCat'>$abvCat</option>\n";
-							}
-							?>
-						</select>
-						
-					</div>
-
-					<div class="col-md-2">
-						<label>Del registro:</label>
-					</div>
-
-					<div class="col-md-2">
-						<input type="text" name="range1" id="range1" placeholder="">
-					</div>
-					<div class="col-md-1">
-						<label>al</label>
-					</div>
-					<div class="col-md-2">
-						<input type="text" name="range2" id="range2" placeholder="">
+					<div class="row">
+						<div class="col-md-1">
+							
+						</div>
+						<div class="col-md-2">
+							<label>Of:</label>
+						</div>
+	
+						<div class="col-md-2">
+							<input type="text" name="range1" id="range1" placeholder="">
+						</div>
+						<div class="col-md-1">
+							<label>to:</label>
+						</div>
+						<div class="col-md-2">
+							<input type="text" name="range2" id="range2" placeholder="">
+						</div>
 					</div>
 				</div>
 				</div>

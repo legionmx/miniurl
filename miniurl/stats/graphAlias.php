@@ -14,7 +14,7 @@
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
-    <div class="carousel-caption">
+    <div class="carousel-caption backgroundCaption">
 
 	<div class="container">
 		<div class="row page-header">

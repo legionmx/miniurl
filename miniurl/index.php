@@ -46,7 +46,7 @@
 					
 						<div class="col-md-4">
 							<p>
-								<label id="labelLog" for="conLog">Log visits?</label>&nbsp;<input type="checkbox" id="conLog">
+								<input type="checkbox" id="conLog">&nbsp;<label id="labelLog" for="conLog">Log visits?</label>
 							</p>
 						</div>
 					

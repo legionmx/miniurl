@@ -26,7 +26,7 @@
 				<div id="containerForm" class="container">
 				<div class="row">
 					
-					<div class="col-md-7">
+					<div class="col-md-8">
 						<div class="inputFile"><label class="butonInputFile">Browse</label><span id="fileName">Select File</span></div>
 						<input type="file" name="fileToUpload" id="fileToUpload" class="form-control fileToUpload" placeholder="Select CSV">
 					</div>
@@ -45,7 +45,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<p>
-							<label for="sameUrl">¿Use the same url?</label>&nbsp;<input type="checkbox" id="sameUrl" name="sameUrl">
+							<input type="checkbox" id="sameUrl" name="sameUrl">&nbsp;<label for="sameUrl">Use the same url?</label>
 						</p>
 					</div>
 				</div>

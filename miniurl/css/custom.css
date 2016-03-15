@@ -379,7 +379,7 @@ ul.navbar-nav > .active > a{
    text-transform: capitalize!important;
 }
 .carousel-caption p{
-    font-size:19.5px;
+    font-size:15px;
     line-height: 30px;
     font-weight: 100;
     color: #aeaeae;
@@ -396,7 +396,8 @@ ul.navbar-nav > .active > a{
 }
 
 .carousel-caption p label#labelLog{
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 40px;
 }
 
 .carousel-caption #containerForm{
@@ -2622,11 +2623,12 @@ iframe{
 .carousel-caption h2{
     color:#01a38a;
     font-weight: lighter;
-    width: 60%;
+    /*width: 60%;*/
     margin: 0 auto;
    padding-top: 12px;
     position: relative;
     font-size:55px;
+    float: left;
 }
 .carousel-caption h2:after{
     content: "";

@@ -18,7 +18,7 @@ img {
 }
 .navbar-brand {
     float: left;
-    font-size: 18px;
+    font-size: 15px;
     height: 48px;
     line-height: 20px;
     padding: 14px;
@@ -40,7 +40,7 @@ input[type=file], #url,#range1, #range2, #categories {
   height: 45px;
   padding: 10px;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 input[type=file], input[type=text], input[type=password], select.form-control, #rangeBox select, .input-group span {
@@ -56,7 +56,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	border-radius: 0px !important;
 	border: 0;
 	padding: 0px!important;
-	font-size: 14px;
+	font-size: 15px;
 	width: 120px !important;
 	font-weight: 500;
 	text-align: left;
@@ -64,12 +64,12 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 }
 
 #alias-group .input-group span.input-group-addon {
-	width: 100% !important;
+	/*width: 100% !important;*/
 	border-bottom: 2px solid #aeaeae;
 }
 
 .inputFile {
-	width:90%;
+	width:92%;
 	position: absolute;
 	border-bottom: 2px solid #aeaeae;
 	height: 45px;
@@ -83,7 +83,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	height: 45px;
 	width: 40%;
 	color:#ffffff;
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: 400;
 	line-height: 45px;
 }
@@ -109,11 +109,11 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
   background: #01a38a;
   border:0;
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 15px;
   border-radius: 1px;
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary[disabled]:hover  {
 	background: #01d1b1;
 }
 
@@ -131,12 +131,38 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
   color: #aeaeae;
   width: 100%;
 }
-#protocolo, #alias {
-  background: rgba(255, 255, 255, .3);
+#protocolo, #alias, #categories {
+  background: transparent;
   color: #aeaeae;
   height: 45px;
-  font-weight: 700;
+  font-weight: 400;
+  -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  font-size: 15px;
   
+}
+
+#protocolo, #categories {
+	background: url('../images/arrow-down.svg') no-repeat right 8px;
+	background-size: 30px;
+}
+
+#categories {
+	padding-right: 20px;
+	width: 200px;	
+}
+
+#rangeBox .row label {
+	height: 30px;
+	padding-top: 10px;
+	font-weight: 400;
+}
+
+#alias {
+	width: 204px;
 }
 .table-condensed {
   
@@ -168,7 +194,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
     right: 0;
     text-align: center;
     text-shadow: none !important;
-    top: 50%;
+    top: 30%;
     transition: all 0.3s ease 0s;
      left: 0;
     padding-bottom: 30px;
@@ -197,6 +223,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 
 .page-header .headerLine {
 	padding-bottom: 15px;
+	padding-left: 5px;
 	border-bottom: 2px solid #aeaeae;
 }
 
@@ -221,7 +248,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 }
 
 .form-group #password, .form-group #passcheck{
-	width:127px;
+	width:138px;
 }
 
 .form-group #password {
@@ -275,7 +302,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 }
 
 .input-group #username, .input-group #password {
-	font-size: 17px;
+	font-size: 15px;
 	padding: 10px 6px;
 }
 
@@ -284,7 +311,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 }
 
 #fileName {
-	font-size: 18px;
+	font-size: 15px;
 	line-height: 48px;
 }
 
@@ -311,3 +338,9 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 }
 .fa-line-chart:before {
   content: "\f201";
+}
+.fa-chevron-down:before {
+  content: "\f078";
+
+}
+
