@@ -26,16 +26,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 				</div>
 				<div id="containerForm" class="container" >
 					<div class="col-md-12 form-inline">
-						<div class="input-group input-group-lg">
-							<span class="input-group-addon text-right">Username:</span>
+						<div class="input-group">
+							<span class="input-group-addon text-right">Username</span>
 							<input type="text" id="username" class="form-control">
 						</div>
-						<div class="input-group input-group-lg">
-							<span class="input-group-addon text-right">Password:</span>
+						<div class="input-group">
+							<span class="input-group-addon text-right">Password</span>
 							<input type="password" id="password" class="form-control">
 						</div>
 						<!-- <div> -->
-							<button type="submit" id="login" class="btn btn-primary btn-lg text-right">L O G I N</button>
+							<button type="submit" id="login" class="btn btn-primary btn-lg text-right">Login</button>
 						<!-- </div> -->
 					</div>
 				</div>
