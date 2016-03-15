@@ -2,9 +2,7 @@
 /**
 * class/User.php - class User
 */
-//namespace miniurl;
 require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
-//global $base; //This is not supposed to be needed
 
 //The next var contains the fields that are persisted in the DB
 $USER_FIELDS = array('username','firstName','lastName','dob','email','password');
@@ -48,7 +46,7 @@ class User
 			//global $base;
 			//die(print_r($base,1));
 			if(is_null($base)){
-				//throw new Exception("The connection to the DB doesn't exist", 1);
+				throw new Exception("The connection to the DB doesn't exist", 1);
 				$this->firstName=' ';
 			}
 			else{

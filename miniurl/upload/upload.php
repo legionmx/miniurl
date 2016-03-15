@@ -1,5 +1,5 @@
 <?php
-
+include_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 include('../class/alias.php');
 
 switch ($_GET['method']) {

@@ -8,7 +8,12 @@ class Alias{
 
 	function getHash($prot, $urlBase, $code = null, $sameUrl = null, $isLog = null) {
 		
-		require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
+		//require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
+		global $base, $_PROTOCOLOS, $_BASEURL;
+		if(!isset($base)||!isset($_PROTOCOLOS)||!isset($_BASEURL)){
+			//If after global, the global scope variables are still not set, we include const.php
+			require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
+		}
 		$this->base = $base;
 
 		if (isset($code) && is_array($code)){
@@ -61,7 +66,8 @@ class Alias{
 
 				//Revisamos si el hash existe
 
-				$rs=$base->Execute("select count(*) as cuenta from enlaces where hash='$hash'");
+				//$rs=$base->Execute("select count(*) as cuenta from enlaces where hash='$hash'");
+				$rs=$this->base->Execute("select count(*) as cuenta from enlaces where hash='$hash'");
 				if($rs->fields['cuenta']=="0"){
 					$arrayAlias[$i] = array(
 						"existe"       => "false",
