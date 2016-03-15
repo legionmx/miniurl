@@ -2,7 +2,27 @@
 */
 $(document).ready(function(){
 
+	var isFieldValid = function(fieldName){
+		var field = $("#"+fieldName);
+		//return value > 0;
+		if(field.val().length > 0){
+			return true;
+		}
+		else{
+			field.parent().addClass('has-error');
+			field.focus();
+			//TODO:Some error message should be sent
+			return false;
+		}
+	}
+
 	var attemptLogin = function(){
+		if(!isFieldValid('username')){
+			return false;
+		}
+		if(!isFieldValid('password')){
+			return false;
+		}
 		var username = $("#username").val();
 		var password = $("#password").val();
 		$.post('authUser.php',{'username': username, 'password': password, 'ss': 'blah'},function(data,status){
@@ -26,6 +46,11 @@ $(document).ready(function(){
 		if(event.key == 'Enter'){
 			attemptLogin();
 		}
+	});
+
+	$("#username,#password").on('input',function(){
+		if($(this).val().length>0) $(this).parent().removeClass('has-error');
+		//else console.log("--> "+$(this).val().length);
 	});
 
 });
