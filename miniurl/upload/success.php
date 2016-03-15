@@ -14,7 +14,7 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 			<form method="post" action="upload.php?method=transformCsv" enctype="multipart/form-data">
 
 				<div class="row page-header">
-					<div class="col-md-12 headerLine"><h2>Success</h2></div>
+					<div class="col-md-12 headerLine"><h2 class="success">Success</h2></div>
 				</div>
 
 				<div id="containerForm" class="container">

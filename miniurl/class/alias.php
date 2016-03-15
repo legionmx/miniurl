@@ -52,7 +52,8 @@ class Alias{
 				$urlToDb = $url. "/" . $codigo;
 
 				//Usamos md5 para hashear, y sólo tomamos 8 caracteres
-				$hash = substr(md5($urlCompleto),0,8);
+				$hash = substr(md5($urlCompleto . time()),0,8);
+				
 				$dominioBase = "mi.ni/";
 				$dominioBase = "localhost:8080/edsa/mini/";
 				$dominioBase = $_BASEURL;
