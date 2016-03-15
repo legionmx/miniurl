@@ -85,7 +85,7 @@ foreach ($ownStyles as $style) {
          	 <ol class="carousel-indicators text-center">
                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                
              </ol>
 
            	<div class="carousel-inner">
@@ -94,10 +94,10 @@ foreach ($ownStyles as $style) {
            	 			<img src="../images/bg2.jpg" alt="" class="img-responsive">
            	 		</div>
            	 	</div>
-                <div class="item">
-                    <div class="overlay-slide">
-                        <img src="../images/bg2.jpg" alt="" class="img-responsive">
-           	 		</div>
+			<div class="item">
+				<div class="overlay-slide">
+				      <img src="../images/p2.jpg" alt="" class="img-responsive">
+				</div>
            	 	</div>
 
            	 </div> 	 <!-- End Carousel Inner -->

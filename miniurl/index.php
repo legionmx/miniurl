@@ -61,11 +61,13 @@
 
 				<div class="row">
 					<div class="col-md-12 hidden" id="success-row">
+						<p>
 						The Cool Link was saved:&nbsp;
 						<a href="#" target="_blank" id="alias-success" class="btn btn-link">Etwas</a>
 						<button type="button" class="btn btn-default" id="copy-link-btn">
 							<span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
 						</button>
+						</p>
 					</div>
 				</div>
 				

@@ -27,7 +27,7 @@ class report {
 		if($category == 0 && $range_1 != '' && $range_2 != '' ){
 			$query = 'select id, cve_protocolo, url, hash, code, id_category, mini_url from enlaces where activo = 1 and id_user = ' . $uid . ' and id BETWEEN ' . $range_1 . ' AND '. $range_2 ;
 			
-		}elseif($category == 0 && $range_1 == '' && $range_2 == '' ){
+		}elseif($category > 0 && $range_1 == '' && $range_2 == '' ){
 			
 			$query = 'select id, cve_protocolo, url, hash, code, id_category, mini_url from enlaces where activo = 1 and id_user = ' . $uid . ' AND id_category ='  . $category ;
 		}else{
@@ -38,7 +38,6 @@ class report {
 	}else{
 		$query = 'select id, cve_protocolo, url, hash, code, id_category, mini_url from enlaces where activo = 1 and id_user = ' . $uid ;
 	}
-
 	
         $result = array();
         $result = $base->getAll($query);

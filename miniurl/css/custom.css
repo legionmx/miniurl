@@ -519,7 +519,7 @@ ul.navbar-nav > .active > a{
     width: 100%;
 }
 .overlay-slide:after{
-    background: url("../images/banner/overaly.png");
+    /*background: url("../images/overaly.png");*/
     position: absolute;
     content: "";
     z-index: 3;

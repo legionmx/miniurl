@@ -158,7 +158,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 
 #rangeBox .row label {
 	height: 30px;
-	padding-top: 10px;
+	padding-top: 15px;
 	font-weight: 400;
 }
 
@@ -229,7 +229,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 }
 
 #logoTitle {
-	margin-left: -20px;
+	margin-left: -15px;
 	margin-top: 10px;
 	padding-bottom: 0;
 	border: none;
@@ -308,7 +308,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	color: #aeaeae;
 }
 
-#success-row {
+#success-row p {
 	border: 2px solid #aeaeae;
 }
 
