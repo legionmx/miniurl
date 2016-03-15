@@ -2,6 +2,11 @@
 */
 $(document).ready(function(){
 
+	var displayMessage = function(message){
+		$("#success-row").removeClass('hidden');
+		$("#success-row").text(message);
+	}
+
 	var isFieldValid = function(fieldName){
 		var field = $("#"+fieldName);
 		//return value > 0;
@@ -11,9 +16,9 @@ $(document).ready(function(){
 		else{
 			field.parent().addClass('has-error');
 			field.focus();
-			//TODO:Some error message should be sent
-			$("#success-row").removeClass('hidden');
-			$("#success-row").text('The '+fieldName+' is empty');
+			/*$("#success-row").removeClass('hidden');
+			$("#success-row").text('The '+fieldName+' is empty');*/
+			displayMessage('The '+fieldName+' is empty');
 			return false;
 		}
 	}
@@ -27,15 +32,16 @@ $(document).ready(function(){
 		}
 		var username = $("#username").val();
 		var password = $("#password").val();
-		$.post('authUser.php',{'username': username, 'password': password, 'ss': 'blah'},function(data,status){
+		$.post('authUser.php',{'username': username, 'password': password, 'ss': 'blah'},function(data,success){
 			if(data.status == '1'){
 				window.location.replace("/");
 			}
 			else{
-				//TODO: An error message should be displayed
+				//displayMessage(data.message);
+				displayMessage("The username/password is not valid");
 			}
-			console.log(status);
-			console.log(data.message);
+			//console.log(success);
+			//console.log(data.message);
 		},'json');
 	}
 

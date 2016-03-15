@@ -1,6 +1,5 @@
 <?php
 /*** /auth/index.php --- If not logged in, it shows a login page. ***
-TODO:If logged, redirect to main page.
 **/
 require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 
@@ -35,12 +34,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 							<span class="input-group-addon text-right">Password</span>
 							<input type="password" id="password" class="form-control">
 						</div>
-						<!-- <div> -->
-							<button type="submit" id="login" class="btn btn-primary btn-lg text-right">Login</button>
-						<!-- </div> -->
+						
+							<!-- <button type="submit" id="login" class="btn btn-primary btn-lg text-right">Login</button> -->
+						
 					</div>
 
 					<div class="col-md-8 col-md-offset-2 hidden" id="success-row"></div>
+
+					<div class="col-md-4 col-md-offset-4">
+						<button type="submit" id="login" class="btn btn-primary btn-lg text-center">Login</button>
+					</div>
 				</div>
 				
 			</div>
