@@ -22,7 +22,7 @@
     <div class="carousel-caption alias-stats-title backgroundCaption">
 
 	<div class="container">
-		<div class="row page-header">
+		<div class="row">
 			<div class="col-md-12 headerLine">
 				<h2>Stats for alias <?php echo $alias; ?></h2>
 			</div>
@@ -31,7 +31,7 @@
 			<div class="col-md-12">
 				<table class="table table-hover table-condensed">
 					<thead>
-						<tr><th>IP</th><?php if($mostrarDatosBrowser) { ?><th>Browser</th><th>Sis. Op.</th><?php } ?><th>Fecha</th><th>User Agent</th></tr>
+						<tr><th width="70">IP</th><?php if($mostrarDatosBrowser) { ?><th>Browser</th><th>Sis. Op.</th><?php } ?><th width="180">Fecha</th><th>User Agent</th></tr>
 					</thead>
 					<tbody>
 						<?php
@@ -44,13 +44,13 @@
 								$userAgent = $registro['user_agent'];
 								?>
 								<tr>
-									<td><?php echo $ip;?></td>
+									<td class="text-left"><?php echo $ip;?></td>
 									<?php if($mostrarDatosBrowser) { ?>
 									<td><?php echo $browser;?></td>
 									<td><?php echo $sisop;?></td>
 									<?php } ?>
-									<td><?php echo $fecha;?></td>
-									<td><?php echo $userAgent;?></td>
+									<td class="text-left"><?php echo $fecha;?></td>
+									<td class="text-left"><?php echo $userAgent;?></td>
 								</tr>
 								<?php
 							}

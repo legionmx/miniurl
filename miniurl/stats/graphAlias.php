@@ -17,7 +17,7 @@
     <div class="carousel-caption backgroundCaption">
 
 	<div class="container">
-		<div class="row page-header">
+		<div class="row">
 			<div class="col-md-12"><h2>Gr&aacute;fica diaria</h2></div>
 		</div>
 		<div class="row">
