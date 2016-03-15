@@ -67,6 +67,8 @@ class FileUp{
 		    	$regUrl = $_POST['url'];
 			if (isset($_POST['conLog'])){
 				$regLog = $_POST['conLog'];
+			}else{
+				$regLog = null;
 			}
 		    	
 		    	

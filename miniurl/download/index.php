@@ -43,6 +43,7 @@
 				
 
 				<div id="rangeBox" style="display: none;">
+					<?php if(isset($_CATEGORIES) && $_CATEGORIES != null){ ?>
 					<div class="row">
 						<div class="col-md-3">
 							<label>Category:</label>
@@ -60,12 +61,13 @@
 							
 						</div>
 					</div>
+					<?php } ?>
 					<div class="row">
 						<div class="col-md-1">
 							
 						</div>
 						<div class="col-md-2">
-							<label>Of:</label>
+							<label>Range of:</label>
 						</div>
 	
 						<div class="col-md-2">
