@@ -10,6 +10,7 @@ if(isset($_SESSION['authToken'])){ //If there is an authToken, no sign up is pos
 	exit();
 }
 $activePage = 'Login';
+$ownStyles[] = 'auth.css';
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
@@ -38,22 +39,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 							<button type="submit" id="login" class="btn btn-primary btn-lg text-right">Login</button>
 						<!-- </div> -->
 					</div>
+
+					<div class="col-md-8 col-md-offset-2 hidden" id="success-row"></div>
 				</div>
 				
 			</div>
 		</div>
 	</div>
-
-	<!-- JQuery y Bootstrap-->
-	<!-- <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
-	<!-- Own scripts -->
-	<!-- <script type="text/javascript" src="indexAuth.js"></script> -->
-	<!-- Other scripts-->
-	<!-- <script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
-	<script src="/js/owl.carousel.min.js"></script>
-</body>
-</html> -->
 
 <?php
 $ownFinalScripts = array('/auth/indexAuth.js');

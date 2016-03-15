@@ -12,6 +12,8 @@ $(document).ready(function(){
 			field.parent().addClass('has-error');
 			field.focus();
 			//TODO:Some error message should be sent
+			$("#success-row").removeClass('hidden');
+			$("#success-row").text('The '+fieldName+' is empty');
 			return false;
 		}
 	}
@@ -49,7 +51,10 @@ $(document).ready(function(){
 	});
 
 	$("#username,#password").on('input',function(){
-		if($(this).val().length>0) $(this).parent().removeClass('has-error');
+		if($(this).val().length>0) {
+			$(this).parent().removeClass('has-error');
+			$("#success-row").addClass('hidden');
+		}
 		//else console.log("--> "+$(this).val().length);
 	});
 

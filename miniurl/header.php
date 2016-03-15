@@ -14,6 +14,7 @@ else{
   $headLinks['Login'] = "/auth/";
   $headLinks['Sign up'] = "/auth/vwSignUp.php";
 }
+if(!isset($ownStyles)) $ownStyles = array();
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,6 +31,13 @@ else{
 	<link rel="stylesheet" href="/css/owl.carousel.css"/>
     <link rel="stylesheet" href="/css/owl.theme.css"/>
   <link rel="stylesheet" type="text/css" href="/css/lnkcool.css">
+<?php
+foreach ($ownStyles as $style) {
+?>
+<link rel="stylesheet" href="/css/<?php echo $style; ?>"/>
+<?php
+}
+?>
 
 </head>
 <body>
