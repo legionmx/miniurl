@@ -2,8 +2,7 @@
 */
 $(document).ready(function(){
 
-	/* -- Handlers -- */
-	$("#login").click(function(){
+	var attemptLogin = function(){
 		var username = $("#username").val();
 		var password = $("#password").val();
 		$.post('authUser.php',{'username': username, 'password': password, 'ss': 'blah'},function(data,status){
@@ -16,6 +15,17 @@ $(document).ready(function(){
 			console.log(status);
 			console.log(data.message);
 		},'json');
+	}
+
+	/* -- Handlers -- */
+	$("#login").click(function(){
+		attemptLogin();
+	});
+
+	$("#password").keypress(function(event){
+		if(event.key == 'Enter'){
+			attemptLogin();
+		}
 	});
 
 });
