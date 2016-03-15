@@ -21,7 +21,7 @@ class User
 	protected $active;
 	protected $registered;
 
-	function __construct($username)
+	function __construct($username=null)
 	{
 		$this->registered = false; //We assume the user is not registered yet
 		$this->active = false; //Until registered, we cannnot truly say it is active
@@ -114,6 +114,14 @@ class User
 		$rsInsUser = $base->Execute($sqlInsUser);
 
 		return new User($data['username']);
+	}
+	
+	public static function getNamebyId($uid) {
+		global $base;
+		$queryUser = "select firstName from users where id='$uid'";
+		$rsUser = $base->Execute($queryUser);
+		
+		return $rsUser;
 	}
 }
 //Test

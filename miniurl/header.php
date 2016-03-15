@@ -1,4 +1,5 @@
 <?php
+include_once ($_SERVER['DOCUMENT_ROOT'].'/class/User.php');
 if(!isset($activePage)){
   $activePage = 'Home';
 }
@@ -48,6 +49,14 @@ else{
             <?php
           }
           ?>
+	  
+	  <?php
+	  
+	  $user = new User;
+	  $userName = $user->getNamebyId($_SESSION['uid']);
+	  $userNameOk = preg_filter('/firstName/', '', $userName);
+	  ?>
+	  <li><a>Welcome: <?php echo $userNameOk; ?></a></li>
 <!-- <li><a href="/stats/">Estad&iacute;sticas</a></li>
             <li class="active"><a href="#">Carga masiva</a></li> -->
 				</ul>
