@@ -6,12 +6,12 @@
 	<footer class="footer">
       <div class="container">
         <!-- <p class="text-muted">Nemo pervenit qui non legitimat certaverit</p> -->
-        <div class="row text-center">
+        <div class="row text-center footerNav">
         	<div class="col-md-1">
-        		<a href="contact.php">Contact</a>
+        		<a href="/contact.php">Contact</a>
         	</div>
         	<div class="col-md-2">
-        		<a href="terms.php">Terms &amp; Conditions</a>
+        		<a href="/terms.php">Terms &amp; Conditions</a>
         	</div>
         </div>
       </div>

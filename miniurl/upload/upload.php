@@ -38,7 +38,7 @@ class FileUp{
 
 		    fclose($fichero);
 		 
-		    echo "<p id='readSms'>Leidos " . count($registros) . " registros </p>";
+		    echo "<p id='readSms'>Leidos " . count($registros) . " registros. </p>";
 		 	
 		 	$regProt = array();
 		 	$regUrl = array();
@@ -114,7 +114,7 @@ class FileUp{
 		} else {
 
 		    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		        echo "<p id='successUpload'>El archivo ". basename( $_FILES["fileToUpload"]["name"]). " se subio correctamente.</p>";
+		        echo "<p id='successUpload'>El archivo ". basename( $_FILES["fileToUpload"]["name"]). " se subio correctamente. </p>";
 		        FileUp::readCsv();
 		    } else {
 		        echo "<p id='errorUpload'>Error, hubo un problema al subir tu archivo.</p>";

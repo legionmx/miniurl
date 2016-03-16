@@ -9,7 +9,9 @@
 	<div class="container">
 		<div id="wrapAllForm">
 			<div class="row page-header">
-				<div class="col-md-12 headerLine"><img id="logoTitle" src="/images/logo_lnk.cool_green.png" width="200"></div>
+				<div class="col-md-12 headerLine"><h2>Contact</h2></div>
+			</div>
+			<div id="containerForm" class="container" >
 			</div>
 			
 		</div>

@@ -25,6 +25,7 @@
 		<div class="row">
 			<div class="col-md-12 headerLine">
 				<h2>Stats for alias <?php echo $alias; ?></h2>
+				<a href="/stats" class="back"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;Get Back</a>
 			</div>
 		</div>
 		<div class="row">

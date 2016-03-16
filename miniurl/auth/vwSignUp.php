@@ -24,12 +24,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 					<div class="col-md-10 col-md-offset-1">
 						<div class="form-group">
 							<label for="email">Email address</label>
-							<input type="text" id="email" class="form-control" placeholder="newuser@coolurl.com">
+							<input type="text" id="email" class="form-control" placeholder="newuser@lnk.cool">
 						</div>
 						<div class="form-group">
 							<label for="password">Password</label>
-							<input type="password" id="password" class="form-control" placeholder="Super secret password here!">
-							<input type="password" id="passcheck" class="form-control" placeholder=" And please repeat it">
+							<input type="password" id="password" class="form-control" placeholder="Enter password">
+							<input type="password" id="passcheck" class="form-control" placeholder="Repeat password">
 						</div>
 						<div class="form-group">
 							<label for="firstName">Name(s)</label>

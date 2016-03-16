@@ -357,8 +357,7 @@ ul.navbar-nav > .active > a{
 }
 
 .carousel-caption{
-    top: 30%;
-    margin-top: -50px;
+    top: 25%;
     text-shadow:none!important;
     left:9%;
     right: 10%;
@@ -381,8 +380,8 @@ ul.navbar-nav > .active > a{
 .carousel-caption p{
     font-size:15px;
     line-height: 30px;
-    font-weight: 100;
-    color: #aeaeae;
+    font-weight: 500;
+    color: #666666;
     transition-delay:.3s;
     -moz-transition-delay:.3s;
     -o-transition-delay:.3s;
@@ -417,10 +416,11 @@ ul.navbar-nav > .active > a{
     margin: 0px auto;
 }
 .carousel-caption p i{
-    font-size: 7px;
+    font-size: 16px;
     margin: 0px 3px;
     position: relative;
-    top: -3px;
+    color:#ffffff;
+    
 }
 .carousel .item {
     -webkit-transition: opacity .3s;

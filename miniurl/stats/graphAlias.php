@@ -18,7 +18,8 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12"><h2>Gr&aacute;fica diaria</h2></div>
+			<div class="col-md-12"><h2>Gr&aacute;fica diaria</h2><a href="/stats" class="back"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;Get Back</a>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">

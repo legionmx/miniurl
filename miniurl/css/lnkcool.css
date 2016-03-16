@@ -35,7 +35,7 @@ img {
 
 input[type=file], #url,#range1, #range2, #categories {
   background: rgba(255, 255, 255, .2);
-  color:#aeaeae;
+  color:#666666;
   border-radius: 0;
   height: 45px;
   padding: 10px;
@@ -51,6 +51,23 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
   border-radius: 0px !important;
 }
 
+::-webkit-input-placeholder {
+   color: #666666;
+   
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #666666;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #666666; 
+}
+
+:-ms-input-placeholder {  
+   color: #666666;  
+}
+
 .input-group span.input-group-addon {
 	background: none;
 	border-radius: 0px !important;
@@ -60,7 +77,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	width: 120px !important;
 	font-weight: 400;
 	text-align: left;
-	color: #aeaeae;
+	color: #666666;
 	line-height: 35px;
 }
 
@@ -118,6 +135,11 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	background: #01d1b1;
 }
 
+.btn-link {
+	color: #01a38a;
+	font-weight: 500;
+}
+
 .contentButon{
 	height: 45px;
     line-height: 50px;
@@ -129,12 +151,12 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
   border-right: none;
   border-left: none;
   border-top:none;
-  color: #aeaeae;
+  color: #666666;
   width: 100%;
 }
 #protocolo, #alias, #categories {
   background: transparent;
-  color: #aeaeae;
+  color: #666666;
   height: 45px;
   font-weight: 400;
   -webkit-appearance: none;
@@ -167,7 +189,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 }
 .table-condensed {
   
-  color: #aeaeae;
+  color: #666666;
 }
 
 .table tr {
@@ -175,11 +197,11 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 }
 
 .table > thead > tr > th {
-	border-bottom-color: #aeaeae;
+	border-bottom-color: #666666;
 }
 
 .table-condensed a {
-	color:#c0c0c0;
+	color:#666666;
 }
 
 .alias-stats-title h2::after {
@@ -280,11 +302,14 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	float: none;
 }
 .carousel-caption {
-	color:#aeaeae;
+	color: #666666;
 }
 
 #error {
-	border: 2px solid #aeaeae;
+	border: 2px solid #922a10;
+	color: #FFFFFF !important;
+	font-weight: 500;
+	background: #ec4419;
 	
 }
 
@@ -305,7 +330,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 .input-group #username, .input-group #password {
 	font-size: 15px;
 	padding: 10px 6px;
-	color: #aeaeae;
+	color: #666666;
 }
 
 #success-row p {
@@ -348,5 +373,61 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 .fa-chevron-down:before {
   content: "\f078";
 
+}
+
+.fa-warning:before,
+.fa-exclamation-triangle:before {
+  content: "\f071";
+}
+
+.fa-file-text-o:before {
+  content: "\f0f6";
+}
+
+.fa-mail-reply-all:before,
+.fa-reply-all:before {
+  content: "\f122";
+}
+
+.back {
+	background: #01a38a;
+	padding: 8px 4px;
+	color: #ffffff;
+	float: right;
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+.back:hover{
+	color: #01a38a;
+	background: #ffffff;
+	border:1px solid #01a38a;
+}
+
+.fa-reply-all {
+	font-size: 16px;
+	color: #ffffff;
+}
+.back:hover .fa-reply-all{
+	color:#01a38a;
+}
+
+
+.footerNav {
+	margin-top: 20px;
+}
+
+.footerNav a {
+	color:#666666;
+	font-weight: 500;
+}
+
+.footerNav a:hover{
+	color: #333333;
+	font-weight: 500;
+}
+
+.has-success .input-group-addon {
+	border-color: #3c763d !important;
 }
 

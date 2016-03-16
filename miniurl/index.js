@@ -91,7 +91,7 @@ $(document).ready(function(){
 		//Input validation
 		if(!newLink.hasValidAlias()){
 			//The alias is short
-			cambiarUIpostHash("At least 3 characters",'orange');
+			cambiarUIpostHash("<i class='fa fa-exclamation-triangle'></i> At least 3 characters",'orange');
 			$("#salvar").prop('disabled',true);
 		}
 		//Persisted alias validation
@@ -132,7 +132,7 @@ $(document).ready(function(){
 		if(!newLink.hasValidAddress()){
 			$("#alias").val("");
 			newLink.isValid = false;
-			cambiarUIpostHash("The address must have at least 4 characters",'red',false);
+			cambiarUIpostHash("<i class='fa fa-exclamation-triangle'></i> The address must have at least 4 characters",'red',false);
 		}
 		else {
 			cambiarUIpostHash();
