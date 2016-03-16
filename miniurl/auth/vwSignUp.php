@@ -47,7 +47,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 				</div>
 				<div class="row hidden" id="messages">
 					<div class="col-md-12">
-						<span id="messageContent" class="text-center"><i class="fa fa-exclamation-triangle"></i></span>
+						<span id="messageContent" class="text-center">
+							<em class='help-block'><i class='fa fa-exclamation-triangle'></i><span id="messageTxt"></span></em>
+						</span>
 					</div>
 				</div>
 				<div class="row">
@@ -61,17 +63,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 	</div>
 
 	</div>
-
-	<!-- JQuery y Bootstrap-->
-	<!-- <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
-	<!-- Own scripts -->
-	<!-- <script type="text/javascript" src="./signUp.js"></script> -->
-	<!-- Other scripts-->
-	<!-- <script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
-	<script src="/js/owl.carousel.min.js"></script>
-</body>
-</html> -->
 
 <?php
 $ownFinalScripts = array('/auth/signUp.js');

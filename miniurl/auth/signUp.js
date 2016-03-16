@@ -34,8 +34,8 @@ $(document).ready(function(){
 	};
 
 	var changeMessage = function(message,classType){
-		$("#messageContent").html(message);
-		$("#messageContent").addClass(classType);
+		$("#messageTxt").html(message);
+		$("#messageContent").addClass(classType); //TODO: Check if this line is necessary
 		$("#messages").removeClass('hidden');
 	};
 
@@ -49,23 +49,22 @@ $(document).ready(function(){
 		var form = new FormSubmit();
 
 		if(form.isValidSignupForm()){
-			$.post('signup.php',{'email': form.email, 'password': form.password, 'firstName': form.firstName, 'lastName': form.lastName, 'ss': 'blah'},function(data,status){
-				//$("#messageContent").html(data.message);
+			$.post('signup.php',{'email': form.email, 'password': form.password, 'firstName': form.firstName, 'lastName': form.lastName, 'ss': 'blah'},function(data,status){				
 				if(data.status == '1'){
 					changeMessage(data.message,'has-success');
 					window.setTimeout(function(){
 						window.location.replace('/auth/');
-					},5000);
+					},3000);
 				}
 				else{
 					changeMessage(data.message,'has-warning');
 				}
 				//console.log(status);
-				console.log(data.log);
+				//console.log(data.log);
 			},'json');
 		}
 		else{
-			changeMessage("<em class='help-block'><i class='fa fa-exclamation-triangle'></i>"+form.errorMsg+"</em>",'has-error');
+			changeMessage(form.errorMsg,'has-error');
 
 			//console.log("Pass1: "+password);
 			//console.log("Pass2: "+checkPassword);
@@ -78,7 +77,7 @@ $(document).ready(function(){
 		}
 		else{
 			console.log('The email field is empty');
-			changeMessage("<em class='help-block'><i class='fa fa-exclamation-triangle'></i>The email field cannot be empty</em>",'has-warning');
+			changeMessage("The email field cannot be empty",'has-warning');
 		}
 	});
 
