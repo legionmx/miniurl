@@ -81,4 +81,10 @@ $(document).ready(function(){
 			changeMessage("<em class='help-block'><i class='fa fa-exclamation-triangle'></i>The email field cannot be empty</em>",'has-warning');
 		}
 	});
+
+	$("#lastName").keypress(function(event){
+		if(event.key == 'Enter'){
+			$("#signup").click();
+		}
+	});
 });
