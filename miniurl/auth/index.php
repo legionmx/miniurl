@@ -37,7 +37,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 						
 					</div>
 
-					<div class="col-md-12 help-block hidden" id="success-row"><i class="fa fa-exclamation-triangle"></i><strong id="success-row-txt"></strong></div>
+					<div class="col-md-12 help-block hidden" id="success-row"><i class="fa fa-exclamation-triangle"></i><span id="success-row-txt"></span></div>
 
 					<div class="col-md-4 col-md-offset-4">
 						<button type="submit" id="login" class="btn btn-primary btn-lg text-center">Login</button>
