@@ -127,13 +127,23 @@ class Alias{
 	function insertAlias($createAlias) {
 
 		$base = $this->base;
+		
+		$timeStamp = time();
 
 		foreach ($createAlias as $value) {
-
-			$query = "insert into `enlaces` (`id_user`, `cve_protocolo`, `url`, `hash`, `seLogea`, `activo`, `code`, `mini_url`) VALUES ('". $value['id user'] . "','" . $value['protocol'] . "', '" . $value['url completa'] . "','" . $value['hash'] . "','" . $value['se logea'] . "','1','" . $value['codigo'] . "','" . $value['url mini'] . "');";
+			
+			$query = "insert into `enlaces` (`id_user`, `cve_protocolo`, `url`, `hash`, `seLogea`, `activo`, `code`, `mini_url`, `time_stamp` ) VALUES ('". $value['id user'] . "','" . $value['protocol'] . "', '" . $value['url completa'] . "','" . $value['hash'] . "','" . $value['se logea'] . "','1','" . $value['codigo'] . "','" . $value['url mini'] . "','" . $timeStamp . "');";
 			
 			$base->Execute($query);
 		}
+		
+		$querySelect = "Select id, cve_protocolo, url, hash, code, id_category, mini_url from enlaces where time_stamp='$timeStamp'";
+		
+		$base->SetFetchMode(ADODB_FETCH_ASSOC);
+		$result = array();
+		$result=$base->getAll($querySelect);
+		
+		return $result;
 
 	}
 

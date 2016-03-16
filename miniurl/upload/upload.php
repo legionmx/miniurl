@@ -38,7 +38,7 @@ class FileUp{
 
 		    fclose($fichero);
 		 
-		    echo "<p id='readSms'>Leidos " . count($registros) . " registros. </p>";
+		    echo "<p id='readSms'>" . count($registros) . " records have been read. </p>";
 		 	
 		 	$regProt = array();
 		 	$regUrl = array();
@@ -81,6 +81,21 @@ class FileUp{
 
 		    $insertAlias = $hashAlias->insertAlias($createAlias);
 		    
+		    $totalInserts = count($insertAlias);
+		    
+		    $insertHeaders = array();
+		    
+		    foreach ($insertAlias as $rows) {
+			
+			$insertHeaders['id'] = $rows['id'];
+			$insertHeaders['Protocol'] = $rows['cve_protocolo'];
+			$insertHeaders['Url'] = $rows['url'];
+			$insertHeaders['Alias'] = $rows['hash'];
+			$insertHeaders['Code'] = $rows['code'];
+			$insertHeaders['Category'] = $rows['id_category'];
+			$insertHeaders['Short Url'] = $rows['mini_url'];
+		    }
+		    
 		    include_once($_SERVER['DOCUMENT_ROOT'].'/upload/success.php');
 
 		}
@@ -114,7 +129,7 @@ class FileUp{
 		} else {
 
 		    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		        echo "<p id='successUpload'>El archivo ". basename( $_FILES["fileToUpload"]["name"]). " se subio correctamente. </p>";
+		        echo "<p id='successUpload'>The file ". basename( $_FILES["fileToUpload"]["name"]). " was uploaded correctly. </p>";
 		        FileUp::readCsv();
 		    } else {
 		        echo "<p id='errorUpload'>Error, hubo un problema al subir tu archivo.</p>";

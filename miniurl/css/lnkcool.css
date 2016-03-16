@@ -442,3 +442,13 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	border-color: #a94442 !important;
 }
 
+#errorSuccess {
+	margin-bottom: 10px;
+}
+
+.carousel-caption p.totalUrl {
+	color:#01a38a;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+

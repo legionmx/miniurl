@@ -9,29 +9,57 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
-    <div class="carousel-caption">
+    <div class="carousel-caption backgroundCaption">
 		
-			<form method="post" action="upload.php?method=transformCsv" enctype="multipart/form-data">
-
-				<div class="row page-header">
-					<div class="col-md-12 headerLine"><h2 class="success">Success</h2></div>
+			<div class="container">
+				<div class="row" class="page-header">
+						<div class="col-md-12"><h2 class="success">Success</h2></div>
 				</div>
 
 				<div id="containerForm" class="container">
 						<div class="row">
 							
-							<div id="errorSuccess" class="col-md-12">
+								<div id="errorSuccess" class="col-md-12">
 								
 								
 								
-							</div>
-		
+								</div>
+								
+								<p class="totalUrl">They have shortened <?php echo $totalInserts; ?> URL's. </p>
+								
+								<div class="col-md-12">
+										<table class="table table-hover table-condensed">
+											<thead>
+												<tr>
+												<?php foreach($insertHeaders as $index => $value){ ?>
+														
+												
+														<?php echo '<th>' .  $index . '</th>'; ?>
+												
+												<?php }?>
+												</tr>
+											</thead>
+											<tbody>
+												<?php foreach($insertAlias as $registers){ ?>
+												<tr>
+														<?php foreach($registers as $index => $value){ ?>
+														
+																<?php echo '<td>' .  $value . '</td>'; ?>
+														
+														<?php }?>
+														</tr>
+												<?php }?>
+											</tbody>
+										</table>
+								</div>
+								
+								
 						</div>
 				
 				</div>
+			</div>
 				
 
-			</form>
 
 	</div>
 <?php
