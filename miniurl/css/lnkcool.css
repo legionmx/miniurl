@@ -438,3 +438,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	border-color: #3c763d !important;
 }
 
+.has-error .input-group-addon{
+	border-color: #a94442 !important;
+}
+
