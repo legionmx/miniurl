@@ -4,20 +4,18 @@ $(document).ready(function(){
 
 	var displayMessage = function(message){
 		$("#success-row").removeClass('hidden');
-		$("#success-row").append(message);
+		//$("#success-row").append(message);
+		$("#success-row-txt").text(message);
 	}
 
 	var isFieldValid = function(fieldName){
 		var field = $("#"+fieldName);
-		//return value > 0;
 		if(field.val().length > 0){
 			return true;
 		}
 		else{
 			field.parent().addClass('has-error');
 			field.focus();
-			/*$("#success-row").removeClass('hidden');
-			$("#success-row").text('The '+fieldName+' is empty');*/
 			displayMessage('The '+fieldName+' is empty');
 			return false;
 		}
