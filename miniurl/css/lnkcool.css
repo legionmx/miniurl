@@ -309,7 +309,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	/*border: 2px solid #922a10;*/
 	color: #FFFFFF !important;
 	font-weight: 500;
-	background: #c80000;
+	background: #fbaf42;
 	    font-style: normal;
 
 	
@@ -317,7 +317,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 
 .help-block {
 	    font-size: 15px;
-    line-height: 30px;
+    line-height: 35px;
 }
 
 #rangeBox label {
