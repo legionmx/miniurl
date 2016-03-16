@@ -59,8 +59,10 @@ class FileUp{
 			$regLog[$i] = $registros[$i]["log"];
 		        $regUrl[$i] = $registros[$i]["url"];
 		        $regCode[$i] = $registros[$i]["codigo"];
+			$categories[$i] = $registros[$i]["categoria"];
 
 		    }
+		    
 		    if(isset($_POST['sameUrl']) && $_POST['sameUrl'] == 'on'){
 		    	$sameUrl = $_POST['sameUrl'];
 		    	$regProt = $_POST['protocolo'];
@@ -75,14 +77,25 @@ class FileUp{
 		    }else{
 			$sameUrl = null;
 		    }
+		    
+		    $catUniq = array_unique($categories);
 
 		    $hashAlias = new Alias;
-		    $createAlias = $hashAlias->getHash($regProt, $regUrl, $regCode, $sameUrl, $regLog);
+		    $insertCat = $hashAlias->insertCategories($catUniq);
+		    $selectCat = $hashAlias->getCategories();
 
+		    for ($i = 0; $i < count($categories); $i++) {
+		    
+			$catId[$i] = $selectCat[$categories[$i]];
+		    
+		    }
+		    
+		    $createAlias = $hashAlias->getHash($regProt, $regUrl, $regCode, $sameUrl, $regLog, $catId);
 		    $insertAlias = $hashAlias->insertAlias($createAlias);
+		    $getProtocols= $hashAlias->getProtocols();
+
 		    
 		    $totalInserts = count($insertAlias);
-		    
 		    $insertHeaders = array();
 		    
 		    foreach ($insertAlias as $rows) {
@@ -95,6 +108,8 @@ class FileUp{
 			$insertHeaders['Category'] = $rows['id_category'];
 			$insertHeaders['Short Url'] = $rows['mini_url'];
 		    }
+		    
+		    $nameCat = $hashAlias->getNameCat();
 		    
 		    include_once($_SERVER['DOCUMENT_ROOT'].'/upload/success.php');
 

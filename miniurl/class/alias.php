@@ -5,9 +5,8 @@ session_start();
 class Alias{
 	
 	public $base = '';
-
-	function getHash($prot, $urlBase, $code = null, $sameUrl = null, $isLog = null) {
-		
+	
+	function __construct(){
 		//require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 		global $base, $_PROTOCOLOS, $_BASEURL;
 		if(!isset($base)||!isset($_PROTOCOLOS)||!isset($_BASEURL)){
@@ -15,10 +14,16 @@ class Alias{
 			require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 		}
 		$this->base = $base;
+		
+	}
 
+	function getHash($prot, $urlBase, $code = null, $sameUrl = null, $isLog = null, $catId = null) {
+		
+		global $base, $_PROTOCOLOS, $_BASEURL;
+		$base = $this->base;
+		
 		if (isset($code) && is_array($code)){
-			
-			
+
 			
 			$arrayAlias= array();
 
@@ -35,6 +40,7 @@ class Alias{
 				
 				$codigo = $code[$i];
 				$uid = $_SESSION['uid'];
+				$cat = $catId[$i];
 
 				//ponemos si pidio usuario la misma url para todo los registros
 
@@ -78,7 +84,8 @@ class Alias{
 						"url completa" => $urlToDb,
 						"url mini"     => $urlMini,
 						"protocol"     => $idProt,
-						"se logea"     => $isLogid
+						"se logea"     => $isLogid,
+						"category"     => $cat
 						);
 				}
 				else{
@@ -91,7 +98,8 @@ class Alias{
 						"url completa" => $urlToDb,
 						"url mini"     => $urlMini,
 						"protocol"     => $idProt,
-						"se logea"     => $isLogid
+						"se logea"     => $isLogid,
+						"category"     => $cat
 						);
 				}
 		
@@ -132,7 +140,7 @@ class Alias{
 
 		foreach ($createAlias as $value) {
 			
-			$query = "insert into `enlaces` (`id_user`, `cve_protocolo`, `url`, `hash`, `seLogea`, `activo`, `code`, `mini_url`, `time_stamp` ) VALUES ('". $value['id user'] . "','" . $value['protocol'] . "', '" . $value['url completa'] . "','" . $value['hash'] . "','" . $value['se logea'] . "','1','" . $value['codigo'] . "','" . $value['url mini'] . "','" . $timeStamp . "');";
+			$query = "insert into `enlaces` (`id_user`, `cve_protocolo`, `url`, `hash`, `seLogea`, `activo`, `id_category`, `code`, `mini_url`, `time_stamp` ) VALUES ('". $value['id user'] . "','" . $value['protocol'] . "', '" . $value['url completa'] . "','" . $value['hash'] . "','" . $value['se logea'] . "','1','" . $value['category'] . "','". $value['codigo'] . "','" . $value['url mini'] . "','" . $timeStamp . "');";
 			
 			$base->Execute($query);
 		}
@@ -146,7 +154,77 @@ class Alias{
 		return $result;
 
 	}
+	
+	function getProtocols() {
 
+		$base = $this->base;
+		
+		$queryProt = "Select * from cat_protocolo where edo_reg = 1";
+		
+		$base->SetFetchMode(ADODB_FETCH_ASSOC);
+		$protocols = array();
+		$protocols = $base->getAll($queryProt);
+		
+		$nameProtocols = array();
+		foreach ($protocols as $rowProt) {
+			
+			$nameProtocols[$rowProt['clave']] = $rowProt['descripcion'];
+		}
+		
+		return $nameProtocols;
+
+	}
+	function insertCategories($categories){
+		$base = $this->base;
+		
+		foreach($categories as $value){
+			
+			$queryProt = "INSERT INTO `cat_categories`(`category`, `id_user`, `active`) VALUES ('".$value."',".$_SESSION['uid'].",1);";
+			
+			$base->Execute($queryProt);
+		}
+		
+		
+	}
+	
+	function getCategories (){
+		$base = $this->base;
+		
+		$sqlCategories = "select id_category, category from cat_categories where active = 1 and id_user = " . $_SESSION['uid'];
+		$base->SetFetchMode(ADODB_FETCH_ASSOC);
+		$rsCat = $base->getAll($sqlCategories);
+		
+		$catDb = array();
+		
+		if($rsCat!==false){
+			foreach ($rsCat as $category) {
+				$catDb[$category['category']] = $category['id_category'];
+			}
+		}
+
+		return $catDb;
+	}
+	
+	function getNameCat (){
+		$base = $this->base;
+		
+		$sqlCategories = "select id_category, category from cat_categories where active = 1 and id_user = " . $_SESSION['uid'];
+		$base->SetFetchMode(ADODB_FETCH_ASSOC);
+		$rsCat = $base->getAll($sqlCategories);
+		
+		$catName = array();
+		
+		if($rsCat!==false){
+			foreach ($rsCat as $category) {
+				$catName[$category['id_category']] = $category['category'];
+			}
+		}
+		
+
+		return $catName;
+	}
+	
+	
 }
 
 

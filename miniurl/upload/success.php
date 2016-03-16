@@ -40,11 +40,22 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 												</tr>
 											</thead>
 											<tbody>
+												
 												<?php foreach($insertAlias as $registers){ ?>
-												<tr>
+												<tr>		
 														<?php foreach($registers as $index => $value){ ?>
-														
-																<?php echo '<td>' .  $value . '</td>'; ?>
+																
+																<?php
+																
+																if($index == 'cve_protocolo'){
+																		echo '<td>' .  $getProtocols[$value] . '</td>';
+																}elseif($index== 'id_category'){
+																	echo '<td>' . $nameCat[$value]. '</td>';
+																}else{
+																	echo '<td>' .  $value . '</td>'; 
+																}
+																?>
+																 
 														
 														<?php }?>
 														</tr>
