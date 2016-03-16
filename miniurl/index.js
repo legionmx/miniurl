@@ -25,7 +25,7 @@ $(document).ready(function(){
 			return this.url.length >= 4;
 		};
 		this.hasValidAlias = function(){
-			return this.alias.length >= 3;
+			return this.alias.length >= 1;
 		}
 		this.getValuesFromUI();
 	};
