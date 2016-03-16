@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 	var displayMessage = function(message){
 		$("#success-row").removeClass('hidden');
-		$("#success-row").text(message);
+		$("#success-row").append(message);
 	}
 
 	var isFieldValid = function(fieldName){

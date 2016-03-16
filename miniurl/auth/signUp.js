@@ -65,7 +65,7 @@ $(document).ready(function(){
 			},'json');
 		}
 		else{
-			changeMessage("<em class='help-block'>"+form.errorMsg+"</em>",'has-error');
+			changeMessage("<em class='help-block'><i class='fa fa-exclamation-triangle'></i>"+form.errorMsg+"</em>",'has-error');
 
 			//console.log("Pass1: "+password);
 			//console.log("Pass2: "+checkPassword);
@@ -78,7 +78,7 @@ $(document).ready(function(){
 		}
 		else{
 			console.log('The email field is empty');
-			changeMessage("<em class='help-block'>The email field cannot be empty</em>",'has-warning');
+			changeMessage("<em class='help-block'><i class='fa fa-exclamation-triangle'></i>The email field cannot be empty</em>",'has-warning');
 		}
 	});
 });

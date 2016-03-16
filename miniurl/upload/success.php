@@ -22,6 +22,8 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 							
 							<div id="errorSuccess" class="col-md-12">
 								
+								
+								
 							</div>
 		
 						</div>

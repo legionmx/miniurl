@@ -46,8 +46,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 					</div>
 				</div>
 				<div class="row hidden" id="messages">
-					<div class="col-md-6 col-md-offset-3">
-						<span id="messageContent" class="text-center"></span>
+					<div class="col-md-12">
+						<span id="messageContent" class="text-center"><i class="fa fa-exclamation-triangle"></i></span>
 					</div>
 				</div>
 				<div class="row">

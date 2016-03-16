@@ -25,7 +25,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 					<thead>
 						<tr>
 							<th class="text-center">Chart</th>
-							<th class="text-left">Alias</th>
+							<th class="text-center">Alias</th>
 							<th class="text-left">Direcci&oacute;n</th>
 							<th class="text-center">Visitas</th>
 						</tr>
@@ -39,7 +39,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 									$alias = $registro['hash'];
 									$direccion = strtolower($_PROTOCOLOS[$registro['prot']])."://".$registro['url'];
 									$visitas = $registro['num_visitas'];
-									echo "<tr><td><a href='graphAlias.php?a=$alias'><button type='button' class='btn btn-default btn-sm'><i class='fa fa-line-chart'></i></span></button></a></td><td class='text-left'><a href='viewAlias.php?a=$alias'><i class='fa fa-file-text-o'></i></a>&nbsp;</td><td class='text-left'><a href='$direccion'>$direccion<a></td><td class='text-center'>$visitas</td></tr>";
+									echo "<tr><td><a href='graphAlias.php?a=$alias'><button type='button' class='btn btn-default btn-sm'><i class='fa fa-line-chart'></i></span></button></a></td><td class='text-center'><a href='viewAlias.php?a=$alias'><i class='fa fa-file-text-o'></i></a>&nbsp;</td><td class='text-left'><a href='$direccion'>$direccion<a></td><td class='text-center'>$visitas</td></tr>";
 								}
 							}
 							else{
