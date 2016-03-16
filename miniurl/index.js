@@ -91,12 +91,12 @@ $(document).ready(function(){
 		//Input validation
 		if(!newLink.hasValidAlias()){
 			//The alias is short
-			cambiarUIpostHash("<i class='fa fa-exclamation-triangle'></i> At least 3 characters",'orange');
+			cambiarUIpostHash("<i class='fa fa-exclamation-triangle'></i> At least 3 characters",'orange',newLink.hasValidAddress());
 			$("#salvar").prop('disabled',true);
 		}
 		//Persisted alias validation
 		else{
-			cambiarUIpostHash("");
+			cambiarUIpostHash("",'green',newLink.hasValidAddress());
 			$("#salvar").prop('disabled',false);
 
 			$.getJSON("chkAlias.php", {'alias': newLink.alias}, function(response){
