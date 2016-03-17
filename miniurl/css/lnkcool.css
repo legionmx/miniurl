@@ -305,11 +305,21 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	color: #666666;
 }
 
-#error, .help-block {
+#error, .has-warning .help-block, .has-error .help-block {
 	/*border: 2px solid #922a10;*/
 	color: #FFFFFF !important;
 	font-weight: 500;
 	background: #fbaf42;
+	    font-style: normal;
+
+	
+}
+
+#error, .has-success .help-block {
+	/*border: 2px solid #922a10;*/
+	color: #FFFFFF !important;
+	font-weight: 500;
+	background: #00942b;
 	    font-style: normal;
 
 	

@@ -9,7 +9,7 @@ body {
   margin-bottom: 60px;
 }
 .footer {
-  position: fixed;
+  position: absolute;
   z-index: 11;
   bottom: 0;
   width: 100%;
