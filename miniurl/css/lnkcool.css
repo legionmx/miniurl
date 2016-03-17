@@ -213,7 +213,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 
 /**/
 .backgroundCaption {
-	margin-top: -50px;
+	margin-top: -40px;
     right: 0;
     text-align: center;
     text-shadow: none !important;
@@ -305,7 +305,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	color: #666666;
 }
 
-#error, .has-warning .help-block, .has-error .help-block {
+#error, .has-warning .help-block, .has-error .help-block, .login #success-row {
 	/*border: 2px solid #922a10;*/
 	color: #FFFFFF !important;
 	font-weight: 500;

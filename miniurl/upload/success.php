@@ -72,9 +72,11 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 				
 
 
-	</div>
+	
 <?php
 $ownFinalScripts = array('/index.js');
 $ownFinalScripts = array('/upload/success.js');
 include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
 ?>
+
+</div>

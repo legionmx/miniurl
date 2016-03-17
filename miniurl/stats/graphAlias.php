@@ -30,7 +30,10 @@
 		</div>
 
 	</div>
-
+<?php
+$ownFinalScripts = array('/stats/graphAlias.js',"http://code.highcharts.com/highcharts.js","https://code.highcharts.com/modules/exporting.js");
+include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
+?>
 	</div>
 
 	<!-- JQuery y Bootstrap-->
@@ -67,7 +70,3 @@
 	</script>
 </body>
 </html> -->
-<?php
-$ownFinalScripts = array('/stats/graphAlias.js',"http://code.highcharts.com/highcharts.js","https://code.highcharts.com/modules/exporting.js");
-include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
-?>

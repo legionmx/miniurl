@@ -5,9 +5,10 @@
 	session_start();
 	
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
-	
-	$regCategories = new Register;
-	$getCategories= $regCategories->getNameCat();
+	if(isset($_SESSION['authToken'])) { 
+		$regCategories = new Register;
+		$getCategories= $regCategories->getNameCat();
+	}
 ?>
 
     <div class="carousel-caption">

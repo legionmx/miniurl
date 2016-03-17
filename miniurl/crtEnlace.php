@@ -7,8 +7,14 @@ $alias = $_REQUEST['alias'];
 $url = $_REQUEST['url'];
 $cve_protocolo = $_REQUEST['keyProtocol'];
 $protTxt = $_REQUEST['protocol'];
-$category = $_REQUEST['category'];
-$categoryNew = $_REQUEST['category_new'];
+$catId = null;
+
+if(isset($_REQUEST['category']) && $_REQUEST['category'] != ''){
+	$category = $_REQUEST['category'];
+	$categoryNew = $_REQUEST['category_new'];
+}
+
+
 
 //$seLogea now defaults to false and is dependant of the user authentication
 $seLogea = false;
@@ -54,19 +60,21 @@ else{
 	session_destroy();
 }
 
-$regCategories = new Register;
+if(isset($_REQUEST['category']) && $_REQUEST['category'] != ''){
 
-if($category == 0 && $category != 'off'){
-	$insertCat = $regCategories->insertCategories($categoryNew);
-	$selectCat = $regCategories->getCategories();
-	$catId = $selectCat[$categoryNew];
-	
-}elseif($category > 0 && $category != 'off'){
-	$catId = $category;
-}else{
-	$catId = null;
+	$regCategories = new Register;
+
+	if($category == 0 && $category != 'off'){
+		$insertCat = $regCategories->insertCategories($categoryNew);
+		$selectCat = $regCategories->getCategories();
+		$catId = $selectCat[$categoryNew];
+		
+	}elseif($category > 0 && $category != 'off'){
+		$catId = $category;
+	}else{
+		$catId = null;
+	}
 }
-
 
 $dataNewLink = array('cve_protocolo' => $cve_protocolo, 'url' => $url, 'hash' => $alias, 'seLogea' => $seLogea, 'id_category'=>$catId);
 if(isset($uid)) $dataNewLink['id_user'] = $uid;
