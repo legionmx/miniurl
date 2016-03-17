@@ -43,7 +43,7 @@ $(document).ready(function(){
 		else{
 			$.getJSON("getHash.php",{"protocolo": newLink.keyProtocol, "protTxt": newLink.protocol, "url": newLink.url},function(response){
 				$("#alias-group").removeClass("has-success has-error");
-				if((response.existe==true)||newLink.url.length<8){ //TODO: Check if the second clause of the condition is needed
+				if((response.existe==true)||newLink.url.length<4){ //TODO: Check if the second clause of the condition is needed
 					cambiarUIpostHash("The URL has already been minimized",'red',false);
 					$("#alias").val(response.hash);
 					newLink.isValid = false;
@@ -156,6 +156,20 @@ $(document).ready(function(){
 		else{
 			$("#prot_propio").addClass('hidden');
 			$("#prot_propio").val('');
+		}
+	});
+	
+	$("#newCategory").on("change",function(evento){
+		var cve_prot = $(this).val();
+		var selectedOption = $("#newCategory option:selected")[0];
+		//console.log(selectedOption.innerHTML+' --- '+selectedOption.value);
+		var txt_prot = selectedOption.innerHTML;
+		if(cve_prot =='0'){
+			$("#category_new").removeClass('hidden');
+		}
+		else{
+			$("#category_new").addClass('hidden');
+			$("#category_new").val('');
 		}
 	});
 

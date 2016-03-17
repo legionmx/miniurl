@@ -1,6 +1,7 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 include('../class/alias.php');
+include('../class/Register.php');
 
 switch ($_GET['method']) {
 	case 'transformCsv':
@@ -38,11 +39,16 @@ class FileUp{
 
 		    fclose($fichero);
 		 
+		 
+		 
 		    echo "<p id='readSms'>" . count($registros) . " records have been read. </p>";
 		 	
 		 	$regProt = array();
 		 	$regUrl = array();
 			$regLog = array();
+			
+		    $registers = new Register;
+		    
 		    
 		    for ($i = 0; $i < count($registros); $i++) {
 			
@@ -52,6 +58,10 @@ class FileUp{
 					break;
 				case 'https':
 					$regProt[$i] = 2;
+					break;
+				default:
+					$protInsert = $registers->insertProtocols($registros[$i]["protocolo"]);
+					$regProt[$i] = $protInsert;
 					break;
 				
 			}
@@ -63,10 +73,43 @@ class FileUp{
 
 		    }
 		    
+		    $regCategories = new Register;
+		    $catUniq = array_unique($categories);
+		    
+		    
 		    if(isset($_POST['sameUrl']) && $_POST['sameUrl'] == 'on'){
+			
 		    	$sameUrl = $_POST['sameUrl'];
-		    	$regProt = $_POST['protocolo'];
 		    	$regUrl = $_POST['url'];
+			
+			if($_POST['protocolo'] == 3){
+				$protInsert = $registers->insertProtocols($_POST['prot_propio']);
+				$regProt = $protInsert;
+			}else{
+				$regProt = $_POST['protocolo'];
+			}
+			
+			
+			if($_POST['category'] == 0 && $_POST['category'] != 'off'){
+				$insertCat = $regCategories->insertCategories($_POST['category_new']);
+				$selectCat = $regCategories->getCategories();
+				$catId = $selectCat[$_POST['category_new']];
+				
+			}elseif($_POST['category'] > 0 && $_POST['category'] != 'off'){
+				$catId = $_POST['category'];
+			}else{
+				$insertCat = $regCategories->insertCategories($catUniq);
+				$selectCat = $regCategories->getCategories();
+				
+	    
+				for ($i = 0; $i < count($categories); $i++) {
+				
+				    $catId[$i] = $selectCat[$categories[$i]];
+				
+				}
+			}
+			
+			
 			if (isset($_POST['conLog'])){
 				$regLog = $_POST['conLog'];
 			}else{
@@ -75,27 +118,28 @@ class FileUp{
 		    	
 		    	
 		    }else{
+			
+			$insertCat = $regCategories->insertCategories($catUniq);
+			$selectCat = $regCategories->getCategories();
+			
+    
+			for ($i = 0; $i < count($categories); $i++) {
+			
+			    $catId[$i] = $selectCat[$categories[$i]];
+			
+			}
+			
 			$sameUrl = null;
 		    }
 		    
-		    $catUniq = array_unique($categories);
-
+		    $getProtocols= $regCategories->getProtocols();
+		    
 		    $hashAlias = new Alias;
-		    $insertCat = $hashAlias->insertCategories($catUniq);
-		    $selectCat = $hashAlias->getCategories();
-
-		    for ($i = 0; $i < count($categories); $i++) {
-		    
-			$catId[$i] = $selectCat[$categories[$i]];
-		    
-		    }
-		    
 		    $createAlias = $hashAlias->getHash($regProt, $regUrl, $regCode, $sameUrl, $regLog, $catId);
 		    $insertAlias = $hashAlias->insertAlias($createAlias);
-		    $getProtocols= $hashAlias->getProtocols();
-
 		    
 		    $totalInserts = count($insertAlias);
+		    
 		    $insertHeaders = array();
 		    
 		    foreach ($insertAlias as $rows) {
@@ -109,7 +153,7 @@ class FileUp{
 			$insertHeaders['Short Url'] = $rows['mini_url'];
 		    }
 		    
-		    $nameCat = $hashAlias->getNameCat();
+		    $nameCat = $regCategories->getNameCat();
 		    
 		    include_once($_SERVER['DOCUMENT_ROOT'].'/upload/success.php');
 

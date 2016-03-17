@@ -33,7 +33,7 @@ img {
 	margin: 0 auto;
 }
 
-input[type=file], #url,#range1, #range2, #categories {
+input[type=file], #url,#range1, #range2, #categories, #newCategory, #category_new {
   background: rgba(255, 255, 255, .2);
   color:#666666;
   border-radius: 0;
@@ -146,7 +146,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
     vertical-align: middle;
 }
 
-#url, #range1, #range2 {
+#url, #range1, #range2, #category_new {
   border-bottom: 2px solid #aeaeae;
   border-right: none;
   border-left: none;
@@ -154,7 +154,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
   color: #666666;
   width: 100%;
 }
-#protocolo, #alias, #categories {
+#protocolo, #alias, #categories, #newCategory {
   background: transparent;
   color: #666666;
   height: 45px;
@@ -168,7 +168,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
   
 }
 
-#protocolo, #categories {
+#protocolo, #categories, #newCategory {
 	background: url('../images/arrow-down.svg') no-repeat right 8px;
 	background-size: 30px;
 }

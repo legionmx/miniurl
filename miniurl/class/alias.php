@@ -11,7 +11,7 @@ class Alias{
 		global $base, $_PROTOCOLOS, $_BASEURL;
 		if(!isset($base)||!isset($_PROTOCOLOS)||!isset($_BASEURL)){
 			//If after global, the global scope variables are still not set, we include const.php
-			require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
+			include_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 		}
 		$this->base = $base;
 		
@@ -26,27 +26,40 @@ class Alias{
 
 			
 			$arrayAlias= array();
-
+			$regCategories = new Register;
+			$getProtocols= $regCategories->getProtocols();
+			
 			for ($i = 0; $i < count($code); $i++){
 
 				//Sacamos el url completo, incluyendo el protocolo
-				$url = $urlBase[$i];
+				
+				if (is_array($urlBase)){
+					$url = $urlBase[$i];
+				}else{
+					$url = $urlBase;
+				}
+				
 				if (is_array($prot)){
 					$idProt = $prot[$i];
-					$protocolBase = $_PROTOCOLOS[$prot[$i]];
+					$protocolBase =  $getProtocols[$prot[$i]];
 				}else{
 					$idProt = $prot;
 				}
 				
 				$codigo = $code[$i];
 				$uid = $_SESSION['uid'];
-				$cat = $catId[$i];
+				
+				if (is_array($catId)){
+					$cat = $catId[$i];
+				}else{
+					$cat = $catId;
+				}
 
 				//ponemos si pidio usuario la misma url para todo los registros
 
 				if(isset($sameUrl) && $sameUrl = 'on'){
 					$url = $urlBase;
-					$protocolBase = $_PROTOCOLOS[$prot];
+					$protocolBase =  $getProtocols[$prot];
 					if(isset($isLog) && $isLog = 'on'){
 						$isLogid = 1;
 					}else{
@@ -153,75 +166,6 @@ class Alias{
 		
 		return $result;
 
-	}
-	
-	function getProtocols() {
-
-		$base = $this->base;
-		
-		$queryProt = "Select * from cat_protocolo where edo_reg = 1";
-		
-		$base->SetFetchMode(ADODB_FETCH_ASSOC);
-		$protocols = array();
-		$protocols = $base->getAll($queryProt);
-		
-		$nameProtocols = array();
-		foreach ($protocols as $rowProt) {
-			
-			$nameProtocols[$rowProt['clave']] = $rowProt['descripcion'];
-		}
-		
-		return $nameProtocols;
-
-	}
-	function insertCategories($categories){
-		$base = $this->base;
-		
-		foreach($categories as $value){
-			
-			$queryProt = "INSERT INTO `cat_categories`(`category`, `id_user`, `active`) VALUES ('".$value."',".$_SESSION['uid'].",1);";
-			
-			$base->Execute($queryProt);
-		}
-		
-		
-	}
-	
-	function getCategories (){
-		$base = $this->base;
-		
-		$sqlCategories = "select id_category, category from cat_categories where active = 1 and id_user = " . $_SESSION['uid'];
-		$base->SetFetchMode(ADODB_FETCH_ASSOC);
-		$rsCat = $base->getAll($sqlCategories);
-		
-		$catDb = array();
-		
-		if($rsCat!==false){
-			foreach ($rsCat as $category) {
-				$catDb[$category['category']] = $category['id_category'];
-			}
-		}
-
-		return $catDb;
-	}
-	
-	function getNameCat (){
-		$base = $this->base;
-		
-		$sqlCategories = "select id_category, category from cat_categories where active = 1 and id_user = " . $_SESSION['uid'];
-		$base->SetFetchMode(ADODB_FETCH_ASSOC);
-		$rsCat = $base->getAll($sqlCategories);
-		
-		$catName = array();
-		
-		if($rsCat!==false){
-			foreach ($rsCat as $category) {
-				$catName[$category['id_category']] = $category['category'];
-			}
-		}
-		
-
-		return $catName;
 	}
 	
 	
