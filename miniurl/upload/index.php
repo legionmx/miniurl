@@ -78,9 +78,9 @@
 						</div>
 						<div class="row">
 							
-							<div class="col-md-3 newCategory">
+							<div class="col-md-8 newCategory">
 								<select id="newCategory" name="category" class="form-control">
-									<option value="off" selected="selected">-Select-</option>
+									<option value="off" selected="selected">-Select a Category-</option>
 									<option value='0'>Other</option>
 									<?php 
 										foreach ($getCategories as  $cveCat => $abvCat) {
@@ -90,7 +90,7 @@
 								</select>
 								
 							</div>
-							<div class="col-md-5">
+							<div id="wrappCategory_new" class="col-md-4">
 								<input type="text" id="category_new" name="category_new" class="form-control input-sm hidden" placeholder="New Category">
 							</div>
 							

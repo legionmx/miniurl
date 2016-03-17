@@ -10,6 +10,8 @@ $(document).ready(function(){
 			this.url = $("#url").val();
 			this.alias = $("#alias").val();
 			this.isTracked = $("#conLog").prop('checked');
+			this.category = $("#newCategory").val();
+			this.category_new = $("#category_new").val();
 			this.exists = false;
 			this.isValid = false;
 			if(this.keyProtocol == '3'){ // The 'other' option is selected
@@ -166,10 +168,20 @@ $(document).ready(function(){
 		var txt_prot = selectedOption.innerHTML;
 		if(cve_prot =='0'){
 			$("#category_new").removeClass('hidden');
+			$(".newCategory").removeClass('col-md-8');
+			$(".newCategory").addClass('col-md-3');
+			$("#wrappCategory_new").removeClass('col-md-4');
+			$("#wrappCategory_new").addClass('col-md-5');
+			
+			
 		}
 		else{
 			$("#category_new").addClass('hidden');
 			$("#category_new").val('');
+			$(".newCategory").removeClass('col-md-3');
+			$(".newCategory").addClass('col-md-8');
+			$("#wrappCategory_new").removeClass('col-md-5');
+			$("#wrappCategory_new").addClass('col-md-4');
 		}
 	});
 
