@@ -3,7 +3,7 @@
 	require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 	include_once($_SERVER['DOCUMENT_ROOT'].'/class/Register.php');
 	session_start();
-	
+	//$activeHeader = 'ok';
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 	if(isset($_SESSION['authToken'])) { 
 		$regCategories = new Register;

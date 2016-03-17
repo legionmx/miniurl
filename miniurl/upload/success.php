@@ -6,11 +6,10 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 	$uid = $_SESSION['uid'];
 	
 	$activePage = 'CSV Upload';
+	$activeHeader = 'ok';
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
-    <div class="carousel-caption backgroundCaption">
-		
 			<div class="container">
 				<div class="row" class="page-header">
 						<div class="col-md-12"><h2 class="success">Success</h2></div>
@@ -71,12 +70,8 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 			</div>
 				
 
-
-	
 <?php
 $ownFinalScripts = array('/index.js');
 $ownFinalScripts = array('/upload/success.js');
 include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
 ?>
-
-</div>

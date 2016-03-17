@@ -1,10 +1,9 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 	session_start();
+	$activeHeader = 'ok';
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
-
-   <div class="carousel-caption alias-stats-title backgroundCaption">
 
 	<div class="container">
 		<div class="row">
@@ -22,7 +21,7 @@
 			
 		</div>
 	</div>
-	</div>
+
 
 <?php
 //$ownFinalScripts = array('/index.js');

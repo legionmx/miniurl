@@ -25,11 +25,12 @@ $numberOfPages = 10;
 $lastInitialRecord = $numberOfPages * $limit;
 
 $activePage = 'Statistics';
+
 $ownStyles[] = 'stats.css';
+$activeHeader = 'ok';
+
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
-
-    <div class="carousel-caption backgroundCaption">
 
 	<div class="container">
 		<div class="row" class="page-header">
@@ -109,4 +110,3 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 $ownFinalScripts[] = '/stats/pager.js';
 include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
 ?>
-	</div>
