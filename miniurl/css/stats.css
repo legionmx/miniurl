@@ -1,4 +1,4 @@
-.footer {
+/*.footer {
 	position: relative;
 }
 
@@ -12,4 +12,17 @@
 	position: relative;
 	margin: 0;
     z-index: 10;
+}*/
+
+.pagination > li > a {
+	border: 0;
+}
+
+.pagination > .active > a {
+	background-color: #337ab7;
+    border-color: #337ab7;
+    border-radius: 15px;
+    color: #fff;
+    cursor: default;
+    z-index: 3
 }
