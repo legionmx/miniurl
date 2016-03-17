@@ -43,7 +43,7 @@ $(document).ready(function(){
 		else{
 			$.getJSON("getHash.php",{"protocolo": newLink.keyProtocol, "protTxt": newLink.protocol, "url": newLink.url},function(response){
 				$("#alias-group").removeClass("has-success has-error");
-				if((response.existe==true)||newLink.url.length<8){ //TODO: Check if the second clause of the condition is needed
+				if((response.existe==true)||newLink.url.length<4){ //TODO: Check if the second clause of the condition is needed
 					cambiarUIpostHash("The URL has already been minimized",'red',false);
 					$("#alias").val(response.hash);
 					newLink.isValid = false;
