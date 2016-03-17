@@ -93,11 +93,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 				<?php
 			}
 			?>
-			<!-- <li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li> -->
-    		<!-- <li class="disabled"><a href="#" id="pager_previous">Previous</a></li>
-    		<li><a href="#" id="pager_next">Next</a></li> -->
 			<li>
 				<a id="pager_next" aria-label="Next">
 					<span aria-hidden="true">&raquo;</span>

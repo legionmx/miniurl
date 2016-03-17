@@ -134,6 +134,11 @@ $(function(){
 					if(offset <= 0){
 						$("#pager_prev").parent().addClass('disabled');
 					}
+					$("#page-"+currentPage).removeClass('active');
+					//currentPage--;
+					currentPage = clickedPage;
+					$("#page-"+currentPage).addClass('active');
+
 				}
 				else{
 					//NOP for the time being
