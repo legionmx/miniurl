@@ -1,9 +1,13 @@
 <?php
 
 	require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
+	include_once($_SERVER['DOCUMENT_ROOT'].'/class/Register.php');
 	session_start();
 	
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
+	
+	$regCategories = new Register;
+	$getCategories= $regCategories->getNameCat();
 ?>
 
     <div class="carousel-caption">
@@ -52,7 +56,28 @@
 					
 					<?php } ?>
 				</div>
-		
+			
+				<?php if(isset($_SESSION['authToken'])) { ?>
+					<div class="row">
+								
+						<div class="col-md-8 newCategory">
+							<select id="newCategory" name="category" class="form-control">
+								<option value="off" selected="selected">-Select a Category</option>
+								<option value='0'>Other</option>
+								<?php 
+									foreach ($getCategories as  $cveCat => $abvCat) {
+										echo "<option value='$cveCat'>$abvCat</option>\n";
+									}
+								?>
+							</select>
+							
+						</div>
+						<div id="wrappCategory_new" class="col-md-4">
+							<input type="text" id="category_new" name="category_new" class="form-control input-sm hidden" placeholder="New Category">
+						</div>
+								
+					</div>
+				<?php } ?>
 				<div class="row">
 					<div class="col-md-12">
 						<p id="error" class="hidden"></p>

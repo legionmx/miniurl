@@ -53,7 +53,7 @@ if(!$requestedNewUser->isRegistered()){
 	$newUser = User::create($newUserData);
 	if($newUser instanceof User){
 		//echo json_encode(array('status' => 1, 'message' => 'Registration success --- '.$newUser ));
-		echo json_encode(array('status' => 1, 'log' => 'Registration success --- '.$newUser, 'message' => '<em class="help-block">Succesful registration! Redirecting to main page</em>'));
+		echo json_encode(array('status' => 1, 'log' => 'Registration success --- '.$newUser, 'message' => 'Succesful registration! Redirecting to main page'));
 	}
 	else{
 		echo json_encode(array('status' => 0, 'message' => 'Registration failed --- Something went wrong with the class method creation'));
@@ -62,6 +62,6 @@ if(!$requestedNewUser->isRegistered()){
 else{
 	//Lets send error message
 	//echo json_encode(array('status' => 0, 'message' => 'Registration failed --- Username already exists'));
-	echo json_encode(array('status' => 0, 'log' => 'Registration failed --- Username already exists', 'message' => '<em class="help-block">The provided email is already registrered :(</em>'));
+	echo json_encode(array('status' => 0, 'log' => 'Registration failed --- Username already exists', 'message' => 'The provided email is already registered :('));
 }
 ?>
