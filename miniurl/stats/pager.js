@@ -9,6 +9,8 @@ $(function(){
 
 	var uid = $("#uid").val();
 
+	$("#page-1").addClass('active');
+
 	$("#pager_next").click(function(event){
 		var from = offset + limit;
 		if(currentPage == currentTopPage){
@@ -42,7 +44,9 @@ $(function(){
 					$("#table-body").html(data);
 					$("#pager_prev").parent().removeClass('disabled');
 					offset = from;
+					$("#page-"+currentPage).removeClass('active');
 					currentPage++;
+					$("#page-"+currentPage).addClass('active');
 					/*if(currentPage == currentMaxPage){
 						//TODO: The paginator should slide
 						console.log("Pager reached its maximum");
@@ -100,7 +104,9 @@ $(function(){
 					/*if(offset <= 0){
 						$("#pager_prev").parent().addClass('disabled');
 					}*/
+					$("#page-"+currentPage).removeClass('active');
 					currentPage--;
+					$("#page-"+currentPage).addClass('active');
 					if(currentPage<=1){
 						$("#pager_prev").parent().addClass('disabled');
 					}
