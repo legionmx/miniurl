@@ -75,11 +75,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 				</table>
 			</div>
 		</div>
-	</div>
+	
 
 	<nav>
  		<!-- <ul class="pager"> -->
- 		<ul class="pager">
+ 		<ul class="pagination">
 			<li class="disabled">
 				<a id="pager_prev" aria-label="Previous">
 					<span aria-hidden="true">&laquo;</span>
@@ -105,6 +105,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 			</li>
   		</ul>
 	</nav>
+	</div>
 
 <?php
 $ownFinalScripts[] = '/stats/pager.js';
