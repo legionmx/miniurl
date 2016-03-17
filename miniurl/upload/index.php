@@ -102,6 +102,19 @@
 
 			</form>
 		</div>
+		<div class="textCaption">
+			<div class="row">
+				<h2>How to Upload?</h2>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<p class="text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia <a href="/csv/downloads/muestra_cool_link.csv">CSV example file</a> deserunt mollit anim id est laborum.</p>
+					
+				</div>
+			</div>
+			
+		</div>
 	</div>
 
 	</div>

@@ -1,0 +1,2 @@
+protocolo,url,codigo,log,categoria
+http,lnk.cool,index.php,1,campaña de inicio

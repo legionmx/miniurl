@@ -462,3 +462,27 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	margin-bottom: 10px;
 }
 
+.textCaption {
+	color:#ffffff;
+	width: 550px;
+	float: left;
+}
+
+.textCaption h2 {
+	color: #ffffff;
+	font-weight: 200;
+	margin: 0px 10px;
+	padding: 0;
+	text-shadow: 2px 2px 8px #333333;
+}
+.textCaption p{
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 400;
+	text-shadow: 2px 2px 8px #333333;
+}
+
+.textCaption p a{
+	color: #01a38a;
+	
+}
