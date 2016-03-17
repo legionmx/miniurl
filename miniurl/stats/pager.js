@@ -138,6 +138,8 @@ $(function(){
 					//currentPage--;
 					currentPage = clickedPage;
 					$("#page-"+currentPage).addClass('active');
+					if(currentPage == 1) $("#pager_prev").parent().addClass('disabled');
+					else $("#pager_prev").parent().removeClass('disabled');
 
 				}
 				else{
