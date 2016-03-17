@@ -16,10 +16,10 @@
 	$mostrarDatosBrowser = true;
 	if(!ini_get('browscap')) $mostrarDatosBrowser = false;
 	$activePage = 'Statistics';
+	$activeHeader = 'ok';
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
-    <div class="carousel-caption alias-stats-title backgroundCaption">
 
 	<div class="container">
 		<div class="row">
@@ -61,10 +61,6 @@
 			</div>
 		</div>
 	</div>
-<?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
-?>
-	</div>
 
 
 <!-- JQuery y Bootstrap-->
@@ -75,3 +71,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
 	<script src="/js/owl.carousel.min.js"></script>
 </body>
 </html> -->
+<?php
+include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
+?>

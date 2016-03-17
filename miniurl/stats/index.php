@@ -8,10 +8,9 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 $uid = $_SESSION['uid'];
 //session_destroy();
 $activePage = 'Statistics';
+$activeHeader = 'ok';
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
-
-    <div class="carousel-caption backgroundCaption">
 
 	<div class="container">
 		<div class="row" class="page-header">
@@ -55,7 +54,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 			</div>
 		</div>
 	</div>
+
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
 ?>
-	</div>

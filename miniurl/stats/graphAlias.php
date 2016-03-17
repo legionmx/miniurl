@@ -11,10 +11,10 @@
 	//TODO: Falta validar parámetros
 	$alias = $_REQUEST['a'];
 	$activePage = 'Statistics';
+	$activeHeader = 'ok';
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
-    <div class="carousel-caption backgroundCaption">
 
 	<div class="container">
 		<div class="row">
@@ -30,11 +30,7 @@
 		</div>
 
 	</div>
-<?php
-$ownFinalScripts = array('/stats/graphAlias.js',"http://code.highcharts.com/highcharts.js","https://code.highcharts.com/modules/exporting.js");
-include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
-?>
-	</div>
+	
 
 	<!-- JQuery y Bootstrap-->
 	<!-- <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -70,3 +66,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
 	</script>
 </body>
 </html> -->
+
+<?php
+$ownFinalScripts = array('/stats/graphAlias.js',"http://code.highcharts.com/highcharts.js","https://code.highcharts.com/modules/exporting.js");
+include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
+?>

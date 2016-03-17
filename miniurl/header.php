@@ -114,3 +114,6 @@ foreach ($ownStyles as $style) {
         </div>
   	</section>
     <!--/ Slider end -->
+<?php if(isset($activeHeader) && $activeHeader == 'ok'){?>
+  <div class="carousel-caption backgroundCaption">
+<?php } ?>
