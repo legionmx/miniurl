@@ -14,15 +14,24 @@
     z-index: 10;
 }*/
 
-.pagination > li > a {
-	border: 0;
+.footer {
+	margin-top: 0;
 }
 
-.pagination > .active > a {
-	background-color: #337ab7;
-    border-color: #337ab7;
-    border-radius: 15px;
+.pagination > li > a {
+	border: 0;
+	color: #666;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover {
+	background-color: #01a38a;
+    border-color: #01a38a;
+    /*border-radius: 15px;*/
     color: #fff;
     cursor: default;
     z-index: 3
+}
+
+.row-paginator {
+	margin-top: 0px;
 }

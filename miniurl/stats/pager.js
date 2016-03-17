@@ -1,5 +1,5 @@
 $(function(){
-	var limit = 2;
+	var limit = 10;
 	var offset = 0;
 	var currentPage = 1;
 	var currentTopPage = 10;
