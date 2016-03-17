@@ -315,7 +315,7 @@ input[type=file], input[type=text], input[type=password], select.form-control, #
 	
 }
 
-#error, .has-success .help-block {
+.has-success .help-block {
 	/*border: 2px solid #922a10;*/
 	color: #FFFFFF !important;
 	font-weight: 500;
