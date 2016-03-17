@@ -19,7 +19,7 @@ else{
 	$numberOfVisitedLinks = 0;
 }
 
-$limit = 10;
+$limit = 2;
 $startOffset = 0;
 $numberOfPages = 10;
 $lastInitialRecord = $numberOfPages * $limit;
@@ -29,7 +29,7 @@ $ownStyles[] = 'stats.css';
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
-    <div class="carousel-caption backgroundCaption">
+    <!-- <div class="carousel-caption backgroundCaption"> -->
 
 	<div class="container">
 		<div class="row" class="page-header">
@@ -51,7 +51,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 					<tbody id='table-body'>
 						<?php
 							//$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace";
-							$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace limit 10 offset 0";
+							//$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace limit 10 offset 0";
+							$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace limit $limit offset 0";
 							$rs = $base->Execute($sql);
 							if($rs->RecordCount()>0){
 								foreach ($rs as $registro) {
@@ -75,7 +76,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 		</div>
 	</div>
 
-	</div>
+	<!-- </div> -->
 
 	<nav>
  		<!-- <ul class="pager"> -->
@@ -86,9 +87,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 				</a>
 			</li>
 			<?php
-			for($i = 0, $j = 1;$i<$lastInitialRecord && $i<$numberOfVisitedLinks;$i+=$limit,$j++){
+			//for($i = 0, $j = 1;$i<$lastInitialRecord && $i<$numberOfVisitedLinks;$i+=$limit,$j++){
+			for($i = 0, $j = 1;$i<$numberOfVisitedLinks;$i+=$limit,$j++){
 				?>
-				<li><a href="#">#<?php echo $j; ?></a></li>
+				<li<?php echo " id='page-$j'"; if($i>=$lastInitialRecord) echo ' class="hidden"'; ?>><a class="page-selector" offset="<?php echo $i;?>"><?php echo $j; ?></a></li>
 				<?php
 			}
 			?>
