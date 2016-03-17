@@ -61,7 +61,9 @@
 			</div>
 		</div>
 	</div>
-
+<?php
+include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
+?>
 	</div>
 
 
@@ -73,6 +75,3 @@
 	<script src="/js/owl.carousel.min.js"></script>
 </body>
 </html> -->
-<?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
-?>

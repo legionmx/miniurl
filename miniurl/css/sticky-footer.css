@@ -9,13 +9,14 @@ body {
   margin-bottom: 60px;
 }
 .footer {
-  position: absolute;
+  position: relative;
   z-index: 11;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
   background: rgba(255, 255, 255, 0.6);
+  margin-top: -60px;
 }
 
 
@@ -29,6 +30,11 @@ body {
   padding: 0 15px;
 
 }
+.backgroundCaption > .container{
+  padding-bottom: 60px;
+  min-height: 580px;
+}
+
 .container .text-muted {
   margin: 20px 0 0px 0;
 }
