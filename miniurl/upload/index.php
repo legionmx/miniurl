@@ -17,9 +17,10 @@
 ?>
 
     <div class="carousel-caption">
-	<div class="container">
-		<div id="wrapAllForm">
-			
+	<div class="container uploadContainer">
+		<div class="row">	
+		<div id="wrapAllForm" class="col-md-6">
+		
 			<div class="row page-header">
 				<div class="col-md-12 headerLine">
 					<h2>Upload</h2>
@@ -102,7 +103,7 @@
 
 			</form>
 		</div>
-		<div class="textCaption">
+		<div class="textCaption col-md-5">
 			<div class="row">
 				<h2>How to Upload?</h2>
 			</div>
@@ -115,6 +116,7 @@
 			</div>
 			
 		</div>
+	</div>
 	</div>
 
 	</div>
