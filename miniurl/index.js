@@ -158,6 +158,20 @@ $(document).ready(function(){
 			$("#prot_propio").val('');
 		}
 	});
+	
+	$("#newCategory").on("change",function(evento){
+		var cve_prot = $(this).val();
+		var selectedOption = $("#newCategory option:selected")[0];
+		//console.log(selectedOption.innerHTML+' --- '+selectedOption.value);
+		var txt_prot = selectedOption.innerHTML;
+		if(cve_prot =='0'){
+			$("#category_new").removeClass('hidden');
+		}
+		else{
+			$("#category_new").addClass('hidden');
+			$("#category_new").val('');
+		}
+	});
 
 	$("#alias").on("input",function(evento){
 		checkAlias();
