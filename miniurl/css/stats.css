@@ -1,4 +1,4 @@
-.footer {
+/*.footer {
 	position: relative;
 }
 
@@ -12,4 +12,26 @@
 	position: relative;
 	margin: 0;
     z-index: 10;
+}*/
+
+.footer {
+	margin-top: 0;
+}
+
+.pagination > li > a {
+	border: 0;
+	color: #666;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover {
+	background-color: #01a38a;
+    border-color: #01a38a;
+    /*border-radius: 15px;*/
+    color: #fff;
+    cursor: default;
+    z-index: 3
+}
+
+.row-paginator {
+	margin-top: 0px;
 }
