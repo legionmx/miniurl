@@ -9,14 +9,20 @@ $uid = $_SESSION['uid'];
 //session_destroy();
 
 //We get the number of visited links related to user
-$sqlNumberOfVisitedLinks = "select count(distinct id_enlace) from enlaces,visitas where enlaces.id = visitas.id_enlace and enlaces.id_user = $uid"
+$sqlNumberOfVisitedLinks = "select count(distinct id_enlace) as count from enlaces,visitas where enlaces.id = visitas.id_enlace and enlaces.id_user = $uid";
 $rsNoVL = $base->Execute($sqlNumberOfVisitedLinks);
+//die($rsNoVL);
 if($rsNoVL !== false){
-	$numberOfVisitedLinks = intval($rsNoVL['count']);
+	$numberOfVisitedLinks = intval($rsNoVL->fields['count']);
 }
 else{
 	$numberOfVisitedLinks = 0;
 }
+
+$limit = 10;
+$startOffset = 0;
+$numberOfPages = 10;
+$lastInitialRecord = $numberOfPages * $limit;
 
 $activePage = 'Statistics';
 $ownStyles[] = 'stats.css';
@@ -79,9 +85,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
-			<li><a href="#">1</a></li>
+			<?php
+			for($i = 0, $j = 1;$i<$lastInitialRecord && $i<$numberOfVisitedLinks;$i+=$limit,$j++){
+				?>
+				<li><a href="#">#<?php echo $j; ?></a></li>
+				<?php
+			}
+			?>
+			<!-- <li><a href="#">1</a></li>
 			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
+			<li><a href="#">3</a></li> -->
     		<!-- <li class="disabled"><a href="#" id="pager_previous">Previous</a></li>
     		<li><a href="#" id="pager_next">Next</a></li> -->
 			<li>
