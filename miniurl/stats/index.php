@@ -7,8 +7,28 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 }
 $uid = $_SESSION['uid'];
 //session_destroy();
+
+//We get the number of visited links related to user
+$sqlNumberOfVisitedLinks = "select count(distinct id_enlace) as count from enlaces,visitas where enlaces.id = visitas.id_enlace and enlaces.id_user = $uid";
+$rsNoVL = $base->Execute($sqlNumberOfVisitedLinks);
+//die($rsNoVL);
+if($rsNoVL !== false){
+	$numberOfVisitedLinks = intval($rsNoVL->fields['count']);
+}
+else{
+	$numberOfVisitedLinks = 0;
+}
+
+$limit = 2;
+$startOffset = 0;
+$numberOfPages = 10;
+$lastInitialRecord = $numberOfPages * $limit;
+
 $activePage = 'Statistics';
+
+$ownStyles[] = 'stats.css';
 $activeHeader = 'ok';
+
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 ?>
 
@@ -29,9 +49,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 							<th class="text-center">Visitas</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id='table-body'>
 						<?php
-							$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace";
+							//$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace";
+							//$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace limit 10 offset 0";
+							$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace limit $limit offset 0";
 							$rs = $base->Execute($sql);
 							if($rs->RecordCount()>0){
 								foreach ($rs as $registro) {
@@ -55,6 +77,36 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 		</div>
 	</div>
 
+	<nav>
+ 		<!-- <ul class="pager"> -->
+ 		<ul class="pager">
+			<li class="disabled">
+				<a id="pager_prev" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+			<?php
+			//for($i = 0, $j = 1;$i<$lastInitialRecord && $i<$numberOfVisitedLinks;$i+=$limit,$j++){
+			for($i = 0, $j = 1;$i<$numberOfVisitedLinks;$i+=$limit,$j++){
+				?>
+				<li<?php echo " id='page-$j'"; if($i>=$lastInitialRecord) echo ' class="hidden"'; ?>><a class="page-selector" offset="<?php echo $i;?>"><?php echo $j; ?></a></li>
+				<?php
+			}
+			?>
+			<!-- <li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li> -->
+    		<!-- <li class="disabled"><a href="#" id="pager_previous">Previous</a></li>
+    		<li><a href="#" id="pager_next">Next</a></li> -->
+			<li>
+				<a id="pager_next" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+  		</ul>
+	</nav>
+
 <?php
+$ownFinalScripts[] = '/stats/pager.js';
 include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
 ?>

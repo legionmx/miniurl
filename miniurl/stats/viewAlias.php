@@ -7,10 +7,15 @@
 	}
 	$uid = $_SESSION['uid'];
 
-	//TODO: validación de parámetros
+	//TODO: Parameter validation
 	$alias = $_REQUEST['a'];
 
-	$sql= "select ip,fecha,browser,sisop,cve_protocolo,url,created,user_agent from visitas,enlaces where visitas.id_enlace = enlaces.id and enlaces.hash = '$alias' order by fecha desc";
+	//Pagination related variables
+	$numberOfLinks = 20;
+	$fromLink = 0;
+	$toLink = $fromLink + $numberOfLinks;
+
+	$sql= "select ip,fecha,browser,sisop,cve_protocolo,url,created,user_agent from visitas,enlaces where visitas.id_enlace = enlaces.id and enlaces.hash = '$alias' order by fecha desc limit $numberOfLinks";
 
 	//checamos si se puede usar browscap
 	$mostrarDatosBrowser = true;
@@ -60,6 +65,12 @@
 				</table>
 			</div>
 		</div>
+		<!-- <nav>
+ 			<ul class="pager">
+    			<li class="disabled"><a href="#">Previous</a></li>
+    			<li><a href="#">Next</a></li>
+  			</ul>
+		</nav> -->
 	</div>
 
 
