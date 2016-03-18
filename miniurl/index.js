@@ -119,6 +119,19 @@ $(document).ready(function(){
 		}
 	};
 
+	var isProtocolValid = function(){
+		if($("#prot_propio").val().length <=0 && $("#protocolo").val()==3){
+			cambiarUIpostHash("<i class='fa fa-exclamation-triangle'></i> No protocol was provided",'red',false);
+			newLink.isValid = false;
+			return false;
+		}
+		else{
+			cambiarUIpostHash("",'blue','false');
+			newLink.isValid = true;
+			return true;
+		}
+	};
+
 	/*** Event handlers ***/
 
 	$("#generar").click(function(){
@@ -154,11 +167,25 @@ $(document).ready(function(){
 		var txt_prot = selectedOption.innerHTML;
 		if(cve_prot =='3'){
 			$("#prot_propio").removeClass('hidden');
+			$("#prot_propio").focus();
 		}
 		else{
 			$("#prot_propio").addClass('hidden');
 			$("#prot_propio").val('');
+			cambiarUIpostHash("",'blue','false');
 		}
+	});
+
+	$("#prot_propio").on('input blur',function(){
+		isProtocolValid();
+		/*if($(this).val().length <=0 && $("#protocolo").val()==3){
+			cambiarUIpostHash("<i class='fa fa-exclamation-triangle'></i> No protocol was provided",'red',false);
+			newLink.isValid = false;
+		}
+		else{
+			cambiarUIpostHash("",'blue','false');
+			newLink.isValid = true;
+		}*/
 	});
 	
 	$("#newCategory").on("change",function(evento){
@@ -190,7 +217,7 @@ $(document).ready(function(){
 	});
 
 	$("#salvar").click(function(){
-		if(newLink.isValid){
+		if(newLink.isValid&&isProtocolValid()){
 			newLink.getValuesFromUI();
 			$.getJSON("crtEnlace.php",newLink,function(response){
 				cambiarUIpostHash("",'blue',false);
