@@ -16,7 +16,8 @@
 	$limit = $_REQUEST['limit'];
 
 	//$sql = "select date(fecha) as dia,count(*) as hits from visitas where id_enlace = (select id from enlaces where hash='$alias') group by dia";
-	$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace limit $limit offset $from";
+	//$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace limit $limit offset $from";
+	$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace order by enlaces.created desc limit $limit offset $from";
 	$tableBody = "";
 
 //die($sql);
