@@ -18,7 +18,9 @@
 
 	//$sql = "select date(fecha) as dia,count(*) as hits from visitas where id_enlace = (select id from enlaces where hash='$alias') group by dia";
 
+
 	$sql = "select hash,url,cve_protocolo as prot, id_category, mini_url, count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace order by enlaces.created desc limit $limit offset $from";
+
 	$tableBody = "";
 
 //die($sql);
