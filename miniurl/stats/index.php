@@ -1,7 +1,8 @@
 <?php
 /*** stats/index.php -- Statistics index view ***/
-require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
 session_start();
+require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
+
 if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 	header('Location: /auth/');
 }
@@ -34,9 +35,25 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 
 	<div class="container">
 		<div class="row" class="page-header">
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<h2>Usage statistics</h2>
 			</div>
+			<div class="row col-md-4">
+				<div class="row col-md-4">
+					<p>Filter by:</p>
+				</div>
+				<div class="row col-md-8">
+					<select id="newCategory" name="category" class="form-control">
+						<option value="off" selected="selected">-Select a Category-</option>
+						<?php 
+							foreach ($_CATEGORIES as  $cveCat => $abvCat) {
+								echo "<option value='$cveCat'>$abvCat</option>\n";
+							}
+						?>
+					</select>
+				</div>
+			</div>
+			
 		</div>
 		<div class="row">
 			<div class="col-md-12">
@@ -45,22 +62,28 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 						<tr>
 							<th class="text-center">Chart</th>
 							<th class="text-center">Alias</th>
-							<th class="text-left">Direcci&oacute;n</th>
-							<th class="text-center">Visitas</th>
+							<th class="text-left">URL</th>
+							<th class="text-left">Categories</th>
+							<th class="text-left">Short URL</th>
+							<th class="text-center">Visits</th>
 						</tr>
 					</thead>
 					<tbody id='table-body'>
 						<?php
 							//$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace";
 							//$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace limit 10 offset 0";
-							$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace limit $limit offset 0";
+							$sql = "select hash,url,cve_protocolo as prot, id_category, mini_url, count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace order by enlaces.created desc limit $limit offset 0";
+
+							
 							$rs = $base->Execute($sql);
 							if($rs->RecordCount()>0){
 								foreach ($rs as $registro) {
 									$alias = $registro['hash'];
 									$direccion = strtolower($_PROTOCOLOS[$registro['prot']])."://".$registro['url'];
 									$visitas = $registro['num_visitas'];
-									echo "<tr><td><a href='graphAlias.php?a=$alias'><button type='button' class='btn btn-default btn-sm'><i class='fa fa-line-chart'></i></span></button></a></td><td class='text-center'><a href='viewAlias.php?a=$alias'><i class='fa fa-file-text-o'></i></a>&nbsp;</td><td class='text-left'><a href='$direccion'>$direccion<a></td><td class='text-center'>$visitas</td></tr>";
+									$category = $_CATEGORIES[$registro['id_category']];
+									$miniurl = $_HTTP.$registro['mini_url'];
+									echo "<tr><td><a href='graphAlias.php?a=$alias'><button type='button' class='btn btn-default btn-sm'><i class='fa fa-line-chart'></i></span></button></a></td><td class='text-center'><a href='viewAlias.php?a=$alias'><i class='fa fa-file-text-o'></i></a>&nbsp;</td><td class='text-left'><a href='$direccion'>$direccion<a></td><td class='text-left'>$category</td><td class='text-left'><a href='$miniurl' target='_blank'>$miniurl</a></td><td class='text-center'>$visitas</td></tr>";
 								}
 							}
 							else{

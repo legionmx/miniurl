@@ -7,6 +7,12 @@ class CONS{
 
 $_BASEURL = $_SERVER['HTTP_HOST'] . "/i/?";
 
+if(isset($_SERVER['HTTPS'])){
+	$_HTTP = 'https://';
+}else{
+	$_HTTP = 'http://';
+}
+
 //Conexion a BD, usando ADO
 require_once($_SERVER['DOCUMENT_ROOT']."/adodb5/adodb.inc.php");
 
@@ -35,4 +41,5 @@ if(isset($_SESSION['uid'])){
 		}
 	}
 }
+
 ?>
