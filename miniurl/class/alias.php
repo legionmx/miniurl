@@ -58,8 +58,15 @@ class Alias{
 				//ponemos si pidio usuario la misma url para todo los registros
 
 				if(isset($sameUrl) && $sameUrl = 'on'){
-					$url = $urlBase;
-					$protocolBase =  $getProtocols[$prot];
+					if(!is_array($urlBase)){
+						$url = $urlBase;
+					}
+					
+					if(!is_array($prot)){
+						$protocolBase =  $getProtocols[$prot];
+						
+					}
+					
 					if(isset($isLog) && $isLog = 'on'){
 						$isLogid = 1;
 					}else{
@@ -70,6 +77,8 @@ class Alias{
 					$isLogid = $isLog[$i];
 				
 				}
+				
+				
 
 				$urlCompleto = strtolower($protocolBase)."://$url/" . $codigo;
 				

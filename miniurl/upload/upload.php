@@ -80,13 +80,20 @@ class FileUp{
 		    if(isset($_POST['sameUrl']) && $_POST['sameUrl'] == 'on'){
 			
 		    	$sameUrl = $_POST['sameUrl'];
-		    	$regUrl = $_POST['url'];
 			
-			if($_POST['protocolo'] == 3){
-				$protInsert = $registers->insertProtocols($_POST['prot_propio']);
-				$regProt = $protInsert;
-			}else{
-				$regProt = $_POST['protocolo'];
+			if(isset($_POST['url']) && $_POST['url']!=''){
+				$regUrl = $_POST['url'];
+			}
+		    	
+			
+			if($_POST['protocolo'] > 0 ){
+				
+				if($_POST['protocolo'] == 3){
+					$protInsert = $registers->insertProtocols($_POST['prot_propio']);
+					$regProt = $protInsert;
+				}else{
+					$regProt = $_POST['protocolo'];
+				}
 			}
 			
 			
@@ -131,6 +138,8 @@ class FileUp{
 			
 			$sameUrl = null;
 		    }
+		    
+		    
 		    
 		    $getProtocols= $regCategories->getProtocols();
 		    

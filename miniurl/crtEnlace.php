@@ -1,5 +1,7 @@
 <?php
+
 require_once($_SERVER['DOCUMENT_ROOT']."/const.php");
+
 include_once($_SERVER['DOCUMENT_ROOT'].'/class/Register.php');
 
 //TODO: Falta validacion de parametros
@@ -7,7 +9,7 @@ $alias = $_REQUEST['alias'];
 $url = $_REQUEST['url'];
 $cve_protocolo = $_REQUEST['keyProtocol'];
 $protTxt = $_REQUEST['protocol'];
-$catId = null;
+$catId = Null;
 
 if(isset($_REQUEST['category']) && $_REQUEST['category'] != ''){
 	$category = $_REQUEST['category'];
@@ -72,11 +74,13 @@ if(isset($_REQUEST['category']) && $_REQUEST['category'] != ''){
 	}elseif($category > 0 && $category != 'off'){
 		$catId = $category;
 	}else{
-		$catId = null;
+		$catId = Null;
 	}
 }
 
-$dataNewLink = array('cve_protocolo' => $cve_protocolo, 'url' => $url, 'hash' => $alias, 'seLogea' => $seLogea, 'id_category'=>$catId);
+$miniUrl = $_BASEURL . $alias;
+
+$dataNewLink = array('cve_protocolo' => $cve_protocolo, 'url' => $url, 'hash' => $alias, 'seLogea' => $seLogea, 'id_category'=>$catId, 'mini_url'=>$miniUrl);
 if(isset($uid)) $dataNewLink['id_user'] = $uid;
 
 $insFields = "";
@@ -90,6 +94,9 @@ foreach ($dataNewLink as $field => $value) {
 	}
 	elseif (is_bool($value)){
 		$insValues.= ($value) ? 'true' : 'false';
+	}elseif(is_null($value)){
+		
+		$insValues .= 'Null';
 	}
 	else{
 		$insValues.="'$value'";
