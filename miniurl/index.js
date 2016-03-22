@@ -93,13 +93,13 @@ $(document).ready(function(){
 		//Input validation
 		if(!newLink.hasValidAlias()){
 			//The alias is short
-			cambiarUIpostHash("<i class='fa fa-exclamation-triangle'></i> At least 3 characters",'orange',newLink.hasValidAddress());
+			cambiarUIpostHash("<i class='fa fa-exclamation-triangle'></i> At least one character",'orange',newLink.hasValidAddress());
 			$("#salvar").prop('disabled',true);
 		}
 		//Persisted alias validation
 		else{
 			cambiarUIpostHash("",'green',newLink.hasValidAddress());
-			$("#salvar").prop('disabled',false);
+			$("#salvar").prop('disabled',!(newLink.hasValidAddress()&&newLink.hasValidAlias()));
 
 			$.getJSON("chkAlias.php", {'alias': newLink.alias}, function(response){
 				if(response.existe){
@@ -110,7 +110,7 @@ $(document).ready(function(){
 				}
 				else{
 					//The alias doesn't exist
-					$("#salvar").prop('disabled',false);
+					//$("#salvar").prop('disabled',false);
 					newLink.alias = response.alias_revisado;
 					newLink.isValid = true;
 					$("#alias-group").addClass('has-success');
