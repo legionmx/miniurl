@@ -123,6 +123,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 										<?php }
 										else{
 											echo '<td>&nbsp;</td><td>&nbsp;</td>';
+											$visits = "---";
 										}
 										?>
 										

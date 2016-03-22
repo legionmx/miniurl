@@ -70,6 +70,7 @@
 				<?php }
 				else{
 					echo '<td>&nbsp;</td><td>&nbsp;</td>';
+					$visits = "---";
 				}
 				?>
 										
