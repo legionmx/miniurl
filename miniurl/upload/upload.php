@@ -74,7 +74,7 @@ class FileUp{
 
 		    }
 		    
-		    echo '<pre>'; print_r($registros); die();
+		    //echo '<pre>'; print_r($registros); die();
 		    
 		    $regCategories = new Register;
 		    $catUniq = array_unique($categories);

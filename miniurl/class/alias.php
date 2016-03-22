@@ -4,7 +4,38 @@ session_start();
 
 switch ($_GET['method']) {
 	case 'select':
-			Alias::selectResultInsert();
+	if(isset($_REQUEST['from'])) $offset  = $_REQUEST['from'];
+	else $offset = 0;
+	if(isset($_REQUEST['limit'])) $limit = $_REQUEST['limit'];
+	else $limit = 10;
+	if(isset($_REQUEST['timeStamp'])) $timestamp = $_REQUEST['timeStamp'];
+	else die("There is no valid timestamp requested");
+			//Alias::selectPagedResultInsert($timestamp,$offset,$limit);
+
+	require_once($_SERVER['DOCUMENT_ROOT']."/const.php");
+	$insertAlias = Alias::selectPagedResultInsert($timestamp,$offset,$limit);
+	foreach($insertAlias as $registers){ ?>
+												<tr>		
+														<?php foreach($registers as $index => $value){ ?>
+																
+																<?php
+																
+																if($index == 'cve_protocolo'){
+																		//echo '<td>' .  $getProtocols[$value] . '</td>';
+																	echo '<td>' .  $_PROTOCOLOS[$value] . '</td>';
+																}elseif($index== 'id_category'){
+																	//echo '<td>' . $nameCat[$value]. '</td>';
+																	echo '<td>' . $_CATEGORIES[$value]. '</td>';
+																}else{
+																	echo '<td>' .  $value . '</td>'; 
+																}
+																?>
+																 
+														
+														<?php }?>
+														</tr>
+												<?php }
+
 		break;
 	
 }
@@ -195,6 +226,20 @@ class Alias{
 		return $result;
 	}
 	
+	static function selectPagedResultInsert($timeStamp,$offset = 10,$limit = 10){
+		$me = new Alias;
+
+		//return $me->selectResultInsert($timeStamp,$offset = 10,$limit = 10)
+
+		$querySelect = "Select id, cve_protocolo, url, hash, code, id_category, mini_url from enlaces where time_stamp='$timeStamp' limit $limit offset $offset";
+		$base = $me->base;
+		$base->SetFetchMode(ADODB_FETCH_ASSOC);
+		$result = array();
+		$result=$base->getAll($querySelect);
+		
+		//die($querySelect);
+		return $result;
+	}
 	
 }
 

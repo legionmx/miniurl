@@ -96,7 +96,7 @@ $(function(){
 		}
 
 		///////////////////////////
-		$.get("/stats/getLinks.php?uid="+uid+"&from="+from+"&limit="+limit,function(data,success){
+		$.get("/class/alias.php?method=select&timeStamp="+timeStamp+"&from="+from+"&limit="+limit,function(data,success){
 			if(success == 'success'){
 				if(data != 'false'){
 					$("#table-body").html(data);
@@ -126,7 +126,7 @@ $(function(){
 		//console.log("---> "+this.nodeName+" ////// "+event.target.nodeName+" +++++ "+this.attributes['offset']+' ****** '+$(this).attr('offset'));
 		var offset_page = parseInt($(this).attr('offset'));
 		var clickedPage = parseInt($(this).text());
-		$.get("/stats/getLinks.php?uid="+uid+"&from="+offset_page+"&limit="+limit,function(data,success){
+		$.get("/class/alias.php?method=select&timeStamp="+timeStamp+"&from="+offset_page+"&limit="+limit,function(data,success){
 			if(success == 'success'){
 				if(data != 'false'){
 					$("#table-body").html(data);
