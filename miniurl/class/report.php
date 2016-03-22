@@ -54,10 +54,7 @@ class report {
 		
 	}
 	
-		$uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
-		$fileNameNew = $_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/' . $uniq . '.csv';
-        //$fp = fopen($_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/midescarga.csv', 'w');
-        $fp = fopen($fileNameNew, 'w');
+        $fp = fopen($_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/midescarga.csv', 'w');
         
         if ($fp && $result) {
             
@@ -77,15 +74,20 @@ class report {
 		fputcsv($fp, array_values($datos));
 		
 	    }
-	    /*$uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
-	    $fileName = $_SERVER['DOCUMENT_ROOT']  . '/csv/downloads/midescarga.csv';
-	    $fileNameNew = $_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/' . $uniq . '.csv';*/
-	    
-	    $rutaNew = '/csv/downloads/' . $uniq . '.csv';
-	    
-	    //$newRoot = rename ($fileName,$fileNameNew);
-	    //rename ($fileName,$fileNameNew);
 
+	    //We close the file before changing its name
+	    fflush($fp);
+	    fclose($fp);
+
+	    $uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
+	    $fileName = $_SERVER['DOCUMENT_ROOT']  . '/csv/downloads/midescarga.csv';
+	    $fileNameNew = $_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/Down-' . $uniq . '.csv';
+	    
+	    $rutaNew = '/csv/downloads/Down-' . $uniq . '.csv';
+	    
+	    $newRoot = rename ($fileName,$fileNameNew);
+
+	    if(!$newRoot) die("There was a problem moving the file to the download zone");
 	    
 	    /*header('Content-Type: application/force-download');
 	    header('Content-Disposition: attachment; filename='.$archivo);
