@@ -46,6 +46,7 @@ class FileUp{
 		 	$regProt = array();
 		 	$regUrl = array();
 			$regLog = array();
+			$categories = array();
 			
 		    $registers = new Register;
 		    
@@ -72,6 +73,8 @@ class FileUp{
 			$categories[$i] = $registros[$i]["categoria"];
 
 		    }
+		    
+		    echo '<pre>'; print_r($registros); die();
 		    
 		    $regCategories = new Register;
 		    $catUniq = array_unique($categories);
@@ -145,7 +148,8 @@ class FileUp{
 		    
 		    $hashAlias = new Alias;
 		    $createAlias = $hashAlias->getHash($regProt, $regUrl, $regCode, $sameUrl, $regLog, $catId);
-		    $insertAlias = $hashAlias->insertAlias($createAlias);
+		    $timeStamp = time();
+		    $insertAlias = $hashAlias->insertAlias($createAlias, $timeStamp);
 		    
 		    $totalInserts = count($insertAlias);
 		    

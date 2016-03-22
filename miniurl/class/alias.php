@@ -2,6 +2,13 @@
 
 session_start();
 
+switch ($_GET['method']) {
+	case 'select':
+			Alias::selectResultInsert();
+		break;
+	
+}
+
 class Alias{
 	
 	public $base = '';
@@ -154,11 +161,11 @@ class Alias{
 
 	}
 
-	function insertAlias($createAlias) {
+	function insertAlias($createAlias, $timeStamp) {
 
 		$base = $this->base;
 		
-		$timeStamp = time();
+		$timeStamp = $timeStamp;
 
 		foreach ($createAlias as $value) {
 			
@@ -167,6 +174,18 @@ class Alias{
 			$base->Execute($query);
 		}
 		
+		$selectInsert = new Alias;
+		
+		$selectResult = $selectInsert->selectResultInsert($timeStamp);
+		
+		return $selectResult;
+
+	}
+	
+	function selectResultInsert ($timeStamp){
+		
+		$base = $this->base;
+		
 		$querySelect = "Select id, cve_protocolo, url, hash, code, id_category, mini_url from enlaces where time_stamp='$timeStamp'";
 		
 		$base->SetFetchMode(ADODB_FETCH_ASSOC);
@@ -174,7 +193,6 @@ class Alias{
 		$result=$base->getAll($querySelect);
 		
 		return $result;
-
 	}
 	
 	
