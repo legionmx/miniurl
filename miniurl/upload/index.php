@@ -49,14 +49,18 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-6 col-md-offset-1">
+							<input type="checkbox" id="sameUrl" name="sameUrl" class="hidden" checked><label for="sameUrl">Advanced options:</label>&nbsp;<em>(not required)</em>
+						</div>
+						<!-- <div class="col-md-6">
 							<p>
 								<input type="checkbox" id="sameUrl" name="sameUrl">&nbsp;<label for="sameUrl">Use the same url?</label>
 							</p>
-						</div>
+						</div> -->
 					</div>
 	
-					<div id="sameUrlBox" style="display: none;">
+					<!-- <div id="sameUrlBox" style="display: none;"> -->
+					<div id="sameUrlBox">
 						<div class="row">
 							<div class="col-md-3">
 								<select id="protocolo" name="protocolo" class="form-control">
