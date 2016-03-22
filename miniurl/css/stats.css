@@ -35,3 +35,7 @@
 .row-paginator {
 	margin-top: 0px;
 }
+
+#table-body > tr{
+	height: 41px;
+}
