@@ -11,6 +11,7 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
         $startOffset = 0;
         $numberOfPages = 10;
         $lastInitialRecord = $numberOfPages * $limit;
+    $rowsInMain = 0;
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 	
 ?>
@@ -43,7 +44,7 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 												<?php }?>
 												</tr>
 											</thead>
-											<tbody>
+											<tbody id="table-body">
 												
 												<?php foreach($insertAlias as $registers){ ?>
 												<tr>		
@@ -63,7 +64,10 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
 														
 														<?php }?>
 														</tr>
-												<?php }?>
+												<?php 
+												$rowsInMain++;
+												if($rowsInMain>=$limit) break;
+												}?>
 											</tbody>
 										</table>
 								</div>
