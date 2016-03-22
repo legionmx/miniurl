@@ -25,6 +25,14 @@ $startOffset = 0;
 $numberOfPages = 10;
 $lastInitialRecord = $numberOfPages * $limit;
 
+$sqlAllUserLinksIds = "select id,seLogea from enlaces where enlaces.id_user = 1 order by created desc";
+$rsAllUserLinksIds = $base->Execute($sqlAllUserLinksIds);
+if($rsAllUserLinksIds !== false){
+	$totalNumOfUserLinks = $rsAllUserLinksIds->RecordCount();
+	$userLinksTable = $rsAllUserLinksIds->GetAssoc();
+}
+
+
 $activePage = 'Statistics';
 
 $ownStyles[] = 'stats.css';
@@ -70,10 +78,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 					</thead>
 					<tbody id='table-body'>
 						<?php
-							//$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace";
-							//$sql = "select hash,url,cve_protocolo as prot,count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace limit 10 offset 0";
 							$sql = "select hash,url,cve_protocolo as prot, id_category, mini_url, count(*) as num_visitas from enlaces,visitas where enlaces.id = visitas.id_enlace and seLogea = true and enlaces.id_user = $uid group by id_enlace order by enlaces.created desc limit $limit offset 0";
-
 							
 							$rs = $base->Execute($sql);
 							if($rs->RecordCount()>0){
@@ -81,7 +86,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 									$alias = $registro['hash'];
 									$direccion = strtolower($_PROTOCOLOS[$registro['prot']])."://".$registro['url'];
 									$visitas = $registro['num_visitas'];
-									$category = $_CATEGORIES[$registro['id_category']];
+									if($reistro['id_category'] == null){
+										$category = "No category";
+									}
+									else{
+										$category = $_CATEGORIES[$registro['id_category']];
+									}
 									$miniurl = $_HTTP.$registro['mini_url'];
 									echo "<tr><td><a href='graphAlias.php?a=$alias'><button type='button' class='btn btn-default btn-sm'><i class='fa fa-line-chart'></i></span></button></a></td><td class='text-center'><a href='viewAlias.php?a=$alias'><i class='fa fa-file-text-o'></i></a>&nbsp;</td><td class='text-left'><a href='$direccion'>$direccion<a></td><td class='text-left'>$category</td><td class='text-left'><a href='$miniurl' target='_blank'>$miniurl</a></td><td class='text-center'>$visitas</td></tr>";
 								}
@@ -102,7 +112,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 
 	<!-- <nav> -->
 		<div class="row row-paginator">
-		<div class="col-md-4 col-sm-6"></div>
+		<div class="col-md-4 col-sm-6">
+			<ul>
+				<li>&nbsp;</li>
+				<li>Number of links: <?php echo $totalNumOfUserLinks;?></li>
+			</ul>
+		</div>
 		<div class="col-md-5 col-md-offset-3 col-sm-6">
 			<ul class="pagination">
 				<li class="disabled">
