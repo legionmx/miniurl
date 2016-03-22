@@ -60,6 +60,7 @@
 						<div class="row">
 							<div class="col-md-3">
 								<select id="protocolo" name="protocolo" class="form-control">
+									<option value='0'>Select</option>
 									<?php
 									foreach ($_PROTOCOLOS as  $cveProt => $abvProt) {
 										echo "<option value='$cveProt'>$abvProt</option>\n";
