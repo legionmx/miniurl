@@ -54,8 +54,10 @@ class report {
 		
 	}
 	
-	
-        $fp = fopen($_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/midescarga.csv', 'w');
+		$uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
+		$fileNameNew = $_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/' . $uniq . '.csv';
+        //$fp = fopen($_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/midescarga.csv', 'w');
+        $fp = fopen($fileNameNew, 'w');
         
         if ($fp && $result) {
             
@@ -75,13 +77,14 @@ class report {
 		fputcsv($fp, array_values($datos));
 		
 	    }
-	    $uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
+	    /*$uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
 	    $fileName = $_SERVER['DOCUMENT_ROOT']  . '/csv/downloads/midescarga.csv';
-	    $fileNameNew = $_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/' . $uniq . '.csv';
+	    $fileNameNew = $_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/' . $uniq . '.csv';*/
 	    
 	    $rutaNew = '/csv/downloads/' . $uniq . '.csv';
 	    
-	    $newRoot = rename ($fileName,$fileNameNew);
+	    //$newRoot = rename ($fileName,$fileNameNew);
+	    //rename ($fileName,$fileNameNew);
 
 	    
 	    /*header('Content-Type: application/force-download');
