@@ -21,7 +21,8 @@
 			<form id="uploadForm" method="post" action="/class/report.php?method=csvDownload" enctype="multipart/form-data">
 
 				<div id="containerForm" class="container">
-				<div class="row">
+				<!-- Next comment in case the code is somehow needed in other scripts validations after sending the form -->
+				<!-- <div class="row">
 					
 					<div class="col-md-8">
 						<p>
@@ -33,7 +34,7 @@
 						<button type="submit" id="upload1" class="btn btn-primary" name="submit">Url´s Download</button>
 					</div>
 
-				</div>
+				</div> -->
 
 				<div class="row">
 					<div class="col-md-7" id="alias-group">
@@ -42,7 +43,7 @@
 				</div>
 				
 
-				<div id="rangeBox" style="display: none;">
+				<div id="rangeBox">
 					<?php if(isset($_CATEGORIES) && $_CATEGORIES != null){ ?>
 					<div class="row">
 						<div class="col-md-3">
@@ -62,6 +63,7 @@
 						</div>
 					</div>
 					<?php } ?>
+					
 					<div class="row">
 						
 						<div class="col-md-3">
@@ -76,6 +78,9 @@
 						</div>
 						<div class="col-md-2">
 							<input type="text" name="range2" id="range2" placeholder="">
+						</div>
+						<div class="col-md-4 contentButon">
+							<button type="submit" id="upload1" class="btn btn-primary" name="submit">Url´s Download</button>
 						</div>
 					</div>
 				</div>
