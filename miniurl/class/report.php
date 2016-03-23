@@ -2,7 +2,8 @@
 session_start();
 switch ($_GET['method']) {
 	case 'csvDownload':
-            report::csvDownload();
+		$report = new report;
+		$report->csvDownload();
 	break;
 	
 }
