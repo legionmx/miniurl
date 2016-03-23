@@ -1,9 +1,13 @@
 <?php
+
+ini_set("log_errors", 1);
+ini_set("error_log", "/logs/php-error.log");
+error_log( "Logs, errors" );
+
 session_start();
 switch ($_GET['method']) {
 	case 'csvDownload':
-		$report = new report;
-		$report->csvDownload();
+            report::csvDownload();
 	break;
 	
 }
