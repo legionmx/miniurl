@@ -27,3 +27,4 @@
                 </li>
         </ul>
 </div>
+<script type="text/javascript" src="/stats/getPaginator.js">

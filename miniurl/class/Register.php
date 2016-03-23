@@ -12,6 +12,7 @@ if (isset($_GET['method'])){
 class Register {
    
    public $base = '';
+   public $uid = '';
 	
     function __construct(){
 		//require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
@@ -19,6 +20,8 @@ class Register {
 		if(!isset($base)||!isset($_PROTOCOLOS)||!isset($_BASEURL)){
 			//If after global, the global scope variables are still not set, we include const.php
 			require_once($_SERVER['DOCUMENT_ROOT'].'/const.php');
+                        session_start();
+                        $this->uid = $_SESSION['uid'];
 		}
 		$this->base = $base;
 		
@@ -131,14 +134,24 @@ class Register {
     }
     
     function getLinkPaginations(){
+        
         $base = $this->base;
+        $uid = $this->uid;
+        $limit = $_REQUEST['limit'];
+        $from = $_REQUEST['from'];
         
         $startOffset = 0;
         $numberOfPages = 10;
         $lastInitialRecord = $numberOfPages * $limit;
         
-        $sql = "select id,hash,url,cve_protocolo as prot, id_category, mini_url from enlaces where id_category = ". $_REQUEST['filterCategory'] ." AND enlaces.id_user = $uid";
-        $rsAllUserLinksIds = $base->Execute($sqlAllUserLinksIds);
+        if(isset($_REQUEST['filterCategory']) && $_REQUEST['filterCategory'] != 'off'){
+            $sql = "select id,hash,url,cve_protocolo as prot, id_category, mini_url from enlaces where id_category = ". $_REQUEST['filterCategory'] ." AND enlaces.id_user = $uid";
+        }else{
+            $sql = "select id,hash,url,cve_protocolo as prot, id_category, mini_url from enlaces where enlaces.id_user = $uid";
+        }
+        
+            
+        $rsAllUserLinksIds = $base->Execute($sql);
        
         $totalNumOfUserLinks = $rsAllUserLinksIds->RecordCount();
                

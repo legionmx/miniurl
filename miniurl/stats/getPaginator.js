@@ -154,49 +154,5 @@ $(function(){
 			}
 		});
 	});
-	
-	$("#filterCategory").change(function(event){
-		var filterCategory = $("#filterCategory").val();
-		//console.log("---> "+this.nodeName+" ////// "+event.target.nodeName+" +++++ "+this.attributes['offset']+' ****** '+$(this).attr('offset'));
-		var offset_page = 0;
-		var clickedPage = parseInt($(this).text());
-	
-		$.get("/stats/getLinks.php?filterCategory="+filterCategory+"&from="+offset_page+"&limit="+limit,function(data,success){
-			if(success == 'success'){
-				if(data != 'false'){
-					
-					$("#table-body").html(data);
-					//$("#pager_next").parent().removeClass('disabled');
-					offset = offset_page;
-					if(offset <= 0){
-						$("#pager_prev").parent().addClass('disabled');
-					}
-					$("#page-"+currentPage).removeClass('active');
-					//currentPage--;
-					currentPage = clickedPage;
-					$("#page-"+currentPage).addClass('active');
-					if(currentPage == 1) $("#pager_prev").parent().addClass('disabled');
-					else $("#pager_prev").parent().removeClass('disabled');
-
-				}
-				else{
-					$("#table-body").html("<td colspan='6'>You haven't any links with this category :=(</td>");
-				}
-			}
-			else{
-				console.log(data+" --- "+success);
-			}
-		});
-		$.get("/class/Register.php?method=getLinkPaginations&filterCategory="+filterCategory+"&from="+offset_page+"&limit="+limit,function(data,success){
-				
-				$('.row-paginator').empty();
-				$('.row-paginator').html(data);
-				element = $('#page-1');
-				element.addClass('active');
-				
-		});
-		
-	});
-	
-	
+        
 });
