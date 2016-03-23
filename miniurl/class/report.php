@@ -5,7 +5,7 @@ switch ($_GET['method']) {
 	case 'csvDownload':
             report::csvDownload();
 	break;
-
+}
 class report {
     
     //public $base = '';
@@ -53,10 +53,12 @@ class report {
 		
 	}
 
-	//Lets try and directly output it
+	//Unique name
+	$uniq = 'Down-'.date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
 
+	//Lets try and directly output it
 	header('Content-Type: application/octet-stream');
-	header('Content-Disposition: attachment; filename="downloadedOutput.csv"');
+	header('Content-Disposition: attachment; filename="'.$uniq.'.csv"');
 	header("Cache-Control: no-cache, must-revalidate");
 	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 	
