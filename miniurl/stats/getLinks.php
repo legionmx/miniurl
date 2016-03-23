@@ -35,8 +35,13 @@
 			}
 		}
 	}
-
-	$sql = "select id,hash,url,cve_protocolo as prot, id_category, mini_url from enlaces where enlaces.id_user = $uid order by created desc limit $limit offset $from";
+	
+	
+	if (isset($_REQUEST['filterCategory']) && $_REQUEST['filterCategory'] != 'off'){
+		$sql = "select id,hash,url,cve_protocolo as prot, id_category, mini_url from enlaces where id_category = ". $_REQUEST['filterCategory'] ." AND enlaces.id_user = $uid order by created desc limit $limit offset $from";
+	}else{
+		$sql = "select id,hash,url,cve_protocolo as prot, id_category, mini_url from enlaces where enlaces.id_user = $uid order by created desc limit $limit offset $from";	
+	}
 
 	$tableBody = "";
 
@@ -44,6 +49,7 @@
 	
 	
 	$rs = $base->Execute($sql);
+	
 	if($rs&&$rs->RecordCount()>0){
 		foreach ($rs as $registro) {
 			$idLink = $registro['id'];
@@ -77,8 +83,12 @@
 				<td class='text-left'><a href='<?php echo $direccion;?>'><?php echo $direccion;?><a></td><td class='text-left'><?php echo $category;?></td><td class='text-left'><a href='<?php echo $miniurl;?>' target='_blank'><?php echo $miniurl;?></a></td><td class='text-center'><?php echo $visits;?></td>
 			</tr>
 			<?php
+			
 			//echo "<tr><td><a href='graphAlias.php?a=$alias'><button type='button' class='btn btn-default btn-sm'><i class='fa fa-line-chart'></i></span></button></a></td><td class='text-center'><a href='viewAlias.php?a=$alias'><i class='fa fa-file-text-o'></i></a>&nbsp;</td><td class='text-left'><a href='$direccion'>$direccion<a></td><td class='text-left'>$category</td><td class='text-left'><a href='$miniurl' target='_blank'>$miniurl</a></td><td class='text-center'>$visitas</td></tr>";
+			
+			
 		}
+		
 	}
 	else{
 		//echo "There were no registries --> $sql";

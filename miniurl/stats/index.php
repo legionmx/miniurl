@@ -67,7 +67,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 					<p>Filter by:</p>
 				</div>
 				<div class="row col-md-8">
-					<select id="newCategory" name="category" class="form-control">
+					<select id="filterCategory" name="filterCategory" class="form-control">
 						<option value="off" selected="selected">-Select a Category-</option>
 						<?php 
 							foreach ($_CATEGORIES as  $cveCat => $abvCat) {
@@ -152,7 +152,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 		<div class="col-md-4 col-sm-6">
 			<ul>
 				<li>&nbsp;</li>
-				<li>Number of links: <?php echo $totalNumOfUserLinks;?></li>
+				<li>Number of links: <span id=totalLinks><?php echo $totalNumOfUserLinks;?></span></li>
 			</ul>
 		</div>
 		<div class="col-md-5 col-md-offset-3 col-sm-6">
