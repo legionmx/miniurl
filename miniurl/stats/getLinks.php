@@ -71,7 +71,7 @@
 									
 				<?php if($userLinksTable[$idLink]) {?>
 				<td>
-					<a href='graphAlias.php?a=<?php echo $alias;?>'><button type='button' class='btn btn-default btn-sm'><i class='fa fa-line-chart'></i></span></button></a></td><td class='text-center'><a href='viewAlias.php?a=$alias'><i class='fa fa-file-text-o'></i></a>&nbsp;
+					<a href='graphAlias.php?a=<?php echo $alias;?>'><button type='button' class='btn btn-default btn-sm'><i class='fa fa-line-chart'></i></span></button></a></td><td class='text-center'><a href='viewAlias.php?a=<?php echo $alias;?>'><i class='fa fa-file-text-o'></i></a>&nbsp;
 				</td>
 				<?php }
 				else{
