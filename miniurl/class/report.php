@@ -4,13 +4,11 @@
 ini_set("error_log", "/logs/php-error.log");
 error_log( "Logs, errors" );*/
 
-/*session_start();
+session_start();
 switch ($_GET['method']) {
 	case 'csvDownload':
             report::csvDownload();
 	break;
-	
-}*/
 
 class report {
     
