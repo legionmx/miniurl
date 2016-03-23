@@ -1,21 +1,11 @@
 <?php
 
-ini_set("log_errors", 1);
-ini_set("error_log", "../logs/php-error.log");
-error_log( "Logs, errors" );
-
-/*ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);*/
-
 session_start();
 switch ($_GET['method']) {
 	case 'csvDownload':
             report::csvDownload();
 	break;
-	
 }
-
 class report {
     
     //public $base = '';
@@ -62,8 +52,18 @@ class report {
 		}
 		
 	}
+
+	//Unique name
+	$uniq = 'Down-'.date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
+
+	//Lets try and directly output it
+	header('Content-Type: application/octet-stream');
+	header('Content-Disposition: attachment; filename="'.$uniq.'.csv"');
+	header("Cache-Control: no-cache, must-revalidate");
+	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 	
-        $fp = fopen($_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/midescarga.csv', 'w');
+        //$fp = fopen($_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/midescarga.csv', 'w');
+	$fp = fopen("php://output",'w');
         
         if ($fp && $result) {
             
@@ -88,7 +88,7 @@ class report {
 	    fflush($fp);
 	    fclose($fp);
 
-	    $uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
+	    /*$uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
 	    $fileName = $_SERVER['DOCUMENT_ROOT']  . '/csv/downloads/midescarga.csv';
 	    $fileNameNew = $_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/Down-' . $uniq . '.csv';
 	    
@@ -96,12 +96,13 @@ class report {
 	    
 	    $newRoot = rename ($fileName,$fileNameNew);
 
-	    if(!$newRoot) die("There was a problem moving the file to the download zone");
+	    if(!$newRoot) die("There was a problem moving the file to the download zone");*/
 	    
 	    
-	    header ('Location: ' . $rutaNew);
-	
-	
+
+	    /*header ('Location: ' . $rutaNew);*/
+	    
+	    //header ('Location: ' . $rutaNew);
         }else{
 		echo 'no se pudo descargar el archivo';
 	
