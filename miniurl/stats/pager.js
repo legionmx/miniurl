@@ -6,12 +6,13 @@ $(function(){
 	var currentBottomPage = 1;
 	var numberOfPagesToSlide = 5
 	var showedPagesAtOnce = 10;
-
+	
 	var uid = $("#uid").val();
 
 	$("#page-1").addClass('active');
 
 	$("#pager_next").click(function(event){
+		var filterCategory = $("#filterCategory").val();
 		var from = offset + limit;
 		if(currentPage == currentTopPage){
 			console.log("Pager reached its maximum -- Charging the other divs");
@@ -38,7 +39,7 @@ $(function(){
 		else{
 			//console.log("current: "+currentPage+" --- currentMax: "+currentTopPage);
 		}
-		$.get("/stats/getLinks.php?uid="+uid+"&from="+from+"&limit="+limit,function(data,success){
+		$.get("/stats/getLinks.php?filterCategory="+filterCategory+"&uid="+uid+"&from="+from+"&limit="+limit,function(data,success){
 			if(success == 'success'){
 				if(data != 'false'){
 					$("#table-body").html(data);
@@ -67,7 +68,7 @@ $(function(){
 	$("#pager_prev").click(function(event){
 		var from = offset - limit;
 		/////////////////////////////
-
+		var filterCategory = $("#filterCategory").val();
 		if(currentPage == currentBottomPage){
 			console.log("Pager reached its minimum -- Charging previous divs");
 
@@ -95,7 +96,7 @@ $(function(){
 		}
 
 		///////////////////////////
-		$.get("/stats/getLinks.php?uid="+uid+"&from="+from+"&limit="+limit,function(data,success){
+		$.get("/stats/getLinks.php?filterCategory="+filterCategory+"&uid="+uid+"&from="+from+"&limit="+limit,function(data,success){
 			if(success == 'success'){
 				if(data != 'false'){
 					$("#table-body").html(data);
@@ -123,9 +124,10 @@ $(function(){
 
 	$(".page-selector").click(function(event){
 		//console.log("---> "+this.nodeName+" ////// "+event.target.nodeName+" +++++ "+this.attributes['offset']+' ****** '+$(this).attr('offset'));
+		var filterCategory = $("#filterCategory").val();
 		var offset_page = parseInt($(this).attr('offset'));
 		var clickedPage = parseInt($(this).text());
-		$.get("/stats/getLinks.php?uid="+uid+"&from="+offset_page+"&limit="+limit,function(data,success){
+		$.get("/stats/getLinks.php?filterCategory="+filterCategory+"&uid="+uid+"&from="+offset_page+"&limit="+limit,function(data,success){
 			if(success == 'success'){
 				if(data != 'false'){
 					$("#table-body").html(data);
@@ -150,5 +152,43 @@ $(function(){
 				console.log(data+" --- "+success);
 			}
 		});
+	});
+	
+	$("#filterCategory").change(function(event){
+		var filterCategory = $("#filterCategory").val();
+		//console.log("---> "+this.nodeName+" ////// "+event.target.nodeName+" +++++ "+this.attributes['offset']+' ****** '+$(this).attr('offset'));
+		var offset_page = 0;
+		var clickedPage = parseInt($(this).text());
+		$.get("/stats/getLinks.php?filterCategory="+filterCategory+"&uid="+uid+"&from="+offset_page+"&limit="+limit,function(data,success){
+			if(success == 'success'){
+				if(data != 'false'){
+					$("#table-body").html(data);
+					//$("#pager_next").parent().removeClass('disabled');
+					offset = offset_page;
+					if(offset <= 0){
+						$("#pager_prev").parent().addClass('disabled');
+					}
+					$("#page-"+currentPage).removeClass('active');
+					//currentPage--;
+					currentPage = clickedPage;
+					$("#page-"+currentPage).addClass('active');
+					if(currentPage == 1) $("#pager_prev").parent().addClass('disabled');
+					else $("#pager_prev").parent().removeClass('disabled');
+
+				}
+				else{
+					$("#table-body").html("<td colspan='6'>You haven't any links with this category :=(</td>");
+				}
+			}
+			else{
+				console.log(data+" --- "+success);
+			}
+		});
+		$.get("/class/Register.php?method=getLinkPaginations&filterCategory="+filterCategory+"&uid="+uid+"&from="+offset_page+"&limit="+limit,function(data,success){
+			console.log('estoy en paginador');
+				$('.row-paginator').empty();
+				$('.row-paginator').html(data);
+			
+		});	
 	});
 });

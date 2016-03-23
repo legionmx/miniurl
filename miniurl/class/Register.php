@@ -1,4 +1,13 @@
 <?php
+if (isset($_GET['method'])){
+    switch ($_GET['method']) {
+	case 'getLinkPaginations':
+                $register = new Register;
+		$register->getLinkPaginations();
+		break;
+	
+    }
+}
 
 class Register {
    
@@ -119,6 +128,25 @@ class Register {
             
 
             return $catName;
+    }
+    
+    function getLinkPaginations(){
+        $base = $this->base;
+        
+        $startOffset = 0;
+        $numberOfPages = 10;
+        $lastInitialRecord = $numberOfPages * $limit;
+        
+        $sql = "select id,hash,url,cve_protocolo as prot, id_category, mini_url from enlaces where id_category = ". $_REQUEST['filterCategory'] ." AND enlaces.id_user = $uid";
+        $rsAllUserLinksIds = $base->Execute($sqlAllUserLinksIds);
+       
+        $totalNumOfUserLinks = $rsAllUserLinksIds->RecordCount();
+               
+                
+        
+        
+        include_once($_SERVER['DOCUMENT_ROOT'].'/stats/paginator.php');
+
     }
 }
 
