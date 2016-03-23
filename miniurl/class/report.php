@@ -103,7 +103,9 @@ class report {
 	    
 	    
 	    
-        }
+        }else{
+		echo 'no se pudo descargar el archivo';
+	}
         
     }
     
