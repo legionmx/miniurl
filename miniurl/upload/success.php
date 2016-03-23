@@ -12,6 +12,7 @@ if(!isset($_SESSION['authToken']) || !isset($_SESSION['uid'])){
         $numberOfPages = 10;
         $lastInitialRecord = $numberOfPages * $limit;
     $rowsInMain = 0;
+    $ownStyles[] = 'stats.css';
 	include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 	
 ?>
