@@ -102,7 +102,7 @@ class report {
 
 	    /*header ('Location: ' . $rutaNew);*/
 	    
-	    header ('Location: ' . $rutaNew);
+	    //header ('Location: ' . $rutaNew);
         }else{
 		echo 'no se pudo descargar el archivo';
 	
