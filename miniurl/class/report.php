@@ -1,16 +1,16 @@
 <?php
 
-ini_set("log_errors", 1);
+/*ini_set("log_errors", 1);
 ini_set("error_log", "/logs/php-error.log");
-error_log( "Logs, errors" );
+error_log( "Logs, errors" );*/
 
-session_start();
+/*session_start();
 switch ($_GET['method']) {
 	case 'csvDownload':
             report::csvDownload();
 	break;
 	
-}
+}*/
 
 class report {
     
@@ -58,8 +58,16 @@ class report {
 		}
 		
 	}
+
+	//Lets try and directly output it
+
+	header('Content-Type: application/octet-stream');
+	header('Content-Disposition: attachment; filename="downloadedOutput.csv"');
+	header("Cache-Control: no-cache, must-revalidate");
+	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 	
-        $fp = fopen($_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/midescarga.csv', 'w');
+        //$fp = fopen($_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/midescarga.csv', 'w');
+	$fp = fopen("php://output",'w');
         
         if ($fp && $result) {
             
@@ -84,7 +92,7 @@ class report {
 	    fflush($fp);
 	    fclose($fp);
 
-	    $uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
+	    /*$uniq = date("d-m-y") . '-' . time() . '-' .  substr(md5(time()),0,8);
 	    $fileName = $_SERVER['DOCUMENT_ROOT']  . '/csv/downloads/midescarga.csv';
 	    $fileNameNew = $_SERVER['DOCUMENT_ROOT'] . '/csv/downloads/Down-' . $uniq . '.csv';
 	    
@@ -92,14 +100,14 @@ class report {
 	    
 	    $newRoot = rename ($fileName,$fileNameNew);
 
-	    if(!$newRoot) die("There was a problem moving the file to the download zone");
+	    if(!$newRoot) die("There was a problem moving the file to the download zone");*/
 	    
 	    /*header('Content-Type: application/force-download');
 	    header('Content-Disposition: attachment; filename='.$archivo);
 	    header('Content-Transfer-Encoding: binary');
 	    header('Content-Length: '.filesize($ruta));*/
 	    
-	    header ('Location: ' . $rutaNew);
+	    /*header ('Location: ' . $rutaNew);*/
 	    
 	    
 	    
