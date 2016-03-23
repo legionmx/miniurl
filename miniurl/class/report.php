@@ -1,9 +1,5 @@
 <?php
 
-/*ini_set("log_errors", 1);
-ini_set("error_log", "/logs/php-error.log");
-error_log( "Logs, errors" );*/
-
 session_start();
 switch ($_GET['method']) {
 	case 'csvDownload':
@@ -100,17 +96,14 @@ class report {
 
 	    if(!$newRoot) die("There was a problem moving the file to the download zone");*/
 	    
-	    /*header('Content-Type: application/force-download');
-	    header('Content-Disposition: attachment; filename='.$archivo);
-	    header('Content-Transfer-Encoding: binary');
-	    header('Content-Length: '.filesize($ruta));*/
 	    
+
 	    /*header ('Location: ' . $rutaNew);*/
 	    
-	    
-	    
+	    header ('Location: ' . $rutaNew);
         }else{
 		echo 'no se pudo descargar el archivo';
+	
 	}
         
     }
