@@ -4,9 +4,9 @@ ini_set("log_errors", 1);
 ini_set("error_log", "../logs/php-error.log");
 error_log( "Logs, errors" );
 
-ini_set('display_errors', 1);
+/*ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+error_reporting(E_ALL);*/
 
 session_start();
 switch ($_GET['method']) {
@@ -98,17 +98,13 @@ class report {
 
 	    if(!$newRoot) die("There was a problem moving the file to the download zone");
 	    
-	    /*header('Content-Type: application/force-download');
-	    header('Content-Disposition: attachment; filename='.$archivo);
-	    header('Content-Transfer-Encoding: binary');
-	    header('Content-Length: '.filesize($ruta));*/
 	    
 	    header ('Location: ' . $rutaNew);
-	    
-	    
-	    
+	
+	
         }else{
 		echo 'no se pudo descargar el archivo';
+	
 	}
         
     }
