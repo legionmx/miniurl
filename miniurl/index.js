@@ -28,6 +28,21 @@ $(document).ready(function(){
 		};
 		this.hasValidAlias = function(){
 			return this.alias.length >= 1;
+		};
+		this.hasValidProtocol = function(){
+			return (this.keyProtocol == '3' && this.protocol.length>0) || this.keyProtocol != '3';
+		};
+		this.canBeSaved = function(){
+			/*console.log('---');
+			console.log(this.hasValidAddress());
+			console.log(this.hasValidAlias());
+			console.log(this.hasValidProtocol());
+			console.log(this.hasValidAddress() && this.hasValidAlias() && this.hasValidProtocol());
+			console.log('---');*/
+			return this.hasValidAddress() && this.hasValidAlias() && this.hasValidProtocol();
+		};
+		this.cannotBeSaved = function(){
+			return !this.canBeSaved();
 		}
 		this.getValuesFromUI();
 	};
@@ -46,17 +61,20 @@ $(document).ready(function(){
 			$.getJSON("getHash.php",{"protocolo": newLink.keyProtocol, "protTxt": newLink.protocol, "url": newLink.url},function(response){
 				$("#alias-group").removeClass("has-success has-error");
 				if((response.existe==true)||newLink.url.length<4){ //TODO: Check if the second clause of the condition is needed
+					//TODO: In theory, this path is never reached. If it is reached, this could be used as a warning about it.
 					cambiarUIpostHash("The URL has already been minimized",'red',false);
 					$("#alias").val(response.hash);
 					newLink.isValid = false;
 					$("#alias-group").addClass('has-error');
 				}
 				else{
+					newLink.alias = response.hash;
 					cambiarUIpostHash("",'green',true,response.hash);
 					ultimoHash = response.hash;
 					$("#alias").val(ultimoHash); //TODO: the 'ultimoHash' schema should be deprecated
-					$("#salvar").prop('disabled',false);
-					newLink.alias = response.hash;
+					//$("#salvar").prop('disabled',false);
+					$("#salvar").prop('disabled',newLink.cannotBeSaved());
+					//newLink.alias = response.hash;
 					newLink.isValid = true;
 					$("#alias-group").addClass('has-success');
 				}
@@ -99,18 +117,19 @@ $(document).ready(function(){
 		//Persisted alias validation
 		else{
 			cambiarUIpostHash("",'green',newLink.hasValidAddress());
-			$("#salvar").prop('disabled',!(newLink.hasValidAddress()&&newLink.hasValidAlias()));
+			//$("#salvar").prop('disabled',!(newLink.hasValidAddress()&&newLink.hasValidAlias()));
+			$("#salvar").prop('disabled',newLink.cannotBeSaved());
 
 			$.getJSON("chkAlias.php", {'alias': newLink.alias}, function(response){
 				if(response.existe){
 					//The alias exists.
 					$("#alias-group").addClass('has-error');
-					$("#salvar").prop('disabled',true);
+					$("#salvar").prop('disabled',true); //The validity of the save button does not depend solely on this check
+					//$("#salvar").prop('disabled',newLink.cannotBeSaved());
 					newLink.isValid = false;
 				}
 				else{
 					//The alias doesn't exist
-					//$("#salvar").prop('disabled',false);
 					newLink.alias = response.alias_revisado;
 					newLink.isValid = true;
 					$("#alias-group").addClass('has-success');
@@ -126,7 +145,9 @@ $(document).ready(function(){
 			return false;
 		}
 		else{
+			newLink.getValuesFromUI();
 			cambiarUIpostHash("",'blue','false');
+			$("#salvar").prop('disabled',newLink.cannotBeSaved());
 			newLink.isValid = true;
 			return true;
 		}
@@ -178,14 +199,6 @@ $(document).ready(function(){
 
 	$("#prot_propio").on('input blur',function(){
 		isProtocolValid();
-		/*if($(this).val().length <=0 && $("#protocolo").val()==3){
-			cambiarUIpostHash("<i class='fa fa-exclamation-triangle'></i> No protocol was provided",'red',false);
-			newLink.isValid = false;
-		}
-		else{
-			cambiarUIpostHash("",'blue','false');
-			newLink.isValid = true;
-		}*/
 	});
 	
 	$("#newCategory").on("change",function(evento){
@@ -199,8 +212,6 @@ $(document).ready(function(){
 			$(".newCategory").addClass('col-md-3');
 			$("#wrappCategory_new").removeClass('col-md-4');
 			$("#wrappCategory_new").addClass('col-md-5');
-			
-			
 		}
 		else{
 			$("#category_new").addClass('hidden');
@@ -219,7 +230,19 @@ $(document).ready(function(){
 	$("#salvar").click(function(){
 		if(newLink.isValid&&isProtocolValid()){
 			newLink.getValuesFromUI();
-			$.getJSON("crtEnlace.php",newLink,function(response){
+
+			//Lets construct the JSON object to send
+			var linkData = {
+				'alias': newLink.alias,
+				'url': newLink.url,
+				'keyProtocol': newLink.keyProtocol,
+				'protocol': newLink.protocol,
+				'category': newLink.category,
+				'category_new': newLink.category_new
+			};
+
+			//$.getJSON("crtEnlace.php",newLink,function(response){
+			$.getJSON("crtEnlace.php",linkData,function(response){
 				cambiarUIpostHash("",'blue',false);
 				$("#alias-success").text(response.status);
 				$("#alias-success").prop('href','http://'+response.status);
