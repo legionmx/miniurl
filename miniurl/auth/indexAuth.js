@@ -4,7 +4,6 @@ $(document).ready(function(){
 
 	var displayMessage = function(message){
 		$("#success-row").removeClass('hidden');
-		//$("#success-row").append(message);
 		$("#success-row-txt").text(message);
 	}
 
@@ -49,7 +48,8 @@ $(document).ready(function(){
 	});
 
 	$("#password").keypress(function(event){
-		if(event.key == 'Enter'){
+		console.log(event.key+' --- '+event.keyCode+' --- '+event.which);
+		if(event.key == 'Enter' || event.keyCode == 13 || event.which == 13){
 			attemptLogin();
 		}
 	});

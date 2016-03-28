@@ -119,6 +119,7 @@ $(document).ready(function(){
 			cambiarUIpostHash("",'green',newLink.hasValidAddress());
 			//$("#salvar").prop('disabled',!(newLink.hasValidAddress()&&newLink.hasValidAlias()));
 			$("#salvar").prop('disabled',newLink.cannotBeSaved());
+			//console.log("PreJSON check: "+newLink.cannotBeSaved());
 
 			$.getJSON("chkAlias.php", {'alias': newLink.alias}, function(response){
 				if(response.existe){
@@ -126,6 +127,7 @@ $(document).ready(function(){
 					$("#alias-group").addClass('has-error');
 					$("#salvar").prop('disabled',true); //The validity of the save button does not depend solely on this check
 					//$("#salvar").prop('disabled',newLink.cannotBeSaved());
+					//console.log("PostExistsJSON check: "+newLink.cannotBeSaved());
 					newLink.isValid = false;
 				}
 				else{
