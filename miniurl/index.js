@@ -164,6 +164,32 @@ $(document).ready(function(){
 		newLink.getValuesFromUI();
 		var protocolsRegExp = /^(\S+):\/\//;
 		if(protocolsRegExp.test(newLink.url)){
+			//Before sanitizing, we capture the alledged protocol
+			var passedProtocol = protocolsRegExp.exec(newLink.url)[1];
+			//console.log(passedProtocol.toUpperCase());
+			var protocolOptions = $("#protocolo option");
+			var matchedProtocol = {
+				'key': 3,
+				'protocol': passedProtocol.toUpperCase()
+			};
+			protocolOptions.each(function(){
+				if($(this).text() == matchedProtocol.protocol){
+					console.log("Match found in protocol --> "+$(this).val()+' '+$(this).text());
+					matchedProtocol.key = $(this).val();
+					return false;
+				}
+				else{
+					//console.log("Match not found. Must create a new protocol via the 'Other' option");
+				}
+			});
+			$("#protocolo").val(matchedProtocol.key);
+			if(matchedProtocol.key == 3) {
+				$("#protocolo").change();
+				$("#prot_propio").val(matchedProtocol.protocol);
+				$(this).focus();
+			}
+
+			//After capturing and stablishing the protocol, we sanitize it out of the url
 			newLink.url = newLink.url.replace(protocolsRegExp,"");
 			$("#url").val(newLink.url);
 		}
